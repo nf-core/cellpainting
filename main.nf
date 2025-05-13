@@ -19,7 +19,7 @@ include { CELLPAINTING  } from './workflows/cellpainting'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_cellpainting_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_cellpainting_pipeline'
 
-inclue { CYTOTABLE } from './modules/nf-core/cytotable'
+include { CYTOTABLE } from './modules/nf-core/cytotable'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
