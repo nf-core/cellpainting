@@ -21,4 +21,3 @@ output:
           description: parquet file format
 authors:
   - "@ybaeus"
-
