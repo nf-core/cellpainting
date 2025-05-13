@@ -1,0 +1,24 @@
+name: cytotable
+description: Converting cellprofiler output csv files to parquet file
+keywords:
+  - CellProfiler
+  - CytoTable
+  - parquet
+tools:
+  - cytotable:
+      description: |
+      Transform CellProfiler and DeepProfiler data for processing image-based profiling readouts with Pycytominer and other Cytomining tools.
+      documentation: https://github.com/cytomining/CytoTable
+input:
+  - - cellprofiler_output:
+        type: path
+        description: |
+          Directory containing the output CSV files from CellProfiler: Cells.csv, Cytoplasm.csv, Experiment.csv, Image.csv, Nuclei.csv
+output:
+  - report:
+      - "*.parquet":
+          type: file
+          description: parquet file format
+authors:
+  - "@ybaeus"
+
