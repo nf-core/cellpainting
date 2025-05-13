@@ -11,7 +11,7 @@ tools:
         documentation: https://github.com/cytomining/CytoTable/
 input:
   - - cellprofiler_output:
-        type: path
+        type: file
         description: |
           Directory containing the output CSV files from CellProfiler: Cells.csv, Cytoplasm.csv, Experiment.csv, Image.csv, Nuclei.csv
 output:
