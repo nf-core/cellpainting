@@ -7,8 +7,8 @@ keywords:
 tools:
   - cytotable:
       description: |
-      Transform CellProfiler and DeepProfiler data for processing image-based profiling readouts with Pycytominer and other Cytomining tools.
-      documentation: https://github.com/cytomining/CytoTable
+        Transform CellProfiler and DeepProfiler data for processing image-based profiling readouts with Pycytominer and other Cytomining tools.
+        documentation: https://github.com/cytomining/CytoTable/
 input:
   - - cellprofiler_output:
         type: path
