@@ -7,7 +7,7 @@ process CYTOTABLE {
     }
 
     input:
-    tuple val(meta), path(cellprofiler_ouput)
+    tuple val(meta), path(cellprofiler_output)
 
     output: 
     tuple val(meta), path("*.parquet")
@@ -23,7 +23,7 @@ os.environ["HOME"] = current_dir
 
 # using a local path with cellprofiler csv presets
 convert(
-    source_path="$cellprofiler_ouput",
+    source_path="$cellprofiler_output",
     source_datatype="csv",
     dest_path="${meta.batch}_${meta.plate}_${meta.well}.parquet",
     dest_datatype="parquet",
