@@ -160,8 +160,21 @@
                 "type": "number",
                 "meta": ["row"]
             }
-
         },
-        "required": ["URL_OrigBrightfield_L","URL_OrigBrightfield_H","URL_OrigBrightfield","URL_OrigRNA","URL_OrigMito","URL_OrigER","URL_OrigDNA","URL_OrigAGP","Metadata_Source", "Metadata_Batch","Metadata_Plate","Metadata_Well","Metadata_Site"]
+        "required": [
+            "URL_OrigBrightfield_L",
+            "URL_OrigBrightfield_H",
+            "URL_OrigBrightfield",
+            "URL_OrigRNA",
+            "URL_OrigMito",
+            "URL_OrigER",
+            "URL_OrigDNA",
+            "URL_OrigAGP",
+            "Metadata_Source",
+            "Metadata_Batch",
+            "Metadata_Plate",
+            "Metadata_Well",
+            "Metadata_Site"
+        ]
     }
 }
