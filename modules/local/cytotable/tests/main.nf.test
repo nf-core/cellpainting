@@ -21,7 +21,7 @@ nextflow_process {
                 // define inputs of the process here. Example:
                 input[0] = [
                     [batch: 'test_batch', plate: 'P1', well: 'A01'],
-                    file("/data/hps/assoc/private/rsc/user/ybae/RSC/nextflow/cellpainting/tests/cytotable/test-datasets/minimal_dataset/cpg0016-jump/source_4/workspace/analysis/2021_04_26_Batch1/BR00117035/analysis/BR00117035-A01-1", checkIfExists: true)
+                    file("s3://nf-core-test-datasets/cellpainting")
                 ]
 
                 // check all the csv files within the cite directory 
