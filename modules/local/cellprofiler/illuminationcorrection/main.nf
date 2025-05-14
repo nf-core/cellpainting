@@ -40,8 +40,8 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir -p illum_corrected_images
-    echo 'this is not an illumination corrected image' > illum_corrected_images/image.npy
+    mkdir -p illumination_corrections
+    echo 'this is not an illumination correction' > illumination_corrections/mock_illum_correction.npy
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
