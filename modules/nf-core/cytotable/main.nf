@@ -1,8 +1,10 @@
-// params.cellprofiler_output = "/data/hps/assoc/private/rsc/user/ybae/RSC/nextflow/cellpainting/test/cytotable/test-datasets/minimal_dataset/cpg0016-jump/source_4/workspace/analysis/2021_04_26_Batch1/BR00117035/analysis/BR00117035-A01-1"
-// params.meta = [batch: 'test_batch', plate: 'P1', well: 'A01']
-
 process CYTOTABLE {
-    container "oras://community.wave.seqera.io/library/pip_cytotable:75a940a0fcae75db"
+
+    container {
+        workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'oras://community.wave.seqera.io/library/pip_cytotable:75a940a0fcae75db' :
+        'community.wave.seqera.io/library/pip_cytotable:e5e76f6f7c7bea96'
+    }
 
     input:
     tuple val(meta), path(cellprofiler_ouput)
@@ -15,6 +17,9 @@ process CYTOTABLE {
 #!/usr/bin/env python
 
 from cytotable import convert
+import os
+current_dir = os.getcwd()
+os.environ["HOME"] = current_dir
 
 # using a local path with cellprofiler csv presets
 convert(
@@ -26,17 +31,3 @@ convert(
 )
     """
 }
-
-// workflow {
-//     channel.of(params.meta)
-//         .set{meta}
-
-//     channel.of(params.cellprofiler_output)
-//         .set{cellprofiler_output}
-
-//     meta
-//         .combine(cellprofiler_output)
-//         .set{meta_cellprofiler_output}
-
-//     CYTOTABLE(meta_cellprofiler_output)    
-// }
