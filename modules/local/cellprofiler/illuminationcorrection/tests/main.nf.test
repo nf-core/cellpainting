@@ -15,7 +15,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [ plate:'BR00117035' ], // meta map
-                    file('https://raw.githubusercontent.com/gerbeldo/cellpainting/refs/heads/illumination-correction/modules/local/cellprofiler/illuminationcorrection/tests/testdata/load_data.csv', checkIfExists: true),
+                    file('https://raw.githubusercontent.com/gerbeldo/cellpainting/refs/heads/illumination-correction/assets/testdata/load_data.csv', checkIfExists: true),
                 ]
 
                 input[1] = file('s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/', checkIfExists: true)
