@@ -9,7 +9,7 @@ process CYTOTABLE {
     input:
     tuple val(meta), path(cellprofiler_output)
 
-    output: 
+    output:
     tuple val(meta), path("*.parquet")
 
     script:
@@ -17,6 +17,7 @@ process CYTOTABLE {
 #!/usr/bin/env python
 
 from cytotable import convert
+
 import os
 current_dir = os.getcwd()
 os.environ["HOME"] = current_dir
