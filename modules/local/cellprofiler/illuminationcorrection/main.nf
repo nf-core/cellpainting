@@ -1,11 +1,7 @@
 process CELLPROFILER_ILLUMINATIONCORRECTION {
     tag "${meta.id}"
-    label 'process_single'
+    label 'process_medium'
 
-    // TODO nf-core: List required Conda package(s).
-    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
         ? 'https://depot.galaxyproject.org/singularity/cellprofiler:4.2.8--pyhdfd78af_0'
@@ -14,10 +10,10 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     input:
     tuple val(meta), path(load_data_csv)
     path image_dir, stageAs: 'images'
-    path illumination_pipeline
+    path illumination_cppipe
 
     output:
-    tuple val(meta), path("illum_corrected_images/*.npy"), emit: illum_corrected_images
+    tuple val(meta), path("illumination_corrections/*.npy"), emit: illumination_corrections
     path "versions.yml", emit: versions
 
     when:
@@ -29,10 +25,10 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     """
     cellprofiler -c -r \
     ${args} \
-    -p ${illumination_pipeline} \
-    -o illum_corrected_images \
+    -p ${illumination_cppipe} \
+    -o illumination_corrections \
     --data-file=${load_data_csv} \
-    -g Metadata_Plate=${meta.id} \
+    -g Metadata_Plate=${meta.plate} \
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
