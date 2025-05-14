@@ -7,27 +7,161 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
-                "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
-            },
-            "fastq_1": {
+            "URL_OrigBrightfield_L": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
             },
-            "fastq_2": {
+            "URL_OrigBrightfield_H": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigBrightfield": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigRNA": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigMito": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigER": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigDNA": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "URL_OrigAGP": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
+            },
+            "Metadata_Source": {
+                "type": "string",
+                "errorMessage": "Source info must be provided",
+                "meta": ["source"]
+            },
+            "Metadata_Batch": {
+                "type": "string",
+                "errorMessage": "Batch info must be provided",
+                "meta": ["batch"]
+            },
+            "Metadata_Plate": {
+                "type": "string",
+                "errorMessage": "Plate info must be provided",
+                "meta": ["plate"]
+            },
+            "Metadata_Well": {
+                "type": "string",
+                "errorMessage": "Well info must be provided",
+                "meta": ["well"]
+            },
+            "Metadata_Site": {
+                "type": "number",
+                "errorMessage": "Site info must be provided",
+                "meta": ["site"]
+            },
+            "Metadata_AbsPositionZ": {
+                "type": "number"
+            },
+            "Metadata_AbsTime": {
+                "type": "string"
+            },
+            "Metadata_BinningX": {
+                "type": "number"
+            },
+            "Metadata_BinningY": {
+                "type": "number"
+            },
+            "Metadata_ChannelID": {
+                "type": "number"
+            },
+
+            "Metadata_ChannelName": {
+                "type": "string"
+            },
+            "Metadata_Col": {
+                "type": "number",
+                "meta": ["col"]
+            },
+            "Metadata_ExposureTime": {
+                "type": "number"
+            },
+            "Metadata_FieldID": {
+                "type": "number"
+            },
+            "Metadata_ImageResolutionX": {
+                "type": "number"
+            },
+            "Metadata_ImageResolutionY": {
+                "type": "number"
+            },
+            "Metadata_ImageSizeX": {
+                "type": "number"
+            },
+            "Metadata_ImageSizeY": {
+                "type": "number"
+            },
+            "Metadata_MainEmissionWavelength": {
+                "type": "number"
+            },
+            "Metadata_MainExcitationWavelength": {
+                "type": "number"
+            },
+            "Metadata_MaxIntensity": {
+                "type": "number"
+            },
+            "Metadata_ObjectiveMagnification": {
+                "type": "number"
+            },
+            "Metadata_ObjectiveNA": {
+                "type": "number"
+            },
+            "Metadata_PlaneID": {
+                "type": "number"
+            },
+            "Metadata_PositionX": {
+                "type": "number"
+            },
+            "Metadata_PositionY": {
+                "type": "number"
+            },
+            "Metadata_PositionZ": {
+                "type": "number"
+            },
+            "Metadata_Row": {
+                "type": "number",
+                "meta": ["row"]
             }
+
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["URL_OrigBrightfield_L","URL_OrigBrightfield_H","URL_OrigBrightfield","URL_OrigRNA","URL_OrigMito","URL_OrigER","URL_OrigDNA","URL_OrigAGP","Metadata_Source", "Metadata_Batch","Metadata_Plate","Metadata_Well","Metadata_Site"]
     }
 }
