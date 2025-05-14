@@ -26,7 +26,7 @@ os.environ["HOME"] = current_dir
 convert(
     source_path="$cellprofiler_output",
     source_datatype="csv",
-    dest_path="${meta.Metadata_Batch}_${meta.Metadata_Plates}_${meta.Metadata_Well}_${meta.Metadata_Site}.parquet",
+    dest_path="${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet",
     dest_datatype="parquet",
     preset="cellprofiler_csv",
 )
