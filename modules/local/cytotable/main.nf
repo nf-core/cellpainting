@@ -30,5 +30,6 @@ convert(
     dest_datatype="parquet",
     preset="cellprofiler_csv",
 )
+
     """
 }

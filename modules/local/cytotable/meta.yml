@@ -18,6 +18,6 @@ output:
   - report:
       - "*.parquet":
           type: file
-          description: parquet file format
+          description: parquet file format.
 authors:
   - "@ybaeus"

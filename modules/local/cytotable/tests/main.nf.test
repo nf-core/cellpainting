@@ -6,12 +6,6 @@ nextflow_process {
 
     test("Should run without failures") {
 
-
-        setup {
-            // untar or unpress the test datasets
-
-        }
-
         when {
             params {
                 // define parameters here.
