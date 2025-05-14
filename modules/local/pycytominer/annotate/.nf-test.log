@@ -1,0 +1,8 @@
+mai-14 14:54:39.385 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.2
+mai-14 14:54:39.402 [main] INFO  com.askimed.nf.test.App - Arguments: [test, tests/modules/local/pycytominer/annotate/main.nf.test]
+mai-14 14:54:40.870 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 24.04.2
+mai-14 14:54:40.874 [main] WARN  com.askimed.nf.test.commands.RunTestsCommand - No nf-test config file found.
+mai-14 14:54:40.883 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 1 files from directory /Users/franz/Hackaton_Netxflow/cellpainting/modules/local/pycytominer/annotate in 0.006 sec
+mai-14 14:54:40.885 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 0 files containing tests.
+mai-14 14:54:40.886 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: []
+mai-14 14:54:40.890 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 0 tests to execute.

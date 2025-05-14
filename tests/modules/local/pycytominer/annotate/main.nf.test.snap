@@ -1,0 +1,36 @@
+{
+    " annotate - parquet ": {
+        "content": [
+            {
+                "0": [
+                    "BR00117035_annotated.parquet:md5,25c3ff6b832516e9f1bcdfab0096256f"
+                ],
+                "annotated_parquet": [
+                    "BR00117035_annotated.parquet:md5,25c3ff6b832516e9f1bcdfab0096256f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2025-05-14T14:40:39.552385"
+    },
+    " annotate - parquet - stub": {
+        "content": [
+            {
+                "0": [
+                    "BR00117035_annotated.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "annotated_parquet": [
+                    "BR00117035_annotated.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2025-05-14T14:49:15.906742"
+    }
+}
