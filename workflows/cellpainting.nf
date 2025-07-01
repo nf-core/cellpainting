@@ -4,6 +4,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { CYTOTABLE              } from '../modules/local/cytotable'
+include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection.nf'
+include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
+include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
+
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -18,11 +23,32 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cell
 workflow CELLPAINTING {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: images read in from --input samplesheet
+    cellprofiler_mode // value: assaydevelopment, analysis
+    cellprofiler_illumination_cppipe // value: path to illumination cppipe
+    cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_analysis_cppipe // value: path to analysis cppipe
+
+
     main:
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
+
+
+
+    // Illumination Correction
+    // Group images by channel and plate
+    ch_samplesheet.map { meta, image ->
+        def group_key = meta.subMap('batch','plate','channel')
+        def new_tuple = [group_key, meta, image]
+        new_tuple
+    }.groupTuple().set { images_grouped_by_plate_channel }
+
+    images_grouped_by_plate_channel.view()
+    //.groupTuple
+    //.view()
+
 
     //
     // Collate and save software versions
