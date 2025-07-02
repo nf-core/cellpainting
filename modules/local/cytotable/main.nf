@@ -17,6 +17,8 @@ process CYTOTABLE {
 #!/usr/bin/env python
 
 from cytotable import convert
+from parsl.config import Config
+from parsl.executors import ThreadPoolExecutor
 
 import os
 current_dir = os.getcwd()
@@ -29,6 +31,9 @@ convert(
     dest_path="${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet",
     dest_datatype="parquet",
     preset="cellprofiler_csv",
+    parsl_config=Config(
+        executors=[ThreadPoolExecutor(max_threads=${task.cpus})],
+    )
 )
 
     """
