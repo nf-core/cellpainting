@@ -8,6 +8,9 @@ trim_trailing_whitespace = true
 indent_size = 4
 indent_style = space
 
+[*.csv]
+end_of_line = unset
+
 [*.{md,yml,yaml,html,css,scss,js}]
 indent_size = 2
 

@@ -1,0 +1,137 @@
+{
+    "cellprofiler corrects illumination": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "BR00117035"
+                        },
+                        [
+                            "BR00117035_IllumAGP.npy:md5,a0fb9ff3c5a75cdfc1547c31d24597e6",
+                            "BR00117035_IllumBrightfield.npy:md5,24eacb2d9beabe2a5bb5baf8b613acc6",
+                            "BR00117035_IllumBrightfield_H.npy:md5,d5c24adeae97b9aa024383cd7735b80f",
+                            "BR00117035_IllumBrightfield_L.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumDNA.npy:md5,3ebff7dabbdce08503fb41abe8d68444",
+                            "BR00117035_IllumER.npy:md5,5ba94c5ebf3ec67375e1bdf4b17e6633",
+                            "BR00117035_IllumMito.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumRNA.npy:md5,2100dd326a754086b8481c839e614a68"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ],
+                "illum_corrected_images": [
+                    [
+                        {
+                            "id": "BR00117035"
+                        },
+                        [
+                            "BR00117035_IllumAGP.npy:md5,a0fb9ff3c5a75cdfc1547c31d24597e6",
+                            "BR00117035_IllumBrightfield.npy:md5,24eacb2d9beabe2a5bb5baf8b613acc6",
+                            "BR00117035_IllumBrightfield_H.npy:md5,d5c24adeae97b9aa024383cd7735b80f",
+                            "BR00117035_IllumBrightfield_L.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumDNA.npy:md5,3ebff7dabbdce08503fb41abe8d68444",
+                            "BR00117035_IllumER.npy:md5,5ba94c5ebf3ec67375e1bdf4b17e6633",
+                            "BR00117035_IllumMito.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumRNA.npy:md5,2100dd326a754086b8481c839e614a68"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.1"
+        },
+        "timestamp": "2025-05-13T16:58:31.76298"
+    },
+    "cellprofiler - illumination correction - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "plate": "BR00117035"
+                        },
+                        "mock_illum_correction.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ],
+                "illumination_corrections": [
+                    [
+                        {
+                            "plate": "BR00117035"
+                        },
+                        "mock_illum_correction.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.1"
+        },
+        "timestamp": "2025-05-14T14:30:01.688781"
+    },
+    "cellprofiler - illumination correction": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "plate": "BR00117035"
+                        },
+                        [
+                            "BR00117035_IllumAGP.npy:md5,a0fb9ff3c5a75cdfc1547c31d24597e6",
+                            "BR00117035_IllumBrightfield.npy:md5,24eacb2d9beabe2a5bb5baf8b613acc6",
+                            "BR00117035_IllumBrightfield_H.npy:md5,d5c24adeae97b9aa024383cd7735b80f",
+                            "BR00117035_IllumBrightfield_L.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumDNA.npy:md5,3ebff7dabbdce08503fb41abe8d68444",
+                            "BR00117035_IllumER.npy:md5,5ba94c5ebf3ec67375e1bdf4b17e6633",
+                            "BR00117035_IllumMito.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumRNA.npy:md5,2100dd326a754086b8481c839e614a68"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ],
+                "illumination_corrections": [
+                    [
+                        {
+                            "plate": "BR00117035"
+                        },
+                        [
+                            "BR00117035_IllumAGP.npy:md5,a0fb9ff3c5a75cdfc1547c31d24597e6",
+                            "BR00117035_IllumBrightfield.npy:md5,24eacb2d9beabe2a5bb5baf8b613acc6",
+                            "BR00117035_IllumBrightfield_H.npy:md5,d5c24adeae97b9aa024383cd7735b80f",
+                            "BR00117035_IllumBrightfield_L.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumDNA.npy:md5,3ebff7dabbdce08503fb41abe8d68444",
+                            "BR00117035_IllumER.npy:md5,5ba94c5ebf3ec67375e1bdf4b17e6633",
+                            "BR00117035_IllumMito.npy:md5,4b574431f5691de610b6d490dee1e74c",
+                            "BR00117035_IllumRNA.npy:md5,2100dd326a754086b8481c839e614a68"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,36342e2e6a8f1a1ef3b02615083687aa"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.1"
+        },
+        "timestamp": "2025-05-14T14:29:49.241321"
+    }
+}
