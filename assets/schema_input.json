@@ -62,16 +62,6 @@
                 "meta": ["row"]
             }
         },
-        "required": [
-            "channel",
-            "path",
-            "source",
-            "batch",
-            "plate",
-            "well",
-            "site",
-            "row",
-            "col"
-        ]
+        "required": ["channel", "path", "source", "batch", "plate", "well", "site", "row", "col"]
     }
 }

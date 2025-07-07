@@ -5,7 +5,7 @@
 */
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { CYTOTABLE              } from '../modules/local/cytotable'
-include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection.nf'
+include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
 
@@ -35,7 +35,11 @@ workflow CELLPAINTING {
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-
+    // Get the list of unique channels from the samplesheet
+    channels_list = ch_samplesheet
+        .map { meta, image -> meta.channel }
+        .unique()
+        .collect()
 
     // Illumination Correction
     // Group images by channel and plate
@@ -45,9 +49,52 @@ workflow CELLPAINTING {
         new_tuple
     }.groupTuple().set { images_grouped_by_plate_channel }
 
-    images_grouped_by_plate_channel.view()
-    //.groupTuple
-    //.view()
+    // Create load_data.csv for each channel for illumination correction
+    images_grouped_by_plate_channel.map{
+        shared_meta, meta_list, image_list ->
+        def header = "Orig${shared_meta.channel}_FileName,Orig${shared_meta.channel}_PathName,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
+        def zip_meta_image = [meta_list, image_list].transpose()
+        def file_name = "${shared_meta.values().join('_')}.csv"
+        def content = zip_meta_image.collect { meta, image ->
+            def row = ["${image.name}","./images/", meta.batch, meta.plate, meta.well, meta.col, meta.row]
+            row.join(',')
+        }
+
+        def file_content = [header] + content
+        def file_content_str = file_content.join('\n')
+
+        [shared_meta, file_name, file_content_str]
+    }.collectFile(
+        newLine: true,
+        storeDir: "${workflow.workDir}/${workflow.sessionId}/illumination_correction/load_data_csvs"
+    ) {
+        shared_meta, file_path, file_content_str ->
+        [file_path] + file_content_str
+    }.set { ch_illumination_correction_load_data_csvs }
+
+    // Create a key for each channel from the shared metadata
+    images_grouped_by_plate_channel.map{
+        shared_meta, meta_list, image_list ->
+        ["${shared_meta.values().join('_')}", shared_meta, meta_list, image_list]
+    }.set { ch_images_grouped_by_plate_channel_with_key }
+    ch_illumination_correction_load_data_csvs.map{
+        load_data_csv ->
+        [load_data_csv.baseName, load_data_csv]
+    }.set { ch_illumination_correction_load_data_csvs_with_key }
+
+    // Join the two channels on the key, and return the shared metadata, image list and load_data_csv
+    ch_images_grouped_by_plate_channel_with_key.join(ch_illumination_correction_load_data_csvs_with_key)
+        .map{
+            _key, shared_meta, meta_list, image_list, load_data_csv ->
+            [shared_meta, image_list, load_data_csv]
+        }
+        .set{ch_illumination_correction_images_with_load_data_csv}
+
+
+    CELLPROFILER_ILLUMINATIONCORRECTION(
+        ch_illumination_correction_images_with_load_data_csv,
+        cellprofiler_illumination_cppipe
+    )
 
 
     //

@@ -8,8 +8,8 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(load_data_csv)
-    path image_dir, stageAs: 'images'
+    tuple val(meta), path(images, stageAs: 'images/*'), path(load_data_csv)
+
     path illumination_cppipe
 
     output:
@@ -23,11 +23,17 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    mkdir -p illumination_corrections
+    # Replace the channel name in the cppipe file
+    sed 's/{{channel}}/${meta.channel}/g' ${illumination_cppipe} > illumination.cppipe
+    # Copy the load_data_csv file to the current directory (needed for cellprofiler difficulty with symlinks)
+    cp ${load_data_csv} load_data.csv
+
     cellprofiler -c -r \
     ${args} \
-    -p ${illumination_cppipe} \
+    -p illumination.cppipe \
     -o illumination_corrections \
-    --data-file=${load_data_csv} \
+    --data-file=load_data.csv \
     -g Metadata_Plate=${meta.plate} \
 
     cat <<-END_VERSIONS > versions.yml
