@@ -34,6 +34,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     -p illumination.cppipe \
     -o illumination_corrections \
     --data-file=load_data.csv \
+    --image-directory ./images \
     -g Metadata_Plate=${meta.plate} \
 
     cat <<-END_VERSIONS > versions.yml

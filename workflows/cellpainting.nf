@@ -52,11 +52,11 @@ workflow CELLPAINTING {
     // Create load_data.csv for each channel for illumination correction
     images_grouped_by_plate_channel.map{
         shared_meta, meta_list, image_list ->
-        def header = "Orig${shared_meta.channel}_FileName,Orig${shared_meta.channel}_PathName,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
+        def header = "Orig${shared_meta.channel}_FileName,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
         def zip_meta_image = [meta_list, image_list].transpose()
         def file_name = "${shared_meta.values().join('_')}.csv"
         def content = zip_meta_image.collect { meta, image ->
-            def row = ["${image.name}","./images/", meta.batch, meta.plate, meta.well, meta.col, meta.row]
+            def row = ["${image.name}",meta.batch, meta.plate, meta.well, meta.col, meta.row]
             row.join(',')
         }
 
