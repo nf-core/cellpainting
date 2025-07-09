@@ -37,7 +37,7 @@ workflow CELLPAINTING {
 
     // Get the list of unique channels from the samplesheet
     channels_list = ch_samplesheet
-        .map { meta, image -> meta.channel }
+        .map { meta, _image -> meta.channel }
         .unique()
         .collect()
 
@@ -90,7 +90,7 @@ workflow CELLPAINTING {
     // Join the two channels on the key, and return the shared metadata, image list and load_data_csv
     ch_images_grouped_by_plate_with_key.join(ch_illumination_correction_load_data_csvs_with_key)
         .map{
-            _key, shared_meta, meta_list, image_list, load_data_csv ->
+            _key, shared_meta, _meta_list, image_list, load_data_csv ->
             [shared_meta, image_list, load_data_csv]
         }
         .set{ch_illumination_correction_images_with_load_data_csv}
