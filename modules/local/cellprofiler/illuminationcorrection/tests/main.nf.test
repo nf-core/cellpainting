@@ -14,12 +14,16 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    [ plate:'BR00117035' ], // meta map
-                    file("${projectDir}/assets/testdata/load_data.csv", checkIfExists: true),
+                    [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP'], // meta map,
+                    [   file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")],
+                        file("${projectDir}/modules/local/cellprofiler/illuminationcorrection/tests/load_data.csv", checkIfExists: true),
                 ]
-
-                input[1] = file('s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/', checkIfExists: true)
-                input[2] = file('s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/workspace/pipelines/2021_04_26_Batch1/illum.cppipe', checkIfExists: true)
+                input[1] = file("${projectDir}/assets/cellprofiler/illumination.cppipe.jinja", checkIfExists: true)
                 """
             }
         }
@@ -40,12 +44,16 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    [ plate:'BR00117035' ], // meta map
-                    file("${projectDir}/assets/testdata/load_data.csv", checkIfExists: true),
+                    [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP'], // meta map,
+                    [   file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")],
+                        file("${projectDir}/modules/local/cellprofiler/illuminationcorrection/tests/load_data.csv", checkIfExists: true),
                 ]
-
-                input[1] = file('s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/', checkIfExists: true)
-                input[2] = file('s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/workspace/pipelines/2021_04_26_Batch1/illum.cppipe', checkIfExists: true)
+                input[1] = file("${projectDir}/assets/cellprofiler/illumination.cppipe.jinja", checkIfExists: true)
                 """
             }
         }
