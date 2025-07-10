@@ -8,7 +8,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(images), path(load_data_csv)
+    tuple val(meta), path(images, stageAs: "images/*"), path(load_data_csv)
 
     path illumination_cppipe
 
@@ -32,7 +32,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     -p illumination.cppipe \
     -o illumination_corrections \
     --data-file=${load_data_csv} \
-    --image-directory ./ \
+    --image-directory ./images/ \
     -g Metadata_Plate=${meta.plate} \
 
     cat <<-END_VERSIONS > versions.yml
