@@ -1,0 +1,64 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core subworkflows test cellprofiler_load_data_csv
+nextflow_workflow {
+
+    name "Test Subworkflow CELLPROFILER_LOAD_DATA_CSV"
+    script "../main.nf"
+    workflow "CELLPROFILER_LOAD_DATA_CSV"
+
+    tag "subworkflows/cellprofiler_load_data_csv"
+
+    setup {
+        run("PIPELINE_INITIALISATION") {
+            script "../../utils_nfcore_cellpainting_pipeline/main.nf"
+            workflow {
+                """
+                input[0] = false // version
+                input[1] = false // validate_params
+                input[2] = false // monochrome_logs
+                input[3] = "   " // nextflow_cli_args
+                input[4] = "results"
+                input[5] = "${projectDir}/assets/samplesheet.csv"
+                """
+            }
+        }
+    }
+
+    test("group_by_batch_plate_channel") {
+
+        when {
+            workflow {
+                """
+                input[0] = PIPELINE_INITIALISATION.out.samplesheet
+                input[1] = ['batch', 'plate', 'channel']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    test("group_by_batch_plate") {
+
+        when {
+            workflow {
+                """
+                input[0] = PIPELINE_INITIALISATION.out.samplesheet
+                input[1] = ['batch', 'plate']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+}

@@ -8,6 +8,7 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
+include { CELLPROFILER_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -41,59 +42,14 @@ workflow CELLPAINTING {
         .unique()
         .collect()
 
-    // Illumination Correction
-    // Group images by channel and plate
-    ch_samplesheet.map { meta, image ->
-        def group_key = meta.subMap('batch','plate','channel')
-        def new_tuple = [group_key + [id: "${meta.batch}_${meta.plate}_${meta.channel}"], meta, image]
-        new_tuple
-    }.groupTuple().set { ch_images_grouped_by_plate }
+    // Create load_data.csv files for illumination correction
+    // Group by batch, plate, and channel for illumination correction
+    CELLPROFILER_LOAD_DATA_CSV(
+        ch_samplesheet,
+        ['batch', 'plate', 'channel']
+    )
 
-    // Create load_data.csv for each channel for illumination correction
-    ch_images_grouped_by_plate.map{
-        shared_meta, meta_list, image_list ->
-        // Create the header for the load_data.csv file
-        def header = "FileName_Orig${shared_meta.channel},Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
-        // Zip the metadata and image list together so that each row corresponds to an image together with its metadata
-        def zip_meta_image = [meta_list, image_list].transpose()
-        // Create the content for the load_data.csv file
-        // Each row will contain the image filename, batch, plate, well, column and row
-        def content = zip_meta_image.collect { meta, image ->
-            def row = ["${image.name}",meta.batch, meta.plate, meta.well, meta.col, meta.row]
-            row.join(',')
-        }
-        // Combine the header and content into a text string
-        def file_content = [header] + content
-        def file_content_str = file_content.join('\n')
-        // Return a tuple with the shared metadata and the file content string
-        [shared_meta, file_content_str]
-    }.collectFile(
-        newLine: true,
-        storeDir: "${workflow.workDir}/cellpainting/${workflow.sessionId}/load_data_csvs/illumination_correction/"
-    ) {
-        shared_meta, file_content_str ->
-        // Create a file name for the load_data.csv file
-        def file_name = "${shared_meta.id}.csv"
-        [file_name] + file_content_str
-    }.set { ch_illumination_correction_load_data_csvs }
-
-    // Create a join key for each channel from the shared metadata
-    ch_images_grouped_by_plate.map{
-        shared_meta, meta_list, image_list ->
-        [shared_meta.id, shared_meta, meta_list, image_list]
-    }.set { ch_images_grouped_by_plate_with_key }
-    ch_illumination_correction_load_data_csvs.map{
-        load_data_csv ->
-        [load_data_csv.baseName, load_data_csv]
-    }.set { ch_illumination_correction_load_data_csvs_with_key }
-
-    // Join the two channels on the key, and return the shared metadata, image list and load_data_csv
-    ch_images_grouped_by_plate_with_key.join(ch_illumination_correction_load_data_csvs_with_key)
-        .map{
-            _key, shared_meta, _meta_list, image_list, load_data_csv ->
-            [shared_meta, image_list, load_data_csv]
-        }
-        .set{ch_illumination_correction_images_with_load_data_csv}
+    ch_illumination_correction_images_with_load_data_csv = CELLPROFILER_LOAD_DATA_CSV.out.images_with_load_data_csv
 
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
