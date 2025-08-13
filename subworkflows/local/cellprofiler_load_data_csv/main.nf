@@ -8,6 +8,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
     take:
     ch_samplesheet // channel: [ val(meta), [ image ] ]
     grouping_keys  // value channel: list of keys to group by (e.g., ['batch','plate','channel'])
+    step_name      // value channel: name of the pipeline step (determines working directory for load_data.csv files)
 
     main:
 
@@ -41,7 +42,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
                 // Extract channels and images from the entries
                 def row_channels = entries.collect { it[1] }  // Extract channels
                 def row_images = entries.collect { it[2] }    // Extract images
-                
+
                 // Create a dictionary with the image_channels as keys and the images as values
                 def images_by_channel = [row_channels, row_images].transpose().collectEntries { channel, image ->
                     [channel, image]
@@ -62,7 +63,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
         }
         .collectFile(
             newLine: true,
-            storeDir: "${workflow.workDir}/${workflow.sessionId}/cellprofiler/load_data_csvs"
+            storeDir: "${workflow.workDir}/${workflow.sessionId}/cellprofiler/load_data_csvs/${step_name}"
         ) { group_meta, csv_content ->
             ["${group_meta.id}.csv", csv_content]
         }

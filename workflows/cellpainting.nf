@@ -9,6 +9,7 @@ include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofi
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
 include { CELLPROFILER_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
+include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -46,7 +47,8 @@ workflow CELLPAINTING {
     // Group by batch, plate, and channel for illumination correction
     CELLPROFILER_LOAD_DATA_CSV(
         ch_samplesheet,
-        ['batch', 'plate', 'channel']
+        ['batch', 'plate', 'channel'],
+        'illumination'
     )
 
     ch_illumination_correction_images_with_load_data_csv = CELLPROFILER_LOAD_DATA_CSV.out.images_with_load_data_csv
