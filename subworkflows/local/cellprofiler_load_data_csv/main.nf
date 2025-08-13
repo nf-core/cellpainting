@@ -17,7 +17,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
             def keys = grouping_keys
             def group_key = meta.subMap(keys)
             def group_id = keys.collect { meta[it] }.join('_')
-            
+
             [group_key + [id: group_id], meta, image]
         }
         .groupTuple()
@@ -26,58 +26,39 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
     // Create load_data.csv files for each group
     ch_images_grouped
         .map { group_meta, meta_list, image_list ->
-            def keys = grouping_keys
-            def has_channel = 'channel' in keys
-            
-            if (has_channel) {
-                // Single channel format: FileName_Orig{channel},Metadata_Batch,etc.
-                def header = "FileName_Orig${group_meta.channel},Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
+            // Derive channels dynamically from the metadata in this group
+            def image_channels = meta_list.collect { it.channel }.unique().sort()
+            def header = "FileName_Orig" + image_channels.join(',FileName_Orig') + ",Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row,Metadata_Site"
+
+            // Group by well+site within this group so we can create a single row per well+site
+            def grouped_by_well = [meta_list, image_list].transpose().collect { meta, image ->
+                def group_key = meta.subMap(['well','site','batch','plate','col','row'])
+                [group_key, meta.channel, image]
+            }.groupBy { it[0] }
+
+            def rows = grouped_by_well.collect { row_meta, entries ->
+
+                // Extract channels and images from the entries
+                def row_channels = entries.collect { it[1] }  // Extract channels
+                def row_images = entries.collect { it[2] }    // Extract images
                 
-                def content = [meta_list, image_list]
-                    .transpose()
-                    .collect { meta, image ->
-                        [image.name, meta.batch, meta.plate, meta.well, meta.col, meta.row].join(',')
-                    }
-                
-                def csv_content = ([header] + content).join('\n')
-                [group_meta, csv_content]
-            } else {
-                // Multi-channel format: FileName_Orig{Channel1},FileName_Orig{Channel2},etc.
-                def channels = meta_list.collect { it.channel }.unique().sort()
-                def wells_data = [:] // Map of well_site -> [meta, images_by_channel]
-                
-                // Group by well+site within this group
-                [meta_list, image_list].transpose().each { meta, image ->
-                    def well_key = "${meta.well}_${meta.site ?: 1}"
-                    if (!wells_data[well_key]) {
-                        wells_data[well_key] = [meta: meta, images_by_channel: [:]]
-                    }
-                    wells_data[well_key].images_by_channel[meta.channel] = image
+                // Create a dictionary with the image_channels as keys and the images as values
+                def images_by_channel = [row_channels, row_images].transpose().collectEntries { channel, image ->
+                    [channel, image]
                 }
-                
-                // Create header with FileName_Orig{Channel} columns
-                def channel_headers = channels.collect { "FileName_Orig${it}" }
-                def header = (channel_headers + ["Metadata_Batch", "Metadata_Plate", "Metadata_Well", "Metadata_Col", "Metadata_Row"]).join(',')
-                
-                // Create content rows - one per well+site
-                def content = wells_data.values().collect { well_data ->
-                    def meta = well_data.meta
-                    def images_by_channel = well_data.images_by_channel
-                    
-                    // Create row with filename for each channel
-                    def channel_values = channels.collect { channel ->
-                        def image = images_by_channel[channel]
-                        image ? image.name : ""
-                    }
-                    
-                    // Add metadata columns
-                    def row = channel_values + [meta.batch, meta.plate, meta.well, meta.col, meta.row]
-                    row.join(',')
+
+                // Create a list of the image filenames in the order of the image_channels
+                def image_filenames = image_channels.collect { channel ->
+                    images_by_channel[channel] ? images_by_channel[channel].name : ""
                 }
-                
-                def csv_content = ([header] + content).join('\n')
-                [group_meta, csv_content]
+
+                // Add metadata columns
+                def row = image_filenames + [row_meta.batch, row_meta.plate, row_meta.well, row_meta.col, row_meta.row, row_meta.site]
+                row.join(',')
             }
+
+            def csv_content = ([header] + rows).join('\n')
+            [group_meta, csv_content]
         }
         .collectFile(
             newLine: true,
@@ -93,7 +74,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV {
             [group_meta.id, group_meta, meta_list, image_list]
         }
         .set { ch_images_with_key }
-    
+
     ch_load_data_csvs
         .map { load_data_csv ->
             [load_data_csv.baseName, load_data_csv]

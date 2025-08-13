@@ -38,7 +38,16 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(workflow.out).match()},
+                { 
+                    // Check each CSV has the correct single-channel header
+                    workflow.out.images_with_load_data_csv.each { meta, images, csv_file -> 
+                        def csv_lines = path(csv_file).readLines()
+                        def header = csv_lines[0]
+                        def expected_header = "FileName_Orig${meta.channel},Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row,Metadata_Site"
+                        assert header == expected_header : "Expected: $expected_header, but got: $header"
+                    }
+                }
             )
         }
     }
@@ -57,7 +66,16 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
+                { assert snapshot(workflow.out).match()},
+                {
+                    // Check each CSV has the correct multi-channel header
+                    workflow.out.images_with_load_data_csv.each { meta, images, csv_file -> 
+                        def csv_lines = path(csv_file).readLines()
+                        def header = csv_lines[0]
+                        def expected_header = "FileName_OrigAGP,FileName_OrigBrightfield,FileName_OrigBrightfield_H,FileName_OrigBrightfield_L,FileName_OrigDNA,FileName_OrigER,FileName_OrigMito,FileName_OrigRNA,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row,Metadata_Site"
+                        assert header == expected_header : "Expected: $expected_header, but got: $header"
+                    }
+                }
             )
         }
     }
