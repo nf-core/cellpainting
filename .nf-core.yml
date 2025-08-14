@@ -1,7 +1,3 @@
-repository_type: pipeline
-
-nf_core_version: 3.2.1
-
 lint:
   files_exist:
     - conf/igenomes.config
@@ -18,14 +14,14 @@ lint:
         - params.cellprofiler_assaydevelopment_cppipe
 
 template:
-  org: nf-core
-  name: cellpainting
-  description: A wonderful pipeline for cell painting
   author: Erin, Dave, Jenna
-  version: 1.0.0dev
-  force: true
+  description: A wonderful pipeline for cell painting
+  force: false
+  is_nfcore: true
+  name: cellpainting
+  org: nf-core
   outdir: .
   skip_features:
     - igenomes
     - fastqc
-  is_nfcore: true
+  version: 1.0.0dev
