@@ -1,4 +1,574 @@
 {
+    "group_by_batch_plate_site_with_illum": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_1.csv:md5,ec03d5255412abfc80561511be7a1b2c"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_2.csv:md5,ef88afabe6d088d0a22765ad6b0c2f72"
+                    ]
+                ],
+                "images_with_illum_load_data_csv": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_1.csv:md5,ec03d5255412abfc80561511be7a1b2c"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_2.csv:md5,ef88afabe6d088d0a22765ad6b0c2f72"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-13T19:33:19.735356"
+    },
+    "group_by_batch_plate_well_site_with_illum": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A01_1.csv:md5,f752d8e05aee3c8fac151699b8d21cf8"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_A01_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A01_2.csv:md5,9a9469442919c3a98f40468db6fdfb2b"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A02",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_A02_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A02_1.csv:md5,482a0d3ddc56a2fbb91ccd922e25f17d"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A02",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_A02_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A02_2.csv:md5,cfe1e9a59621c50514f179dddbb6cf20"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "B01",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_B01_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_B01_1.csv:md5,cd264df907f32435cf255c5d32695e16"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "B01",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_B01_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_B01_2.csv:md5,3aeabe161d8ab0f56b5e44a1c591b318"
+                    ]
+                ],
+                "images_with_illum_load_data_csv": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A01_1.csv:md5,f752d8e05aee3c8fac151699b8d21cf8"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_A01_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A01_2.csv:md5,9a9469442919c3a98f40468db6fdfb2b"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A02",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_A02_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A02_1.csv:md5,482a0d3ddc56a2fbb91ccd922e25f17d"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A02",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_A02_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_A02_2.csv:md5,cfe1e9a59621c50514f179dddbb6cf20"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "B01",
+                            "site": 1,
+                            "id": "2021_04_26_Batch1_BR00117035_B01_1"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_B01_1.csv:md5,cd264df907f32435cf255c5d32695e16"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "B01",
+                            "site": 2,
+                            "id": "2021_04_26_Batch1_BR00117035_B01_2"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_B01_2.csv:md5,3aeabe161d8ab0f56b5e44a1c591b318"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-13T19:35:31.280653"
+    },
     "group_by_batch_plate_with_illum": {
         "content": [
             {
@@ -69,7 +639,7 @@
                             "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
                             "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
                         ],
-                        "2021_04_26_Batch1_BR00117035.csv:md5,3abc6c7b76d39c91ae494f3664baaf5d"
+                        "2021_04_26_Batch1_BR00117035.csv:md5,53e21f6e5721eecfea15f84c02740bd8"
                     ]
                 ],
                 "images_with_illum_load_data_csv": [
@@ -139,7 +709,7 @@
                             "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy",
                             "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"
                         ],
-                        "2021_04_26_Batch1_BR00117035.csv:md5,3abc6c7b76d39c91ae494f3664baaf5d"
+                        "2021_04_26_Batch1_BR00117035.csv:md5,53e21f6e5721eecfea15f84c02740bd8"
                     ]
                 ]
             }
@@ -148,6 +718,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-13T16:32:44.787833"
+        "timestamp": "2025-08-13T18:19:03.986205"
     }
 }

@@ -8,7 +8,7 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
-include { CELLPROFILER_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
+include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
 include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
@@ -45,13 +45,13 @@ workflow CELLPAINTING {
 
     // Create load_data.csv files for illumination correction
     // Group by batch, plate, and channel for illumination correction
-    CELLPROFILER_LOAD_DATA_CSV(
+    ILLUMINATION_LOAD_DATA_CSV(
         ch_samplesheet,
         ['batch', 'plate', 'channel'],
         'illumination'
     )
 
-    ch_illumination_correction_images_with_load_data_csv = CELLPROFILER_LOAD_DATA_CSV.out.images_with_load_data_csv
+    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
 
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
@@ -59,6 +59,13 @@ workflow CELLPAINTING {
         cellprofiler_illumination_cppipe
     )
 
+    // Create the LOAD_DATA.CSV files for assay development
+    CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
+        ch_samplesheet,
+        ['batch', 'plate'],
+        'assay_development',
+        CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
+    )
 
     //
     // Collate and save software versions

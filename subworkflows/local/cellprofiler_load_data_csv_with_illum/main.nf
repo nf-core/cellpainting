@@ -55,7 +55,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
 
                 // Create illumination filename list based on the plate and channel
                 def illum_filenames = channels.collect { channel ->
-                    "${meta.batch}_${meta.plate}_Illum${channel}.npy"
+                    "${meta.plate}_Illum${channel}.npy"
                 }
 
                 // Combine: image files + metadata + illum files
@@ -87,10 +87,12 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
         }
         .set { ch_csvs_with_key }
 
-    // Group illumination correction files by the same keys
+    // Group illumination correction files by keys that exist in illum metadata
+    // (typically batch and plate, but not site since illum files are plate-level)
     ch_illumination_correction
         .map { illum_meta, illum_file ->
-            def group_meta = illum_meta.subMap(grouping_keys) + [id: grouping_keys.collect { illum_meta[it] }.join('_')]
+            def illum_grouping_keys = grouping_keys.findAll { illum_meta.containsKey(it) }
+            def group_meta = illum_meta.subMap(illum_grouping_keys) + [id: illum_grouping_keys.collect { illum_meta[it] }.join('_')]
             [group_meta, illum_meta, illum_file]
         }
         .groupTuple()
@@ -100,10 +102,21 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
         .set { ch_illum_with_key }
 
     // Combine grouped images with their load_data.csv files and illumination files
+    // Need to handle case where illumination files may be grouped by fewer keys than images
     ch_images_with_key
         .join(ch_csvs_with_key)
-        .join(ch_illum_with_key)
-        .map { _key, group_meta, _meta_list, image_list, load_data_csv, illum_group_meta, illum_file_list ->
+        .map { _key, group_meta, _meta_list, image_list, load_data_csv ->
+            // Create illumination key based on the keys that illumination files actually have
+            def first_meta = _meta_list[0]
+            def illum_keys = ['batch', 'plate'].findAll { first_meta.containsKey(it) }
+            def illum_key = illum_keys.collect { first_meta[it] }.join('_')
+            [_key, group_meta, _meta_list, image_list, load_data_csv, illum_key]
+        }
+        .combine(ch_illum_with_key)
+        .filter { _key, group_meta, _meta_list, image_list, load_data_csv, illum_key, illum_id, illum_group_meta, illum_file_list ->
+            illum_key == illum_id
+        }
+        .map { _key, group_meta, _meta_list, image_list, load_data_csv, illum_key, illum_id, illum_group_meta, illum_file_list ->
             [group_meta, image_list, illum_file_list, load_data_csv]
         }
         .set { ch_images_with_illum_load_data_csv }

@@ -46,7 +46,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir -p illumination_corrections
-    echo 'this is not an illumination correction' > illumination_corrections/mock_illum_correction.npy
+    echo 'this is not an illumination correction' > illumination_corrections/${meta.plate}_Illum${meta.channel}.npy
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

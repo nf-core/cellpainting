@@ -65,4 +65,99 @@ nextflow_workflow {
             )
         }
     }
+
+    test("group_by_batch_plate_site_with_illum") {
+
+        when {
+            workflow {
+                """
+                // Create illumination correction files channel using actual S3 paths
+                def illum_files = Channel.of(
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'AGP'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield_H'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield_L'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'DNA'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'ER'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Mito'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'RNA'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy')]
+                )
+
+                input[0] = PIPELINE_INITIALISATION.out.samplesheet
+                input[1] = ['batch', 'plate', 'site']
+                input[2] = illum_files
+                input[3] = 'test_step'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()},
+                {
+                    workflow.out.images_with_illum_load_data_csv.each { meta, images, illum_files, csv_file ->
+                        def csv_lines = path(csv_file).readLines()
+                        def header = csv_lines[0]
+                        def expected_header = "FileName_OrigAGP,FileName_OrigBrightfield,FileName_OrigBrightfield_H,FileName_OrigBrightfield_L,FileName_OrigDNA,FileName_OrigER,FileName_OrigMito,FileName_OrigRNA,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row,FileName_IllumAGP,FileName_IllumBrightfield,FileName_IllumBrightfield_H,FileName_IllumBrightfield_L,FileName_IllumDNA,FileName_IllumER,FileName_IllumMito,FileName_IllumRNA"
+                        assert header == expected_header : "Expected: $expected_header, but got: $header"
+
+                        // Verify that meta contains site information when grouping by site
+                        if (meta.containsKey('site')) {
+                            assert meta.site != null : "Site value should not be null when site key is present"
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    test("group_by_batch_plate_well_site_with_illum") {
+
+        when {
+            workflow {
+                """
+                // Create illumination correction files channel using actual S3 paths
+                def illum_files = Channel.of(
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'AGP'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield_H'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Brightfield_L'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'DNA'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'ER'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'Mito'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy')],
+                    [['batch': '2021_04_26_Batch1', 'plate': 'BR00117035', 'channel': 'RNA'], file('s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy')]
+                )
+
+                input[0] = PIPELINE_INITIALISATION.out.samplesheet
+                input[1] = ['batch', 'plate', 'well', 'site']
+                input[2] = illum_files
+                input[3] = 'test_step'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()},
+                {
+                    workflow.out.images_with_illum_load_data_csv.each { meta, images, illum_files, csv_file ->
+                        def csv_lines = path(csv_file).readLines()
+                        def header = csv_lines[0]
+                        def expected_header = "FileName_OrigAGP,FileName_OrigBrightfield,FileName_OrigBrightfield_H,FileName_OrigBrightfield_L,FileName_OrigDNA,FileName_OrigER,FileName_OrigMito,FileName_OrigRNA,Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row,FileName_IllumAGP,FileName_IllumBrightfield,FileName_IllumBrightfield_H,FileName_IllumBrightfield_L,FileName_IllumDNA,FileName_IllumER,FileName_IllumMito,FileName_IllumRNA"
+                        assert header == expected_header : "Expected: $expected_header, but got: $header"
+
+                        // Verify that meta contains batch, plate, well, and site information
+                        assert meta.containsKey('batch') : "Meta should contain 'batch' key"
+                        assert meta.containsKey('plate') : "Meta should contain 'plate' key"
+                        assert meta.containsKey('well') : "Meta should contain 'well' key when grouping by well"
+                        assert meta.containsKey('site') : "Meta should contain 'site' key when grouping by site"
+                        assert meta.well != null : "Well value should not be null"
+                        assert meta.site != null : "Site value should not be null"
+                    }
+                }
+            )
+        }
+    }
 }
