@@ -26,7 +26,7 @@ workflow CELLPAINTING {
 
     take:
     ch_samplesheet // channel: images read in from --input samplesheet
-    cellprofiler_mode // value: assaydevelopment, analysis
+    cellprofiler_mode // value: assay_development, analysis
     cellprofiler_illumination_cppipe // value: path to illumination cppipe
     cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
     cellprofiler_analysis_cppipe // value: path to analysis cppipe
@@ -59,13 +59,24 @@ workflow CELLPAINTING {
         cellprofiler_illumination_cppipe
     )
 
-    // Create the LOAD_DATA.CSV files for assay development
-    CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
-        ch_samplesheet,
-        ['batch', 'plate'],
-        'assay_development',
-        CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
-    )
+    if (cellprofiler_mode == 'assay_development') {
+
+        // Create the LOAD_DATA.CSV files for assay development
+        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
+            ch_samplesheet,
+            ['batch', 'plate','well'],
+            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
+            'assay_development'
+        )
+
+        CELLPROFILER_ASSAYDEVELOPMENT(
+            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
+            cellprofiler_assaydevelopment_cppipe
+        )
+
+    }
+
+
 
     //
     // Collate and save software versions
