@@ -9,6 +9,8 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
+                input = "$projectDir/assets/samplesheet.csv"
+                cellprofiler_mode = "analysis"
             }
         }
 

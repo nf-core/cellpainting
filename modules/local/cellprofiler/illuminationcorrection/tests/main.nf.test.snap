@@ -10,7 +10,7 @@
                             "plate": "BR00117035",
                             "channel": "AGP"
                         },
-                        "mock_illum_correction.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
+                        "BR00117035_IllumAGP.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
                     ]
                 ],
                 "1": [
@@ -24,7 +24,7 @@
                             "plate": "BR00117035",
                             "channel": "AGP"
                         },
-                        "mock_illum_correction.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
+                        "BR00117035_IllumAGP.npy:md5,1950d1deb8bc1c4cc1c859cd0174ecc3"
                     ]
                 ],
                 "versions": [
@@ -34,9 +34,9 @@
         ],
         "meta": {
             "nf-test": "0.9.1",
-            "nextflow": "25.04.5"
+            "nextflow": "25.06.0"
         },
-        "timestamp": "2025-07-09T14:54:11.941501"
+        "timestamp": "2025-08-13T21:03:53.708346"
     },
     "cellprofiler - illumination correction": {
         "content": [
@@ -73,8 +73,8 @@
         ],
         "meta": {
             "nf-test": "0.9.1",
-            "nextflow": "25.04.5"
+            "nextflow": "25.06.0"
         },
-        "timestamp": "2025-07-09T14:54:01.10902"
+        "timestamp": "2025-08-13T21:03:42.881425"
     }
 }

@@ -1,0 +1,24 @@
+{
+    "-profile test": {
+        "content": [
+            0,
+            {
+                "Workflow": {
+                    "nf-core/cellpainting": "v1.0.0dev"
+                }
+            },
+            [
+                "pipeline_info",
+                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.06.0"
+        },
+        "timestamp": "2025-08-13T21:09:12.305961"
+    }
+}
