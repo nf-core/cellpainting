@@ -41,7 +41,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
             // Header: for each channel add FileName_Orig{channel}, followed by metadata, then FileName_Illum{channel}
             def orig_headers = channels.collect { "FileName_Orig${it}" }
             def illum_headers = channels.collect { "FileName_Illum${it}" }
-            def header = (orig_headers + ["Metadata_Batch", "Metadata_Plate", "Metadata_Well", "Metadata_Col", "Metadata_Row"] + illum_headers).join(',')
+            def header = (orig_headers + ["Metadata_Batch", "Metadata_Plate", "Metadata_Well", "Metadata_Site", "Metadata_Col", "Metadata_Row"] + illum_headers).join(',')
 
             // Content: one row per well+site
             def rows = wells_data.values().collect { well_data ->
@@ -59,7 +59,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
                 }
 
                 // Combine: image files + metadata + illum files
-                def row = image_filenames + [meta.batch, meta.plate, meta.well, meta.col, meta.row] + illum_filenames
+                def row = image_filenames + [meta.batch, meta.plate, meta.well, meta.site ?: 1, meta.col, meta.row] + illum_filenames
                 row.join(',')
             }
 
