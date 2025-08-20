@@ -1,0 +1,420 @@
+{
+    "group_by_batch_plate_channel": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "AGP",
+                            "id": "2021_04_26_Batch1_BR00117035_AGP"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_AGP.csv:md5,792d25b46c18243d142df442be63483b"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield.csv:md5,386bb90ea46bde0546e2f7b25aacb8d0"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield_H",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield_H"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield_H.csv:md5,dd7d804839c18dbaea16771d2db13ff2"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield_L",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield_L"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield_L.csv:md5,e42046edff925a6b32d5e66cc6f62db7"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "DNA",
+                            "id": "2021_04_26_Batch1_BR00117035_DNA"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_DNA.csv:md5,4cd151ddd03e55b3543b7b03cd637b3d"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "ER",
+                            "id": "2021_04_26_Batch1_BR00117035_ER"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_ER.csv:md5,f2e38bb76bd193a2801fc6863a515b7f"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Mito",
+                            "id": "2021_04_26_Batch1_BR00117035_Mito"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Mito.csv:md5,f33bbace33052da87f0f433d238cd211"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "RNA",
+                            "id": "2021_04_26_Batch1_BR00117035_RNA"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_RNA.csv:md5,6fcf47007efdc1fb63d5124e02f3b16a"
+                    ]
+                ],
+                "images_with_load_data_csv": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "AGP",
+                            "id": "2021_04_26_Batch1_BR00117035_AGP"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_AGP.csv:md5,792d25b46c18243d142df442be63483b"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield.csv:md5,386bb90ea46bde0546e2f7b25aacb8d0"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield_H",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield_H"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield_H.csv:md5,dd7d804839c18dbaea16771d2db13ff2"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Brightfield_L",
+                            "id": "2021_04_26_Batch1_BR00117035_Brightfield_L"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Brightfield_L.csv:md5,e42046edff925a6b32d5e66cc6f62db7"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "DNA",
+                            "id": "2021_04_26_Batch1_BR00117035_DNA"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_DNA.csv:md5,4cd151ddd03e55b3543b7b03cd637b3d"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "ER",
+                            "id": "2021_04_26_Batch1_BR00117035_ER"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_ER.csv:md5,f2e38bb76bd193a2801fc6863a515b7f"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "Mito",
+                            "id": "2021_04_26_Batch1_BR00117035_Mito"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_Mito.csv:md5,f33bbace33052da87f0f433d238cd211"
+                    ],
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "channel": "RNA",
+                            "id": "2021_04_26_Batch1_BR00117035_RNA"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035_RNA.csv:md5,6fcf47007efdc1fb63d5124e02f3b16a"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-13T15:26:28.476756"
+    },
+    "group_by_batch_plate": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "id": "2021_04_26_Batch1_BR00117035"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035.csv:md5,631f353cd823d018b193d1debf40aa6a"
+                    ]
+                ],
+                "images_with_load_data_csv": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "id": "2021_04_26_Batch1_BR00117035"
+                        },
+                        [
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch7sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch6sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch8sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch3sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch1sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch4sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch5sk1fk1fl1.tiff",
+                            "/cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff"
+                        ],
+                        "2021_04_26_Batch1_BR00117035.csv:md5,631f353cd823d018b193d1debf40aa6a"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-13T15:26:31.336267"
+    }
+}

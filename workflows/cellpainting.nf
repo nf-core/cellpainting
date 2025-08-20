@@ -4,6 +4,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { CYTOTABLE              } from '../modules/local/cytotable'
+include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
+include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
+include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
+include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
+include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
+
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -18,73 +25,52 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cell
 workflow CELLPAINTING {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: images read in from --input samplesheet
+    cellprofiler_mode // value: assay_development, analysis
+    cellprofiler_illumination_cppipe // value: path to illumination cppipe
+    cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_analysis_cppipe // value: path to analysis cppipe
+
+
     main:
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Assay Development
-    // Group images by plate and well
-    ch_samplesheet.map { meta, image ->
-        def group_key = meta.subMap('batch','plate','well')
-        def new_tuple = [group_key + [id: "${meta.batch}_${meta.plate}_${meta.well}"], meta, image]
-        new_tuple
-    }.groupTuple().set { images_grouped_by_plate_well }
+    // Create load_data.csv files for illumination correction
+    // Group by batch, plate, and channel for illumination correction
+    ILLUMINATION_LOAD_DATA_CSV(
+        ch_samplesheet,
+        ['batch', 'plate', 'channel'],
+        'illumination'
+    )
 
-    // Create load_data.csv for each well for assay development
-    images_grouped_by_plate_well.map{
-        shared_meta, meta_list, image_list ->
-        // Create the header for the load_data.csv file
-        # TODO: Need a FileName_OrigCHANNEL for each channel in experiment
-        # TODO: Need an FileName_IllumCHANNEL for each channel in experiment
-        def header = "FileName_Orig${shared_meta.channel},Metadata_Batch,Metadata_Plate,Metadata_Well,Metadata_Col,Metadata_Row"
-        // Zip the metadata and image list together so that each row corresponds to an image together with its metadata
-        def zip_meta_image = [meta_list, image_list].transpose()
-        // Create the content for the load_data.csv file
-        // Each row will contain the image filename, batch, plate, well, column and row
-        def content = zip_meta_image.collect { meta, image ->
-            def row = ["${image.name}",meta.batch, meta.plate, meta.well, meta.col, meta.row]
-            row.join(',')
-        }
-        // Combine the header and content into a text string
-        def file_content = [header] + content
-        def file_content_str = file_content.join('\n')
-        // Return a tuple with the shared metadata and the file content string
-        [shared_meta, file_content_str]
-    }.collectFile(
-        newLine: true,
-        storeDir: "${workflow.workDir}/cellpainting/${workflow.sessionId}/load_data_csvs/assay_development/"
-    ) {
-        shared_meta, file_content_str ->
-        // Create a file name for the load_data.csv file
-        def file_name = "${shared_meta.id}.csv"
-        [file_name] + file_content_str
-    }.set { well_assay_development_load_data_csvs }
-
-    // Create a join key for each channel from the shared metadata
-    images_grouped_by_plate_well.map{
-        shared_meta, meta_list, image_list ->
-        [shared_meta.id, shared_meta, meta_list, image_list]
-    }.set { images_grouped_by_plate_well_with_key }
-    well_assay_development_load_data_csvs.map{
-        load_data_csv ->
-        [load_data_csv.baseName, load_data_csv]
-    }.set { well_assay_development_load_data_csvs_with_key }
-
-    // Join the two channels on the key, and return the shared metadata, image list and load_data_csv
-    images_grouped_by_plate_well_with_key.join(well_assay_development_load_data_csvs_with_key)
-        .map{
-            _key, shared_meta, _meta_list, image_list, load_data_csv ->
-            [shared_meta, image_list, load_data_csv]
-        }
-        .set{assay_dev_images_with_load_data_csv}
+    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
 
 
-    CELLPROFILER_ASSAYDEVELOPMENT(
-        assay_dev_images_with_load_data_csv,
+    CELLPROFILER_ILLUMINATIONCORRECTION(
+        ch_illumination_correction_images_with_load_data_csv,
         cellprofiler_illumination_cppipe
     )
+
+    if (cellprofiler_mode == 'assay_development') {
+
+        // Create the LOAD_DATA.CSV files for assay development
+        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
+            ch_samplesheet,
+            ['batch', 'plate','well'],
+            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
+            'assay_development'
+        )
+
+        CELLPROFILER_ASSAYDEVELOPMENT(
+            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
+            cellprofiler_assaydevelopment_cppipe
+        )
+
+    }
+
+
 
     //
     // Collate and save software versions
@@ -129,17 +115,18 @@ workflow CELLPAINTING {
         )
     )
 
-    // MULTIQC (
-    //     ch_multiqc_files.collect(),
-    //     ch_multiqc_config.toList(),
-    //     ch_multiqc_custom_config.toList(),
-    //     ch_multiqc_logo.toList(),
-    //     [],
-    //     []
-    // )
+    MULTIQC (
+        ch_multiqc_files.collect(),
+        ch_multiqc_config.toList(),
+        ch_multiqc_custom_config.toList(),
+        ch_multiqc_logo.toList(),
+        [],
+        []
+    )
 
-    // emit:multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    // versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    emit:
+    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 

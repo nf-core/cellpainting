@@ -40,7 +40,11 @@ workflow NFCORE_CELLPAINTING {
     // WORKFLOW: Run pipeline
     //
     CELLPAINTING (
-        samplesheet
+        samplesheet,
+        params.cellprofiler_mode,
+        params.cellprofiler_illumination_cppipe,
+        params.cellprofiler_assaydevelopment_cppipe,
+        params.cellprofiler_analysis_cppipe
     )
     // emit:
     // multiqc_report = CELLPAINTING.out.multiqc_report // channel: /path/to/multiqc_report.html
