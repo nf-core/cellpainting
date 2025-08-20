@@ -1,23 +1,28 @@
-repository_type: pipeline
-
-nf_core_version: 3.2.1
-
 lint:
   files_exist:
     - conf/igenomes.config
     - conf/igenomes_ignored.config
     - conf/igenomes.config
     - conf/igenomes_ignored.config
-
+  template_strings:
+    - assets/cellprofiler/illumination.cppipe.jinja
+    - modules/local/cellprofiler/illuminationcorrection/main.nf
+  nextflow_config:
+    - config_defaults:
+        - params.cellprofiler_illumination_cppipe
+        - params.cellprofiler_analysis_cppipe
+        - params.cellprofiler_assaydevelopment_cppipe
+nf_core_version: 3.3.2
+repository_type: pipeline
 template:
-  org: nf-core
-  name: cellpainting
+  author: Kenneth Brewer
   description: A wonderful pipeline for cell painting
-  author: Erin, Dave, Jenna
-  version: 1.0.0dev
-  force: true
+  force: false
+  is_nfcore: true
+  name: cellpainting
+  org: nf-core
   outdir: .
   skip_features:
     - igenomes
     - fastqc
-  is_nfcore: true
+  version: 1.0.0dev

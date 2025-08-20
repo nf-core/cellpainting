@@ -5,6 +5,30 @@
     "description": "A wonderful pipeline for cell painting",
     "type": "object",
     "$defs": {
+        "cellprofiler": {
+            "title": "CellProfiler",
+            "type": "object",
+            "description": "Parameters related to CellProfiler",
+            "default": "",
+            "properties": {
+                "cellprofiler_mode": {
+                    "type": "string",
+                    "default": "analysis"
+                },
+                "cellprofiler_illumination_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir]/assets/cellprofiler/illumination.cppipe"
+                },
+                "cellprofiler_analysis_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir]/cellpainting/assets/cellprofiler/analysis.cppipe"
+                },
+                "cellprofiler_assaydevelopment_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir]/assets/cellprofiler/assaydevelopment.cppipe"
+                }
+            }
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -22,6 +46,10 @@
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/cellpainting/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
+                },
+                "stop_after": {
+                    "type": "string",
+                    "default": "complete"
                 },
                 "outdir": {
                     "type": "string",
@@ -190,6 +218,9 @@
         }
     },
     "allOf": [
+        {
+            "$ref": "#/$defs/cellprofiler"
+        },
         {
             "$ref": "#/$defs/input_output_options"
         },

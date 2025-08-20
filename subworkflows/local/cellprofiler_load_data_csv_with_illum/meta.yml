@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "cellprofiler_load_data_csv_with_illum"
+description: Create CellProfiler compatible load_data.csv files with illumination correction file columns.
+keywords:
+  - cellprofiler
+  - image analysis
+  - microscopy
+  - illumination correction
+components: []
+input:
+  - ch_samplesheet:
+      type: channel
+      description: |
+        The input channel containing images with metadata
+        Structure: [ val(meta), path(image) ]
+      pattern: "*.{tiff,tif,png,jpg}"
+  - grouping_keys:
+      type: value
+      description: |
+        List of metadata keys to group by for creating load_data.csv files
+        Example: ['batch', 'plate', 'channel']
+  - ch_illumination_correction:
+      type: channel
+      description: |
+        Channel containing illumination correction files with metadata
+        Structure: [ val(meta), path(illumination_correction) ]
+      pattern: "*.{npy,tiff,tif}"
+output:
+  - images_with_load_data_csv:
+      type: channel
+      description: |
+        Channel containing grouped images with their corresponding load_data.csv files
+        Structure: [ val(meta), [list_of_images], [list_of_illum_files], path(load_data_csv) ]
+      pattern: "*.csv"
+authors:
+  - "@kenibrewer"
+maintainers:
+  - "@kenibrewer"

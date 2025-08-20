@@ -8,8 +8,8 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(load_data_csv)
-    path image_dir, stageAs: 'images'
+    tuple val(meta), path(images, stageAs: "images/*"), path(load_data_csv)
+
     path illumination_cppipe
 
     output:
@@ -23,16 +23,21 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    mkdir -p illumination_corrections
+    # Replace the channel name in the cppipe file
+    sed 's/{{channel}}/${meta.channel}/g' ${illumination_cppipe} > illumination.cppipe
+
     cellprofiler -c -r \
     ${args} \
-    -p ${illumination_cppipe} \
+    -p illumination.cppipe \
     -o illumination_corrections \
     --data-file=${load_data_csv} \
+    --image-directory ./images/ \
     -g Metadata_Plate=${meta.plate} \
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 
@@ -41,11 +46,11 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir -p illumination_corrections
-    echo 'this is not an illumination correction' > illumination_corrections/mock_illum_correction.npy
+    echo 'this is not an illumination correction' > illumination_corrections/${meta.plate}_Illum${meta.channel}.npy
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version )
     END_VERSIONS
     """
 }

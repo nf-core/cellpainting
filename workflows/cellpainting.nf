@@ -4,6 +4,13 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { CYTOTABLE              } from '../modules/local/cytotable'
+include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
+include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
+include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
+include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
+include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
+
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -18,11 +25,55 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cell
 workflow CELLPAINTING {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: images read in from --input samplesheet
+    cellprofiler_mode // value: assay_development, analysis
+    cellprofiler_illumination_cppipe // value: path to illumination cppipe
+    cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_analysis_cppipe // value: path to analysis cppipe
+
+
     main:
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
+
+    // Get the list of unique channels from the samplesheet
+
+
+    // Create load_data.csv files for illumination correction
+    // Group by batch, plate, and channel for illumination correction
+    ILLUMINATION_LOAD_DATA_CSV(
+        ch_samplesheet,
+        ['batch', 'plate', 'channel'],
+        'illumination'
+    )
+
+    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
+
+
+    CELLPROFILER_ILLUMINATIONCORRECTION(
+        ch_illumination_correction_images_with_load_data_csv,
+        cellprofiler_illumination_cppipe
+    )
+
+    if (cellprofiler_mode == 'assay_development') {
+
+        // Create the LOAD_DATA.CSV files for assay development
+        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
+            ch_samplesheet,
+            ['batch', 'plate','well'],
+            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
+            'assay_development'
+        )
+
+        CELLPROFILER_ASSAYDEVELOPMENT(
+            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
+            cellprofiler_assaydevelopment_cppipe
+        )
+
+    }
+
+
 
     //
     // Collate and save software versions
@@ -67,17 +118,18 @@ workflow CELLPAINTING {
         )
     )
 
-    // MULTIQC (
-    //     ch_multiqc_files.collect(),
-    //     ch_multiqc_config.toList(),
-    //     ch_multiqc_custom_config.toList(),
-    //     ch_multiqc_logo.toList(),
-    //     [],
-    //     []
-    // )
+    MULTIQC (
+        ch_multiqc_files.collect(),
+        ch_multiqc_config.toList(),
+        ch_multiqc_custom_config.toList(),
+        ch_multiqc_logo.toList(),
+        [],
+        []
+    )
 
-    // emit:multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    // versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    emit:
+    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
