@@ -38,10 +38,7 @@ workflow CELLPAINTING {
     ch_multiqc_files = Channel.empty()
 
     // Get the list of unique channels from the samplesheet
-    channels_list = ch_samplesheet
-        .map { meta, _image -> meta.channel }
-        .unique()
-        .collect()
+
 
     // Create load_data.csv files for illumination correction
     // Group by batch, plate, and channel for illumination correction

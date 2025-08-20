@@ -69,7 +69,7 @@ process CELLPROFILER_ANALYSIS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(samtools --version |& sed '1!d ; s/samtools //')
+        cellprofiler: \$(cellprofiler --version )
     END_VERSIONS
     """
 
@@ -85,7 +85,7 @@ process CELLPROFILER_ANALYSIS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(samtools --version |& sed '1!d ; s/samtools //')
+        cellprofiler: \$(cellprofiler --version )
     END_VERSIONS
     """
 }

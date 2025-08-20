@@ -37,7 +37,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 
@@ -50,7 +50,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version )
     END_VERSIONS
     """
 }

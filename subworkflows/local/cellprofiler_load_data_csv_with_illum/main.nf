@@ -96,7 +96,7 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
             [group_meta, illum_meta, illum_file]
         }
         .groupTuple()
-        .map { group_meta, illum_meta_list, illum_file_list ->
+        .map { group_meta, _illum_meta_list, illum_file_list ->
             [group_meta.id, group_meta, illum_file_list]
         }
         .set { ch_illum_with_key }
@@ -113,10 +113,10 @@ workflow CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM {
             [_key, group_meta, _meta_list, image_list, load_data_csv, illum_key]
         }
         .combine(ch_illum_with_key)
-        .filter { _key, group_meta, _meta_list, image_list, load_data_csv, illum_key, illum_id, illum_group_meta, illum_file_list ->
+        .filter { _key, _group_meta, _meta_list, _image_list, _load_data_csv, illum_key, illum_id, _illum_group_meta, _illum_file_list ->
             illum_key == illum_id
         }
-        .map { _key, group_meta, _meta_list, image_list, load_data_csv, illum_key, illum_id, illum_group_meta, illum_file_list ->
+        .map { _key, group_meta, _meta_list, image_list, load_data_csv, _illum_key, _illum_id, _illum_group_meta, illum_file_list ->
             [group_meta, image_list, illum_file_list, load_data_csv]
         }
         .set { ch_images_with_illum_load_data_csv }
