@@ -23,7 +23,6 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir -p assaydevelopment
-    # TODO Do we need to move illumination corrections to the images directory?
 
     cellprofiler -c -r \
     ${args} \
@@ -31,11 +30,10 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
     -o assaydevelopment \
     --data-file=${load_data_csv} \
     --image-directory ./images/ \
-    -g Metadata_Plate=${meta.plate},Metadata_Well=${meta.well},Metadata_Site=${meta.site ?: 1} \
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 
@@ -49,7 +47,7 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version |& sed '1!d ; s/cellprofiler //')
+        cellprofiler: \$(cellprofiler --version )
     END_VERSIONS
     """
 }
