@@ -1,6 +1,6 @@
 CellProfiler Pipeline: http://www.cellprofiler.org
 Version:5
-DateRevision:428
+DateRevision:426
 GitHash:
 ModuleCount:16
 HasImagePlaneDetails:False
@@ -9,11 +9,11 @@ LoadData:[module_num:1|svn_version:'Unknown'|variable_revision_number:6|show_win
     Input data file location:Default Input Folder|/Users/kbowers/Downloads
     Name of the file:load_data_with_illum.csv
     Load images based on this data?:Yes
-    Base image location:None|
+    Base image location:Default Input Folder|
     Process just a range of rows?:No
     Rows to process:1,100000
-    Group images by metadata?:Yes
-    Select metadata tags for grouping:Plate,Well,Site
+    Group images by metadata?:No
+    Select metadata tags for grouping:Plate,Well
     Rescale intensities?:Yes
 
 CorrectIlluminationApply:[module_num:2|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
@@ -292,7 +292,7 @@ SaveImages:[module_num:15|svn_version:'Unknown'|variable_revision_number:16|show
     Select the image to save:OrigOverlay
     Select method for constructing file names:Single name
     Select image name for file prefix:OrigDNA
-    Enter single file name:\g<Plate>\g<Well>
+    Enter single file name:\g<Batch>_\g<Plate>_\g<Well>_ObjectOverlay
     Number of digits:4
     Append a suffix to the image file name?:No
     Text to append to the image name:
@@ -328,5 +328,5 @@ ExportToSpreadsheet:[module_num:16|svn_version:'Unknown'|variable_revision_numbe
     Overwrite existing files without warning?:Yes
     Data to export:Image
     Combine these object measurements with those of the previous object?:No
-    File name:DATA.csv
-    Use the object name for the file name?:Yes
+    File name:\g<Batch>_\g<Plate>_\g<Well>_ImageQCMeasurements.csv
+    Use the object name for the file name?:No
