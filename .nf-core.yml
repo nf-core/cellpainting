@@ -4,10 +4,18 @@ lint:
     - conf/igenomes_ignored.config
     - conf/igenomes.config
     - conf/igenomes_ignored.config
-nf_core_version: 3.3.2
+  nextflow_config:
+    - config_defaults:
+        - params.cellprofiler_illumination_cppipe
+        - params.cellprofiler_analysis_cppipe
+        - params.cellprofiler_assaydevelopment_cppipe
+  template_strings:
+    - assets/cellprofiler/illumination.cppipe.jinja
+    - modules/local/cellprofiler/illuminationcorrection/main.nf
+nf_core_version: 3.4.1
 repository_type: pipeline
 template:
-  author: Erin, Dave, Jenna
+  author: Kenneth Brewer
   description: A wonderful pipeline for cell painting
   force: false
   is_nfcore: true
