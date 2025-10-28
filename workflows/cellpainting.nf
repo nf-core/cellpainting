@@ -29,6 +29,7 @@ workflow CELLPAINTING {
     cellprofiler_mode // value: assay_development, analysis
     cellprofiler_illumination_cppipe // value: path to illumination cppipe
     cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_assaydevelopment_site // value: site to use for assay development
     cellprofiler_analysis_cppipe // value: path to analysis cppipe
 
 
@@ -58,13 +59,19 @@ workflow CELLPAINTING {
         // Create the LOAD_DATA.CSV files for assay development
         CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
             ch_samplesheet,
-            ['batch', 'plate','well'],
+            ['batch', 'plate', 'well'],
             CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
             'assay_development'
         )
 
+        // Filter images by the specified site for assay development
+        ch_filtered_images = CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv
+            .filter { meta, _images, _illum_files, _load_data_csv ->
+                meta.site == cellprofiler_assaydevelopment_site
+            }
+
         CELLPROFILER_ASSAYDEVELOPMENT(
-            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
+            ch_filtered_images,
             cellprofiler_assaydevelopment_cppipe
         )
 

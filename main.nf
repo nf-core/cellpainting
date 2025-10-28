@@ -44,6 +44,7 @@ workflow NFCORE_CELLPAINTING {
         params.cellprofiler_mode,
         params.cellprofiler_illumination_cppipe,
         params.cellprofiler_assaydevelopment_cppipe,
+        params.cellprofiler_assaydevelopment_site,
         params.cellprofiler_analysis_cppipe
     )
     // emit:

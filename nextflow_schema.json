@@ -26,6 +26,11 @@
                 "cellprofiler_assaydevelopment_cppipe": {
                     "type": "string",
                     "default": "${projectDir]/assets/cellprofiler/assaydevelopment.cppipe"
+                },
+                "cellprofiler_assaydevelopment_site": {
+                    "type": "string",
+                    "default": "2",
+                    "description": "Site to use for assay development (filters images to only process this site)"
                 }
             }
         },
