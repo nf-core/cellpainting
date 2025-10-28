@@ -8,8 +8,6 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
-include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
-include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -38,40 +36,63 @@ workflow CELLPAINTING {
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Create load_data.csv files for illumination correction
-    // Group by batch, plate, and channel for illumination correction
-    ILLUMINATION_LOAD_DATA_CSV(
-        ch_samplesheet,
-        ['batch', 'plate', 'channel'],
-        'illumination'
-    )
-
-    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
-
+    // Group images by batch, plate, and channel for illumination correction
+    ch_samplesheet
+        .map { meta, image ->
+            def group_key = meta.subMap(['batch', 'plate', 'channel'])
+            def group_id = [meta.batch, meta.plate, meta.channel].join('_')
+            [group_key + [id: group_id], image]
+        }
+        .groupTuple()
+        .set { ch_illumination_correction_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
-        ch_illumination_correction_images_with_load_data_csv,
+        ch_illumination_correction_images,
         cellprofiler_illumination_cppipe
     )
 
     if (cellprofiler_mode == 'assay_development') {
 
-        // Create the LOAD_DATA.CSV files for assay development
-        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
-            ch_samplesheet,
-            ['batch', 'plate', 'well'],
-            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
-            'assay_development'
-        )
-
-        // Filter images by the specified site for assay development
-        ch_filtered_images = CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv
-            .filter { meta, _images, _illum_files, _load_data_csv ->
+        // Group images by batch, plate, and well for assay development
+        ch_samplesheet
+            .map { meta, image ->
+                def group_key = meta.subMap(['batch', 'plate', 'well'])
+                def group_id = [meta.batch, meta.plate, meta.well].join('_')
+                [group_key + [id: group_id, site: meta.site], image]
+            }
+            .groupTuple()
+            // Filter to the specified site for assay development
+            .filter { meta, _images ->
                 meta.site == cellprofiler_assaydevelopment_site
             }
+            .set { ch_assay_dev_images }
+
+        // Join images with illumination corrections
+        // Illumination files are grouped by batch/plate
+        CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections
+            .map { meta, illum_files ->
+                def key = [meta.batch, meta.plate].join('_')
+                [key, illum_files]
+            }
+            .groupTuple()
+            .map { key, illum_lists ->
+                [key, illum_lists.flatten()]
+            }
+            .set { ch_illum_by_plate }
+
+        ch_assay_dev_images
+            .map { meta, images ->
+                def illum_key = [meta.batch, meta.plate].join('_')
+                [illum_key, meta, images]
+            }
+            .combine(ch_illum_by_plate, by: 0)
+            .map { _key, meta, images, illum_files ->
+                [meta, images, illum_files]
+            }
+            .set { ch_assay_dev_with_illum }
 
         CELLPROFILER_ASSAYDEVELOPMENT(
-            ch_filtered_images,
+            ch_assay_dev_with_illum,
             cellprofiler_assaydevelopment_cppipe
         )
 

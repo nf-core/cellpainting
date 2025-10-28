@@ -8,7 +8,7 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(images, stageAs: "images/*"), path(illumination_correction_files, stageAs: "images/*"), path(load_data_csv) // channel: [ val(meta), [ list_of_images ], [ list_of_illumination_correction_files ], load_data_csv ]
+    tuple val(meta), path(images, stageAs: "images/*"), path(illumination_correction_files, stageAs: "images/*") // channel: [ val(meta), [ list_of_images ], [ list_of_illumination_correction_files ] ]
     path(assay_development_cppipe)
 
     output:
@@ -22,14 +22,20 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    # Generate load_data.csv dynamically with illumination files
+    generate_illumination_apply_csv.py \\
+        --images-dir ./images \\
+        --illum-dir ./images \\
+        --output load_data.csv
+
     mkdir -p assaydevelopment
 
-    cellprofiler -c -r \
-    ${args} \
-    -p assaydevelopment.cppipe \
-    -o assaydevelopment \
-    --data-file=${load_data_csv} \
-    --image-directory ./images/ \
+    cellprofiler -c -r \\
+    ${args} \\
+    -p ${assay_development_cppipe} \\
+    -o assaydevelopment \\
+    --data-file=load_data.csv \\
+    --image-directory ./images/
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

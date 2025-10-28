@@ -8,8 +8,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(images, stageAs: "images/*"), path(load_data_csv)
-
+    tuple val(meta), path(images, stageAs: "images/*")
     path illumination_cppipe
 
     output:
@@ -23,17 +22,22 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    # Generate load_data.csv dynamically
+    generate_illumination_calc_csv.py \\
+        --images-dir ./images \\
+        --output load_data.csv
+
     mkdir -p illumination_corrections
     # Replace the channel name in the cppipe file
     sed 's/{{channel}}/${meta.channel}/g' ${illumination_cppipe} > illumination.cppipe
 
-    cellprofiler -c -r \
-    ${args} \
-    -p illumination.cppipe \
-    -o illumination_corrections \
-    --data-file=${load_data_csv} \
-    --image-directory ./images/ \
-    -g Metadata_Plate=${meta.plate} \
+    cellprofiler -c -r \\
+    ${args} \\
+    -p illumination.cppipe \\
+    -o illumination_corrections \\
+    --data-file=load_data.csv \\
+    --image-directory ./images/ \\
+    -g Metadata_Plate=${meta.plate}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
