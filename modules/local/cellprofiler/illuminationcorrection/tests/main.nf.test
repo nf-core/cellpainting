@@ -13,16 +13,30 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [
-                    [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP'], // meta map,
-                    [   file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")],
-                        file("${projectDir}/modules/local/cellprofiler/illuminationcorrection/tests/load_data.csv", checkIfExists: true),
+                // Construct shared metadata
+                def meta = [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP']
+
+                // Construct per-image metadata list
+                def images_meta = [
+                    [filename: 'r01c01f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A01', col: 1, row: 1, site: 1, channel: 'AGP'],
+                    [filename: 'r01c01f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A01', col: 1, row: 1, site: 2, channel: 'AGP'],
+                    [filename: 'r01c02f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A02', col: 2, row: 1, site: 1, channel: 'AGP'],
+                    [filename: 'r01c02f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A02', col: 2, row: 1, site: 2, channel: 'AGP'],
+                    [filename: 'r02c01f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'B01', col: 1, row: 2, site: 1, channel: 'AGP'],
+                    [filename: 'r02c01f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'B01', col: 1, row: 2, site: 2, channel: 'AGP']
                 ]
+
+                // Construct images path list
+                def images = [
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")
+                ]
+
+                input[0] = [meta, images_meta, images]
                 input[1] = file("${projectDir}/assets/cellprofiler/illumination.cppipe.jinja", checkIfExists: true)
                 """
             }
@@ -43,16 +57,30 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [
-                    [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP'], // meta map,
-                    [   file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")],
-                        file("${projectDir}/modules/local/cellprofiler/illuminationcorrection/tests/load_data.csv", checkIfExists: true),
+                // Construct shared metadata
+                def meta = [id:"2021_04_26_Batch1_BR00117035_AGP", batch:'2021_04_26_Batch1', plate:'BR00117035', channel:'AGP']
+
+                // Construct per-image metadata list
+                def images_meta = [
+                    [filename: 'r01c01f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A01', col: 1, row: 1, site: 1, channel: 'AGP'],
+                    [filename: 'r01c01f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A01', col: 1, row: 1, site: 2, channel: 'AGP'],
+                    [filename: 'r01c02f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A02', col: 2, row: 1, site: 1, channel: 'AGP'],
+                    [filename: 'r01c02f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A02', col: 2, row: 1, site: 2, channel: 'AGP'],
+                    [filename: 'r02c01f01p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'B01', col: 1, row: 2, site: 1, channel: 'AGP'],
+                    [filename: 'r02c01f02p01-ch2sk1fk1fl1.tiff', batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'B01', col: 1, row: 2, site: 2, channel: 'AGP']
                 ]
+
+                // Construct images path list
+                def images = [
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f02p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c02f02p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f01p01-ch2sk1fk1fl1.tiff"),
+                    file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r02c01f02p01-ch2sk1fk1fl1.tiff")
+                ]
+
+                input[0] = [meta, images_meta, images]
                 input[1] = file("${projectDir}/assets/cellprofiler/illumination.cppipe.jinja", checkIfExists: true)
                 """
             }

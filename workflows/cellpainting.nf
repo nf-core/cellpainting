@@ -41,9 +41,16 @@ workflow CELLPAINTING {
         .map { meta, image ->
             def group_key = meta.subMap(['batch', 'plate', 'channel'])
             def group_id = [meta.batch, meta.plate, meta.channel].join('_')
-            [group_key + [id: group_id], image]
+            // Preserve full metadata for each image
+            def image_meta = meta.clone()
+            image_meta.filename = image.name
+            [group_key + [id: group_id], image_meta, image]
         }
         .groupTuple()
+        .map { meta, images_meta_list, images_list ->
+            // Return tuple: (shared meta, list of per-image metadata, list of images)
+            [meta, images_meta_list, images_list]
+        }
         .set { ch_illumination_correction_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(

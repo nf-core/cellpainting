@@ -2,231 +2,171 @@
 """
 Generate load_data.csv for CellProfiler illumination calculation.
 
-This script generates load_data.csv files for the illumination calculation step,
-which uses original multi-channel images.
+This script generates load_data.csv files for the illumination calculation step
+by reading metadata from a JSON file passed from Nextflow.
 
 Uses only Python standard library - no external dependencies.
 """
 
 import argparse
 import csv
-import glob
-import os
-import re
+import json
 import sys
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
-def parse_original_image(filename: str) -> Optional[Dict]:
+def read_metadata_json(json_path: str) -> Dict:
     """
-    Parse original multi-channel image filename.
+    Read and validate metadata JSON file.
 
-    Pattern: WellA1_PointA1_0000_ChannelCHN1,CHN2,CHN3_Seq0000.ome.tiff
-
-    Returns dict with: plate (if available), well, site, channels (list), frames (dict)
-    """
-    # Extract well, site, and channel info
-    pattern = r'Well([A-Z]\d+)_Point[A-Z]\d+_(\d+)_Channel([^_]+)_Seq\d+\.ome\.tiff?'
-    match = re.search(pattern, filename)
-
-    if not match:
-        return None
-
-    well = match.group(1)
-    site = int(match.group(2))
-    channels_str = match.group(3)
-
-    # Parse channels - could be comma-separated
-    channels = [ch.strip() for ch in channels_str.split(',')]
-
-    # Build frame mapping - each channel gets its sequential frame number
-    frames = {ch: idx for idx, ch in enumerate(channels)}
-
-    return {
-        'well': well,
-        'site': site,
-        'channels': channels,
-        'frames': frames
+    Expected structure:
+    {
+        "meta": {
+            "id": "...",
+            "batch": "...",
+            "plate": "...",
+            "channel": "..."
+        },
+        "images_meta": [
+            {
+                "filename": "...",
+                "batch": "...",
+                "plate": "...",
+                "well": "...",
+                "col": ...,
+                "row": ...,
+                "site": ...,
+                "channel": "..."
+            },
+            ...
+        ]
     }
 
-
-def infer_plate_from_path(file_path: str) -> str:
+    Returns:
+        Dict with 'meta' and 'images_meta' keys
     """
-    Try to infer plate name from file path.
-    Looks for 'Plate{number}' pattern in the path.
-    """
-    match = re.search(r'Plate(\d+)', file_path)
-    if match:
-        return f'Plate{match.group(1)}'
-    return 'Unknown'
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"❌ ERROR: Metadata JSON file not found: {json_path}", file=sys.stderr)
+        raise
+    except json.JSONDecodeError as e:
+        print(f"❌ ERROR: Failed to parse JSON from {json_path}", file=sys.stderr)
+        print(f"   {e}", file=sys.stderr)
+        raise
+
+    # Validate structure
+    if 'meta' not in data:
+        raise ValueError("JSON must contain 'meta' key")
+    if 'images_meta' not in data:
+        raise ValueError("JSON must contain 'images_meta' key")
+
+    meta = data['meta']
+    images_meta = data['images_meta']
+
+    # Validate meta has required fields
+    required_meta_fields = ['batch', 'plate', 'channel']
+    missing_meta_fields = [f for f in required_meta_fields if f not in meta]
+    if missing_meta_fields:
+        raise ValueError(f"meta missing required fields: {', '.join(missing_meta_fields)}")
+
+    # Validate images_meta is a list
+    if not isinstance(images_meta, list):
+        raise ValueError("images_meta must be a list")
+
+    if not images_meta:
+        raise ValueError("images_meta list is empty")
+
+    # Validate each image metadata has required fields
+    required_image_fields = ['filename', 'batch', 'plate', 'well', 'col', 'row', 'site', 'channel']
+    for idx, img in enumerate(images_meta):
+        missing_fields = [f for f in required_image_fields if f not in img]
+        if missing_fields:
+            raise ValueError(
+                f"images_meta[{idx}] missing required fields: {', '.join(missing_fields)}"
+            )
+
+    print(f"✓ Successfully loaded metadata for {len(images_meta)} images", file=sys.stderr)
+
+    return data
 
 
-def collect_and_group_files(images_dir: str) -> Dict:
+def generate_csv_rows(meta: Dict, images_meta: List[Dict]) -> List[Dict]:
     """
-    Collect and group image files by (plate, well, site).
+    Generate CSV rows from metadata.
+
+    Creates one row per image in tall format with columns:
+    - FileName_{channel}
+    - Metadata_Batch
+    - Metadata_Plate
+    - Metadata_Well
+    - Metadata_Col
+    - Metadata_Row
+    - Metadata_Site
+
+    No Frame or Series columns for illumination correction.
+
+    Args:
+        meta: Shared metadata dict
+        images_meta: List of per-image metadata dicts
 
     Returns:
-        Dict mapping (plate, well, site) -> {'images': {...}}
+        List of row dicts
     """
-    # Validate input directory exists
-    if not os.path.isdir(images_dir):
-        raise FileNotFoundError(f"Images directory not found: {images_dir}")
-
-    # Find image files
-    pattern = os.path.join(images_dir, "**", "*")
-    try:
-        all_files = glob.glob(pattern, recursive=True)
-    except Exception as e:
-        raise IOError(f"Error searching for files in {images_dir}: {e}")
-
-    # Filter to actual files matching pattern
-    file_pattern = r'.*\.ome\.tiff?$'
-    image_files = [
-        f for f in all_files
-        if os.path.isfile(f) and re.search(file_pattern, os.path.basename(f))
-    ]
-
-    if not image_files:
-        raise ValueError(
-            f"No image files found matching pattern '{file_pattern}' in {images_dir}\n"
-            f"Expected pattern: WellA1_PointA1_0000_ChannelCHN1,CHN2_Seq0000.ome.tiff"
-        )
-
-    print(f"✓ Found {len(image_files)} image files to process", file=sys.stderr)
-
-    # Group files
-    grouped = {}
-    parse_errors = []
-    missing_metadata = []
-
-    for img_path in image_files:
-        filename = os.path.basename(img_path)
-
-        try:
-            parsed = parse_original_image(filename)
-        except Exception as e:
-            parse_errors.append((filename, str(e)))
-            print(f"⚠ Error parsing filename '{filename}': {e}", file=sys.stderr)
-            continue
-
-        if not parsed:
-            parse_errors.append((filename, "Failed to match expected pattern"))
-            print(f"⚠ Skipping '{filename}': does not match expected pattern", file=sys.stderr)
-            continue
-
-        # Validate required metadata fields
-        try:
-            plate = parsed.get('plate', infer_plate_from_path(img_path))
-            well = parsed['well']
-            site = parsed['site']
-        except KeyError as e:
-            missing_metadata.append((filename, str(e)))
-            print(f"⚠ Missing required metadata in '{filename}': {e}", file=sys.stderr)
-            continue
-
-        key = (plate, well, site)
-
-        if key not in grouped:
-            grouped[key] = {'images': {}}
-
-        # Store multi-channel image with frames info
-        grouped[key]['images']['_file'] = filename
-        grouped[key]['images']['_parsed'] = parsed
-
-    # Report parsing summary
-    if parse_errors:
-        print(f"\n⚠ Warning: Failed to parse {len(parse_errors)} file(s)", file=sys.stderr)
-    if missing_metadata:
-        print(f"⚠ Warning: {len(missing_metadata)} file(s) had missing metadata", file=sys.stderr)
-
-    print(f"✓ Successfully grouped {len(grouped)} unique (plate, well, site) combinations", file=sys.stderr)
-
-    return grouped
-
-
-def generate_csv_rows(grouped: Dict, range_skip: int = 1) -> List[Dict]:
-    """
-    Generate CSV rows from grouped file data.
-    """
-    if not grouped:
-        raise ValueError("No grouped files to generate CSV rows from")
-
-    # Apply subsampling if needed
-    all_sites = sorted(set(site for _, _, site in grouped.keys()))
-    selected_sites = [site for i, site in enumerate(all_sites) if i % range_skip == 0]
-
-    if not selected_sites:
-        raise ValueError(f"No sites selected with range_skip={range_skip}")
-
-    print(f"✓ Selected {len(selected_sites)} site(s) from {len(all_sites)} total sites", file=sys.stderr)
-
+    channel = meta['channel']
     rows = []
-    row_errors = []
 
-    for (plate, well, site), file_data in sorted(grouped.items()):
-        if site not in selected_sites:
-            continue
+    for img in images_meta:
+        row = {
+            f'FileName_Orig{channel}': img['filename'],
+            'Metadata_Batch': img['batch'],
+            'Metadata_Plate': img['plate'],
+            'Metadata_Well': img['well'],
+            'Metadata_Col': img['col'],
+            'Metadata_Row': img['row'],
+            'Metadata_Site': img['site']
+        }
+        rows.append(row)
 
-        try:
-            parsed = file_data['images']['_parsed']
-            filename = file_data['images']['_file']
-
-            if 'channels' not in parsed or 'frames' not in parsed:
-                raise ValueError(f"Missing channels or frames data for {filename}")
-
-            # Build metadata columns
-            row = {
-                'Metadata_Plate': plate,
-                'Metadata_Well': well,
-                'Metadata_Site': site
-            }
-
-            # Add FileName and Frame for each channel
-            for channel in parsed['channels']:
-                if channel not in parsed['frames']:
-                    raise KeyError(f"Frame information missing for channel '{channel}'")
-
-                frame = parsed['frames'][channel]
-                row[f'FileName_Orig{channel}'] = filename
-                row[f'Frame_Orig{channel}'] = frame
-
-            rows.append(row)
-
-        except (KeyError, ValueError) as e:
-            row_errors.append((f"{plate}/{well}/Site{site}", str(e)))
-            print(f"⚠ Error generating row for {plate}/{well}/Site{site}: {e}", file=sys.stderr)
-            continue
-
-    if row_errors:
-        print(f"\n⚠ Warning: Failed to generate {len(row_errors)} row(s)", file=sys.stderr)
-
-    if not rows:
-        raise ValueError(
-            f"Failed to generate any valid CSV rows. "
-            f"Processed {len(grouped)} file groups, encountered {len(row_errors)} errors"
-        )
-
-    print(f"✓ Generated {len(rows)} CSV row(s)", file=sys.stderr)
+    print(f"✓ Generated {len(rows)} CSV rows", file=sys.stderr)
 
     return rows
 
 
-def write_csv(rows: List[Dict], output_file: str):
-    """Write rows to CSV with proper column ordering."""
+def write_csv(rows: List[Dict], output_file: str, channel: str):
+    """
+    Write rows to CSV with proper column ordering.
+
+    Column order (fixed):
+    1. FileName_{channel}
+    2. Metadata_Batch
+    3. Metadata_Plate
+    4. Metadata_Well
+    5. Metadata_Col
+    6. Metadata_Row
+    7. Metadata_Site
+
+    Args:
+        rows: List of row dicts
+        output_file: Output CSV file path
+        channel: Channel name for FileName column
+    """
     if not rows:
         raise ValueError("No rows to write - cannot create empty CSV")
 
-    # Get all column names
-    all_cols = set()
-    for row in rows:
-        all_cols.update(row.keys())
+    # Define column order (fixed)
+    fieldnames = [
+        f'FileName_Orig{channel}',
+        'Metadata_Batch',
+        'Metadata_Plate',
+        'Metadata_Well',
+        'Metadata_Col',
+        'Metadata_Row',
+        'Metadata_Site'
+    ]
 
-    # Order: metadata columns first, then sorted FileName/Frame columns
-    metadata_cols = ['Metadata_Plate', 'Metadata_Well', 'Metadata_Site']
-    file_cols = sorted([c for c in all_cols if c not in metadata_cols])
-    fieldnames = metadata_cols + file_cols
-
-    print(f"✓ Writing CSV with {len(fieldnames)} columns: {', '.join(fieldnames)}", file=sys.stderr)
+    print(f"✓ Writing CSV with columns: {', '.join(fieldnames)}", file=sys.stderr)
 
     try:
         with open(output_file, 'w', newline='') as f:
@@ -243,51 +183,42 @@ def write_csv(rows: List[Dict], output_file: str):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Generate load_data.csv for CellProfiler illumination calculation'
+        description='Generate load_data.csv for CellProfiler illumination calculation from JSON metadata'
     )
     parser.add_argument(
-        '--images-dir',
-        default='./images',
-        help='Directory containing input images (default: ./images)'
+        '--metadata-json',
+        required=True,
+        help='Path to metadata JSON file'
     )
     parser.add_argument(
         '--output',
         default='load_data.csv',
         help='Output CSV file path (default: load_data.csv)'
     )
-    parser.add_argument(
-        '--range-skip',
-        type=int,
-        default=1,
-        help='Subsampling interval - use every Nth site (default: 1 = all sites)'
-    )
 
     args = parser.parse_args()
-
-    if args.range_skip < 1:
-        parser.error(f"--range-skip must be >= 1, got {args.range_skip}")
 
     print(f"\n{'='*60}", file=sys.stderr)
     print(f"CellProfiler Illumination Calculation CSV Generator", file=sys.stderr)
     print(f"{'='*60}", file=sys.stderr)
-    print(f"Images directory: {args.images_dir}", file=sys.stderr)
-    if args.range_skip > 1:
-        print(f"Subsampling: every {args.range_skip} sites", file=sys.stderr)
+    print(f"Metadata JSON: {args.metadata_json}", file=sys.stderr)
     print(f"Output file: {args.output}", file=sys.stderr)
     print(f"{'='*60}\n", file=sys.stderr)
 
     try:
-        # Collect and group files
-        print(f"Step 1/3: Collecting and grouping files...", file=sys.stderr)
-        grouped = collect_and_group_files(args.images_dir)
+        # Read and validate metadata JSON
+        print(f"Step 1/3: Reading metadata JSON...", file=sys.stderr)
+        data = read_metadata_json(args.metadata_json)
+        meta = data['meta']
+        images_meta = data['images_meta']
 
         # Generate rows
         print(f"\nStep 2/3: Generating CSV rows...", file=sys.stderr)
-        rows = generate_csv_rows(grouped, args.range_skip)
+        rows = generate_csv_rows(meta, images_meta)
 
         # Write CSV
         print(f"\nStep 3/3: Writing CSV file...", file=sys.stderr)
-        write_csv(rows, args.output)
+        write_csv(rows, args.output, meta['channel'])
 
         print(f"\n{'='*60}", file=sys.stderr)
         print(f"✓ SUCCESS: CSV generation completed", file=sys.stderr)
@@ -296,7 +227,11 @@ def main():
         return 0
 
     except FileNotFoundError as e:
-        print(f"\n❌ ERROR: File or directory not found", file=sys.stderr)
+        print(f"\n❌ ERROR: File not found", file=sys.stderr)
+        print(f"   {e}", file=sys.stderr)
+        return 1
+    except json.JSONDecodeError as e:
+        print(f"\n❌ ERROR: JSON parsing error", file=sys.stderr)
         print(f"   {e}", file=sys.stderr)
         return 1
     except ValueError as e:
@@ -305,10 +240,6 @@ def main():
         return 1
     except IOError as e:
         print(f"\n❌ ERROR: File I/O error", file=sys.stderr)
-        print(f"   {e}", file=sys.stderr)
-        return 1
-    except KeyError as e:
-        print(f"\n❌ ERROR: Missing required metadata field", file=sys.stderr)
         print(f"   {e}", file=sys.stderr)
         return 1
     except Exception as e:
