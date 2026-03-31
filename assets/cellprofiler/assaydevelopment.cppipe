@@ -12,7 +12,7 @@ LoadData:[module_num:1|svn_version:'Unknown'|variable_revision_number:6|show_win
     Base image location:Default Input Folder|
     Process just a range of rows?:No
     Rows to process:1,100000
-    Group images by metadata?:No
+    Group images by metadata?:Yes
     Select metadata tags for grouping:Plate,Well
     Rescale intensities?:Yes
 
