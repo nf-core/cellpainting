@@ -12,14 +12,14 @@ The design goal is to support multiple upstream data states without letting the 
 - Support a secondary processed-data entrypoint for precomputed CellProfiler outputs.
 - Converge both paths on one standardized collated profile format.
 - Keep CellProfiler integration explicit and reproducible inside Nextflow.
-- Preserve room for later downstream expansion (`pycytominer`, additional QC, visualization) without forcing v1 to implement all of it now.
+- Include `pycytominer` as the standard downstream profile processing step.
+- Preserve room for later expansion of `pycytominer` configurations, additional QC, and visualization beyond the standard workflow.
 
 ## Non-goals for v1
 
 - Broad support for arbitrary custom CellProfiler pipelines.
 - Exhaustive support for all historical collated formats as native first-class inputs.
 - Generalized alternate segmentation frameworks in the mainline path.
-- Full pooled-cellpainting workflow inside this repo.
 
 ## Architecture principles
 
@@ -147,11 +147,9 @@ These patterns are proven enough to treat them as the default design baseline he
 
 ## Deferred design space
 
-- `pycytominer` subworkflows
 - broader format auto-detection for processed entrypoint
 - alternate segmentation backends
 - richer visualization/report layers
-- pooled-specific SBS/barcoding branches
 
 ## Current architectural decisions
 

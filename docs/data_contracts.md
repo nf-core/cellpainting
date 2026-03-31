@@ -25,14 +25,14 @@ A tall samplesheet where each row describes one image and its metadata.
 
 The exact schema may evolve, but the workflow design assumes at least:
 
-| Field | Meaning |
-|---|---|
-| `path` | image path or URI |
-| `channel` | imaging channel name |
-| `batch` | batch identifier |
-| `plate` | plate identifier |
-| `well` | well identifier |
-| `site` | site / field-of-view identifier |
+| Field     | Meaning                         |
+| --------- | ------------------------------- |
+| `path`    | image path or URI               |
+| `channel` | imaging channel name            |
+| `batch`   | batch identifier                |
+| `plate`   | plate identifier                |
+| `well`    | well identifier                 |
+| `site`    | site / field-of-view identifier |
 
 Optional metadata can be included, but grouping logic should not depend on undocumented columns.
 
@@ -110,6 +110,8 @@ Expected outputs:
 - assay-development images for review
 - optional per-group CSV outputs
 - versions metadata
+
+Post-CellProfiler processing is needed to make outputs easy to inspect. CellProfiler produces one image per group; these should be stitched into a pseudo-plate view for human review, following the pattern established in `nf-pooled-cellpainting`.
 
 This stage should operate on a representative subset per group, not the entire full-analysis footprint.
 
