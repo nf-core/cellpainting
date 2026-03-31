@@ -191,14 +191,18 @@ workflow CELLPAINTING {
         )
     )
 
-    MULTIQC (
-        ch_multiqc_files.collect(),
-        ch_multiqc_config.toList(),
-        ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList(),
-        [],
-        []
-    )
+    ch_multiqc_input = ch_multiqc_files
+        .collect()
+        .map { files ->
+            [ [id: 'multiqc'], files ]
+        }
+        .combine(ch_multiqc_config.toList().map { [it] })
+        .combine(ch_multiqc_logo.ifEmpty([]).toList().map { [it.flatten()] })
+        .map { meta, files, config, logo ->
+            [ meta, files, config.flatten(), logo.flatten() ?: [], [], [] ]
+        }
+
+    MULTIQC ( ch_multiqc_input )
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
