@@ -8,8 +8,6 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
-include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
-include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -29,51 +27,130 @@ workflow CELLPAINTING {
     cellprofiler_mode // value: assay_development, analysis
     cellprofiler_illumination_cppipe // value: path to illumination cppipe
     cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_assaydevelopment_site // value: site number for assay development
     cellprofiler_analysis_cppipe // value: path to analysis cppipe
-
 
     main:
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Get the list of unique channels from the samplesheet
+    //
+    // Enrich samplesheet with filename metadata
+    //
+    ch_samplesheet
+        .map { meta, image ->
+            def image_meta = meta.clone()
+            image_meta.filename = image.name
+            [image_meta, image]
+        }
+        .set { ch_enriched }
 
-
-    // Create load_data.csv files for illumination correction
-    // Group by batch, plate, and channel for illumination correction
-    ILLUMINATION_LOAD_DATA_CSV(
-        ch_samplesheet,
-        ['batch', 'plate', 'channel'],
-        'illumination'
-    )
-
-    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
-
+    //
+    // ILLUMINATION CORRECTION
+    // Group by [batch, plate, channel], carry per-image metadata
+    //
+    ch_enriched
+        .map { meta, image ->
+            def group_key = meta.subMap(['batch', 'plate', 'channel'])
+            def group_id = [meta.batch, meta.plate, meta.channel].join('_')
+            [group_key + [id: group_id], meta, image]
+        }
+        .groupTuple()
+        .set { ch_illumination_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
-        ch_illumination_correction_images_with_load_data_csv,
+        ch_illumination_images,
         cellprofiler_illumination_cppipe
     )
 
+    ch_versions = ch_versions.mix(CELLPROFILER_ILLUMINATIONCORRECTION.out.versions)
+
+    //
+    // Flatten illumination corrections to plate level
+    //
+    CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections
+        .map { meta, npy_files ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, npy_files]
+        }
+        .groupTuple()
+        .map { key, npy_lists -> [key, npy_lists.flatten()] }
+        .set { ch_illum_by_plate }
+
     if (cellprofiler_mode == 'assay_development') {
 
-        // Create the LOAD_DATA.CSV files for assay development
-        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
-            ch_samplesheet,
-            ['batch', 'plate','well'],
-            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
-            'assay_development'
-        )
+        //
+        // ASSAY DEVELOPMENT
+        // Group by [batch, plate, well], filter to single site, join with illum
+        //
+        ch_enriched
+            .map { meta, image ->
+                def group_id = [meta.batch, meta.plate, meta.well].join('_')
+                def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id, site: meta.site]
+                [group_key, meta, image]
+            }
+            .groupTuple()
+            .filter { meta, _images_meta, _images ->
+                meta.site == cellprofiler_assaydevelopment_site
+            }
+            .map { meta, images_meta, images ->
+                def plate_key = [meta.batch, meta.plate].join('_')
+                [plate_key, meta, images_meta, images]
+            }
+            .combine(ch_illum_by_plate, by: 0)
+            .map { _key, meta, images_meta, images, illum_files ->
+                [meta, images_meta, images, illum_files]
+            }
+            .set { ch_assay_dev_with_illum }
 
         CELLPROFILER_ASSAYDEVELOPMENT(
-            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
+            ch_assay_dev_with_illum,
             cellprofiler_assaydevelopment_cppipe
         )
 
+        ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
+
     }
 
+    if (cellprofiler_mode == 'analysis') {
 
+        //
+        // ANALYSIS
+        // Group by [batch, plate, well, site], join with illum
+        //
+        ch_enriched
+            .map { meta, image ->
+                def group_id = [meta.batch, meta.plate, meta.well, meta.site].join('_')
+                def group_key = meta.subMap(['batch', 'plate', 'well', 'site']) + [id: group_id]
+                [group_key, meta, image]
+            }
+            .groupTuple()
+            .map { meta, images_meta, images ->
+                def plate_key = [meta.batch, meta.plate].join('_')
+                [plate_key, meta, images_meta, images]
+            }
+            .combine(ch_illum_by_plate, by: 0)
+            .map { _key, meta, images_meta, images, illum_files ->
+                [meta, images_meta, images, illum_files]
+            }
+            .set { ch_analysis_with_illum }
+
+        CELLPROFILER_ANALYSIS(
+            ch_analysis_with_illum,
+            cellprofiler_analysis_cppipe
+        )
+
+        ch_versions = ch_versions.mix(CELLPROFILER_ANALYSIS.out.versions)
+
+        //
+        // CYTOTABLE - convert analysis CSVs to Parquet
+        //
+        CYTOTABLE(
+            CELLPROFILER_ANALYSIS.out.output_dir
+        )
+
+    }
 
     //
     // Collate and save software versions
@@ -85,7 +162,6 @@ workflow CELLPAINTING {
             sort: true,
             newLine: true
         ).set { ch_collated_versions }
-
 
     //
     // MODULE: MultiQC
