@@ -43,16 +43,16 @@ flowchart LR
 
 ## Component ownership (proposed; confirm in thread)
 
-| Area | Owner(s) | Deliverable for May dev branch |
-|---|---|---|
-| Alternate entrypoint requirements (`collated_profiles`) | Josh Shapiro, Jaclyn Taroni | Required inputs, accepted formats, acceptance criteria |
-| CPG artifact reality check + format policy | Erin Weisbart | Dataset matrix (what exists), recommended v1 format policy |
-| Workflow branching + Nextflow plumbing | Florian Wuennemann, Edmund Miller (with Ken Brewer review) | Conditional skip of early path, clean channels from both entrypoints |
-| `CellProfiler analysis -> CytoTable` integration | Edmund Miller | Working downstream handoff from full raw path |
-| `sqlite/csv -> parquet` converter process | Edmund Miller, Erin Weisbart | Deterministic conversion module + schema checks |
-| pycytominer subworkflow modules | Jaclyn Taroni, Josh Shapiro, Edmund Miller | Annotate/normalize/feature-select wired and parameterized |
-| Tests (spec + regression) for both entrypoints | Edmund Miller, Florian Wuennemann | Passing nf-test coverage for `raw_images` and `collated_profiles` |
-| Docs + workflow diagram sync | Edmund Miller | Updated usage + architecture docs matching implemented behavior |
+| Area                                                    | Owner(s)                                                   | Deliverable for May dev branch                                       |
+| ------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
+| Alternate entrypoint requirements (`collated_profiles`) | Josh Shapiro, Jaclyn Taroni                                | Required inputs, accepted formats, acceptance criteria               |
+| CPG artifact reality check + format policy              | Erin Weisbart                                              | Dataset matrix (what exists), recommended v1 format policy           |
+| Workflow branching + Nextflow plumbing                  | Florian Wuennemann, Edmund Miller (with Ken Brewer review) | Conditional skip of early path, clean channels from both entrypoints |
+| `CellProfiler analysis -> CytoTable` integration        | Edmund Miller                                              | Working downstream handoff from full raw path                        |
+| `sqlite/csv -> parquet` converter process               | Edmund Miller, Erin Weisbart                               | Deterministic conversion module + schema checks                      |
+| pycytominer subworkflow modules                         | Jaclyn Taroni, Josh Shapiro, Edmund Miller                 | Annotate/normalize/feature-select wired and parameterized            |
+| Tests (spec + regression) for both entrypoints          | Edmund Miller, Florian Wuennemann                          | Passing nf-test coverage for `raw_images` and `collated_profiles`    |
+| Docs + workflow diagram sync                            | Edmund Miller                                              | Updated usage + architecture docs matching implemented behavior      |
 
 ## Milestones to May 2026 (proposed)
 
