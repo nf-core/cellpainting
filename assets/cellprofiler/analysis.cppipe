@@ -9,7 +9,7 @@ LoadData:[module_num:1|svn_version:'Unknown'|variable_revision_number:6|show_win
     Input data file location:Default Input Folder sub-folder|Desktop\\load_data_csv\\2020_11_04_CPJUMP1\\BR00118045
     Name of the file:load_data_with_illum.csv
     Load images based on this data?:Yes
-    Base image location:None|
+    Base image location:Default Input Folder|
     Process just a range of rows?:No
     Rows to process:3457,6912
     Group images by metadata?:Yes
