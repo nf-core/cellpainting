@@ -33,7 +33,7 @@ def read_metadata_json(json_path):
 def generate_csv(data, output_file):
     """Generate load_data.csv from metadata."""
     meta = data['meta']
-    images = data['images']
+    images = sorted(data['images'], key=lambda img: (img['well'], img['site'], img['filename']))
     channel = meta['channel']
 
     fieldnames = [

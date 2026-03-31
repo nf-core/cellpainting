@@ -57,6 +57,11 @@ workflow CELLPAINTING {
             [group_key + [id: group_id], meta, image]
         }
         .groupTuple()
+        .map { meta, images_meta, images ->
+            // Sort by filename for deterministic metadata JSON and resume caching
+            def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
+            [meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
+        }
         .set { ch_illumination_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
@@ -94,8 +99,10 @@ workflow CELLPAINTING {
             meta.site == cellprofiler_assaydevelopment_site
         }
         .map { meta, images_meta, images ->
+            // Sort by filename for deterministic metadata JSON and resume caching
+            def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
             def plate_key = [meta.batch, meta.plate].join('_')
-            [plate_key, meta, images_meta, images]
+            [plate_key, meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
         }
         .combine(ch_illum_by_plate, by: 0)
         .map { _key, meta, images_meta, images, illum_files ->
@@ -124,8 +131,10 @@ workflow CELLPAINTING {
             }
             .groupTuple()
             .map { meta, images_meta, images ->
+                // Sort by filename for deterministic metadata JSON and resume caching
+                def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
                 def plate_key = [meta.batch, meta.plate].join('_')
-                [plate_key, meta, images_meta, images]
+                [plate_key, meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
             }
             .combine(ch_illum_by_plate, by: 0)
             .map { _key, meta, images_meta, images, illum_files ->

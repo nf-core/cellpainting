@@ -74,6 +74,9 @@ def generate_csv(data, illum_by_channel, output_file):
     meta = data['meta']
     images = data['images']
 
+    # Sort images for deterministic output
+    images = sorted(images, key=lambda img: (img['well'], img['site'], img['channel'], img['filename']))
+
     # Get unique channels from image metadata
     channels = sorted(set(img['channel'] for img in images))
 
