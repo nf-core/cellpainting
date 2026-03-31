@@ -35,4 +35,9 @@ convert(
     )
 )
     """
+
+    stub:
+    """
+    touch ${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet
+    """
 }

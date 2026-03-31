@@ -4,7 +4,9 @@ nextflow_pipeline {
     script "../main.nf"
     tag "pipeline"
 
-    test("-profile test") {
+    test("-profile test -stub") {
+
+        options '-stub'
 
         when {
             params {
