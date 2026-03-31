@@ -60,13 +60,13 @@ CorrectIlluminationApply:[module_num:3|svn_version:'Unknown'|variable_revision_n
     Name the output image:PreBrightfield
     Select the illumination function:IllumBrightfield
     Select how the illumination function is applied:Divide
-    Select the input image:OrigHighZBF
-    Name the output image:PreHighZBF
-    Select the illumination function:IllumHighZBF
+    Select the input image:OrigBrightfield_H
+    Name the output image:PreBrightfield_H
+    Select the illumination function:IllumBrightfield_H
     Select how the illumination function is applied:Divide
-    Select the input image:OrigLowZBF
-    Name the output image:PreLowZBF
-    Select the illumination function:IllumLowZBF
+    Select the input image:OrigBrightfield_L
+    Name the output image:PreBrightfield_L
+    Select the illumination function:IllumBrightfield_L
     Select how the illumination function is applied:Divide
     Set output image values less than 0 equal to 0?:Yes
     Set output image values greater than 1 equal to 1?:Yes
@@ -194,9 +194,9 @@ ImageMath:[module_num:10|svn_version:'Unknown'|variable_revision_number:5|show_w
     Set values greater than 1 equal to 1?:Yes
     Replace invalid values with 0?:Yes
     Ignore the image masks?:No
-    Name the output image:HighZBF
+    Name the output image:Brightfield_H
     Image or measurement?:Image
-    Select the first image:PreHighZBF
+    Select the first image:PreBrightfield_H
     Multiply the first image by:1.0
     Measurement:
     Image or measurement?:Image
@@ -213,9 +213,9 @@ ImageMath:[module_num:11|svn_version:'Unknown'|variable_revision_number:5|show_w
     Set values greater than 1 equal to 1?:Yes
     Replace invalid values with 0?:Yes
     Ignore the image masks?:No
-    Name the output image:LowZBF
+    Name the output image:Brightfield_L
     Image or measurement?:Image
-    Select the first image:PreLowZBF
+    Select the first image:PreBrightfield_L
     Multiply the first image by:1.0
     Measurement:
     Image or measurement?:Image
@@ -557,7 +557,7 @@ SaveImages:[module_num:27|svn_version:'Unknown'|variable_revision_number:15|show
     How to save the series:T (Time)
 
 MeasureColocalization:[module_num:28|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:['Have to Check -->Beth mentioned something-->either have it at fastest or  have the Costes OFF']|batch_state:array(b'', dtype='|S1')|enabled:True|wants_pause:False]
-    Select images to measure:AGP, Brightfield, DNA, ER, HighZBF, LowZBF, Mito, RNA
+    Select images to measure:AGP, Brightfield, DNA, ER, Brightfield_H, Brightfield_L, Mito, RNA
     Set threshold as percentage of maximum intensity for the images:15.0
     Select where to measure correlation:Within objects
     Select objects to measure:Nuclei, Cytoplasm, Cells
@@ -570,7 +570,7 @@ MeasureColocalization:[module_num:28|svn_version:'Unknown'|variable_revision_num
     Method for Costes thresholding:Fast
 
 MeasureGranularity:[module_num:29|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array(b'', dtype='|S1')|enabled:True|wants_pause:False]
-    Select images to measure:AGP, Brightfield, DNA, ER, HighZBF, LowZBF, Mito, RNA
+    Select images to measure:AGP, Brightfield, DNA, ER, Brightfield_H, Brightfield_L, Mito, RNA
     Measure within objects?:Yes
     Select objects to measure:Nuclei, Cytoplasm, Cells
     Subsampling factor for granularity measurements:0.5
@@ -579,7 +579,7 @@ MeasureGranularity:[module_num:29|svn_version:'Unknown'|variable_revision_number
     Range of the granular spectrum:16
 
 MeasureObjectIntensity:[module_num:30|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array(b'', dtype='|S1')|enabled:True|wants_pause:False]
-    Select images to measure:AGP, Brightfield, DNA, ER, HighZBF, LowZBF, Mito, RNA
+    Select images to measure:AGP, Brightfield, DNA, ER, Brightfield_H, Brightfield_L, Mito, RNA
     Select objects to measure:Nuclei, Cytoplasm, Cells
 
 MeasureObjectNeighbors:[module_num:31|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array(b'', dtype='|S1')|enabled:True|wants_pause:False]
@@ -622,7 +622,7 @@ MeasureObjectNeighbors:[module_num:33|svn_version:'Unknown'|variable_revision_nu
     Select colormap:Default
 
 MeasureObjectIntensityDistribution:[module_num:34|svn_version:'Unknown'|variable_revision_number:6|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select images to measure:AGP, Brightfield, DNA, ER, HighZBF, LowZBF, Mito, RNA
+    Select images to measure:AGP, Brightfield, DNA, ER, Brightfield_H, Brightfield_L, Mito, RNA
     Hidden:3
     Hidden:1
     Hidden:0
@@ -647,7 +647,7 @@ MeasureObjectSizeShape:[module_num:35|svn_version:'Unknown'|variable_revision_nu
     Calculate the advanced features?:No
 
 MeasureTexture:[module_num:36|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array(b'', dtype='|S1')|enabled:True|wants_pause:False]
-    Select images to measure:AGP, Brightfield, DNA, ER, HighZBF, LowZBF, Mito, RNA
+    Select images to measure:AGP, Brightfield, DNA, ER, Brightfield_H, Brightfield_L, Mito, RNA
     Select objects to measure:Nuclei, Cytoplasm, Cells
     Enter how many gray levels to measure the texture at:256
     Hidden:3
