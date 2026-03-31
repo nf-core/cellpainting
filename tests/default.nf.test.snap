@@ -1,9 +1,12 @@
 {
     "-profile test -stub": {
         "content": [
-            21,
+            24,
             {
                 "CELLPROFILER_ANALYSIS": {
+                    "cellprofiler": "stub"
+                },
+                "CELLPROFILER_ASSAYDEVELOPMENT": {
                     "cellprofiler": "stub"
                 },
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
@@ -22,6 +25,9 @@
                 "cellprofiler/analysis/analysis/Image.csv",
                 "cellprofiler/analysis/analysis/Nuclei.csv",
                 "cellprofiler/analysis/analysis/mock_overlay.png",
+                "cellprofiler/assaydevelopment",
+                "cellprofiler/assaydevelopment/Image.csv",
+                "cellprofiler/assaydevelopment/mock_segmentedimage.png",
                 "cellprofiler/illumination_corrections",
                 "cellprofiler/illumination_corrections/BR00117035_IllumAGP.npy",
                 "cellprofiler/illumination_corrections/BR00117035_IllumBrightfield.npy",
@@ -51,6 +57,8 @@
                 "Image.csv:md5,430c6339bcd290f7837657c15db12ffb",
                 "Nuclei.csv:md5,cdead07f939579f92afcf8d9a5617589",
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "Image.csv:md5,430c6339bcd290f7837657c15db12ffb",
+                "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260",
                 "BR00117035_IllumAGP.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumBrightfield.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumBrightfield_H.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -71,6 +79,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-03-31T14:05:23.050553"
+        "timestamp": "2026-03-31T14:14:31.983243"
     }
 }

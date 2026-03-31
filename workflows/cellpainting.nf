@@ -78,40 +78,37 @@ workflow CELLPAINTING {
         .map { key, npy_lists -> [key, npy_lists.flatten()] }
         .set { ch_illum_by_plate }
 
-    if (cellprofiler_mode == 'assay_development') {
+    //
+    // ASSAY DEVELOPMENT
+    // Runs in both assay_development and analysis modes
+    // Group by [batch, plate, well], filter to single site, join with illum
+    //
+    ch_enriched
+        .map { meta, image ->
+            def group_id = [meta.batch, meta.plate, meta.well].join('_')
+            def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id, site: meta.site]
+            [group_key, meta, image]
+        }
+        .groupTuple()
+        .filter { meta, _images_meta, _images ->
+            meta.site == cellprofiler_assaydevelopment_site
+        }
+        .map { meta, images_meta, images ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, meta, images_meta, images]
+        }
+        .combine(ch_illum_by_plate, by: 0)
+        .map { _key, meta, images_meta, images, illum_files ->
+            [meta, images_meta, images, illum_files]
+        }
+        .set { ch_assay_dev_with_illum }
 
-        //
-        // ASSAY DEVELOPMENT
-        // Group by [batch, plate, well], filter to single site, join with illum
-        //
-        ch_enriched
-            .map { meta, image ->
-                def group_id = [meta.batch, meta.plate, meta.well].join('_')
-                def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id, site: meta.site]
-                [group_key, meta, image]
-            }
-            .groupTuple()
-            .filter { meta, _images_meta, _images ->
-                meta.site == cellprofiler_assaydevelopment_site
-            }
-            .map { meta, images_meta, images ->
-                def plate_key = [meta.batch, meta.plate].join('_')
-                [plate_key, meta, images_meta, images]
-            }
-            .combine(ch_illum_by_plate, by: 0)
-            .map { _key, meta, images_meta, images, illum_files ->
-                [meta, images_meta, images, illum_files]
-            }
-            .set { ch_assay_dev_with_illum }
+    CELLPROFILER_ASSAYDEVELOPMENT(
+        ch_assay_dev_with_illum,
+        cellprofiler_assaydevelopment_cppipe
+    )
 
-        CELLPROFILER_ASSAYDEVELOPMENT(
-            ch_assay_dev_with_illum,
-            cellprofiler_assaydevelopment_cppipe
-        )
-
-        ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
-
-    }
+    ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
 
     if (cellprofiler_mode == 'analysis') {
 
