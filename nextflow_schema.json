@@ -13,19 +13,21 @@
             "properties": {
                 "cellprofiler_mode": {
                     "type": "string",
-                    "default": "analysis"
+                    "default": "analysis",
+                    "enum": ["assay_development", "analysis"],
+                    "description": "Pipeline mode: assay_development (QC only) or analysis (full feature extraction)"
                 },
                 "cellprofiler_illumination_cppipe": {
                     "type": "string",
-                    "default": "${projectDir]/assets/cellprofiler/illumination.cppipe"
+                    "default": "${projectDir}/assets/cellprofiler/illumination.cppipe.jinja"
                 },
                 "cellprofiler_analysis_cppipe": {
                     "type": "string",
-                    "default": "${projectDir]/cellpainting/assets/cellprofiler/analysis.cppipe"
+                    "default": "${projectDir}/assets/cellprofiler/analysis.cppipe"
                 },
                 "cellprofiler_assaydevelopment_cppipe": {
                     "type": "string",
-                    "default": "${projectDir]/assets/cellprofiler/assaydevelopment.cppipe"
+                    "default": "${projectDir}/assets/cellprofiler/assaydevelopment.cppipe"
                 },
                 "cellprofiler_assaydevelopment_site": {
                     "type": "integer",
@@ -51,10 +53,6 @@
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/cellpainting/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
-                },
-                "stop_after": {
-                    "type": "string",
-                    "default": "complete"
                 },
                 "outdir": {
                     "type": "string",

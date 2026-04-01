@@ -1,4 +1,26 @@
 {
+    "cytotable - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": "1"
+                        },
+                        "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-01T16:35:12.452789"
+    },
     "*.parquet": {
         "content": [
             {
@@ -17,8 +39,8 @@
         ],
         "meta": {
             "nf-test": "0.9.1",
-            "nextflow": "25.04.5"
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-07-01T15:12:05.54452"
+        "timestamp": "2026-04-01T16:35:07.784117"
     }
 }
