@@ -8,6 +8,5 @@ testing*
 *.pyc
 null/
 .nf-test*
-CLAUDE.md
 docs/superpowers/
 .superset/
