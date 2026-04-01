@@ -20,7 +20,10 @@
 
 ## Introduction
 
-**nf-core/cellpainting** is a bioinformatics pipeline that ...
+**nf-core/cellpainting** is a community-developed bioinformatics pipeline designed to orchestrate scalable and reproducible image-based profiling analyses, primarily using the [Cell Painting assay](https://doi.org/10.1038/nprot.2016.105) and related approaches.
+
+Current dev-planning summary, workflow map, and ownership split are tracked in [`docs/development_plan.md`](docs/development_plan.md).
+Architecture and data-contract design docs are tracked in [`docs/architecture.md`](docs/architecture.md), [`docs/data_contracts.md`](docs/data_contracts.md), and [`docs/implementation_design.md`](docs/implementation_design.md).
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
@@ -30,7 +33,7 @@
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/guidelines/graphic_design/workflow_diagrams#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
 ## Usage
 
