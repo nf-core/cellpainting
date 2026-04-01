@@ -1,7 +1,6 @@
 {
     "-profile test -stub": {
         "content": [
-            24,
             {
                 "CELLPROFILER_ANALYSIS": {
                     "cellprofiler": "4.2.8"
@@ -46,9 +45,7 @@
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
                 "multiqc",
                 "multiqc/multiqc_data",
-                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
-                "multiqc/multiqc_plots/.stub",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"
@@ -74,15 +71,13 @@
                 "2021_04_26_Batch1_BR00117035_A02_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_A02_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_B01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "2021_04_26_Batch1_BR00117035_B01_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
-                ".stub:md5,d41d8cd98f00b204e9800998ecf8427e",
-                ".stub:md5,d41d8cd98f00b204e9800998ecf8427e"
+                "2021_04_26_Batch1_BR00117035_B01_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
         "meta": {
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T13:08:52.800116"
+        "timestamp": "2026-04-01T16:15:09.083599"
     }
 }
