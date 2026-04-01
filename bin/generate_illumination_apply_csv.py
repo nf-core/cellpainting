@@ -44,7 +44,7 @@ def find_illumination_files(images_dir):
     Expected pattern: {plate}_Illum{channel}.npy
     Returns dict: channel -> filename
     """
-    npy_files = glob.glob(os.path.join(images_dir, "*.npy"))
+    npy_files = glob.glob(os.path.join(images_dir, "*_Illum*.npy"))
     illum_by_channel = {}
 
     for npy_path in npy_files:
@@ -77,16 +77,16 @@ def generate_csv(data, illum_by_channel, output_file):
     # Sort images for deterministic output
     images = sorted(images, key=lambda img: (img['well'], img['site'], img['channel'], img['filename']))
 
-    # Get unique channels from image metadata
-    channels = sorted(set(img['channel'] for img in images))
-
-    # Group images by (well, site)
+    # Group images by (well, site) and collect channels in a single pass
+    channels_set = set()
     grouped = {}
     for img in images:
+        channels_set.add(img['channel'])
         key = (img['well'], img['site'])
         if key not in grouped:
             grouped[key] = {'meta': img, 'by_channel': {}}
         grouped[key]['by_channel'][img['channel']] = img['filename']
+    channels = sorted(channels_set)
 
     # Build fieldnames: FileName_Orig{ch}, FileName_Illum{ch} for each channel, then metadata
     fieldnames = []

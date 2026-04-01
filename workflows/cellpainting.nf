@@ -35,6 +35,12 @@ workflow CELLPAINTING {
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
+    // Sort grouped image pairs by filename for deterministic resume caching
+    def sortGroupedImages = { meta, images_meta, images ->
+        def sorted = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
+        [meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
+    }
+
     //
     // Enrich samplesheet with filename metadata
     //
@@ -57,11 +63,7 @@ workflow CELLPAINTING {
             [group_key + [id: group_id], meta, image]
         }
         .groupTuple()
-        .map { meta, images_meta, images ->
-            // Sort by filename for deterministic metadata JSON and resume caching
-            def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
-            [meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
-        }
+        .map(sortGroupedImages)
         .set { ch_illumination_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
@@ -89,20 +91,17 @@ workflow CELLPAINTING {
     // Group by [batch, plate, well], filter to single site, join with illum
     //
     ch_enriched
+        .filter { meta, _image -> meta.site == cellprofiler_assaydevelopment_site }
         .map { meta, image ->
             def group_id = [meta.batch, meta.plate, meta.well].join('_')
-            def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id, site: meta.site]
+            def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id]
             [group_key, meta, image]
         }
         .groupTuple()
-        .filter { meta, _images_meta, _images ->
-            meta.site == cellprofiler_assaydevelopment_site
-        }
         .map { meta, images_meta, images ->
-            // Sort by filename for deterministic metadata JSON and resume caching
-            def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
-            def plate_key = [meta.batch, meta.plate].join('_')
-            [plate_key, meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
+            def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+            def plate_key = [m.batch, m.plate].join('_')
+            [plate_key, m, im, imgs]
         }
         .combine(ch_illum_by_plate, by: 0)
         .map { _key, meta, images_meta, images, illum_files ->
@@ -131,10 +130,9 @@ workflow CELLPAINTING {
             }
             .groupTuple()
             .map { meta, images_meta, images ->
-                // Sort by filename for deterministic metadata JSON and resume caching
-                def sorted_pairs = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
-                def plate_key = [meta.batch, meta.plate].join('_')
-                [plate_key, meta, sorted_pairs.collect { it[0] }, sorted_pairs.collect { it[1] }]
+                def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+                def plate_key = [m.batch, m.plate].join('_')
+                [plate_key, m, im, imgs]
             }
             .combine(ch_illum_by_plate, by: 0)
             .map { _key, meta, images_meta, images, illum_files ->
@@ -200,12 +198,14 @@ workflow CELLPAINTING {
         )
     )
 
+    ch_multiqc_config_combined = ch_multiqc_config
+        .mix(ch_multiqc_custom_config)
+        .toList()
+
     ch_multiqc_input = ch_multiqc_files
         .collect()
-        .map { files ->
-            [ [id: 'multiqc'], files ]
-        }
-        .combine(ch_multiqc_config.toList().map { [it] })
+        .map { files -> [ [id: 'multiqc'], files ] }
+        .combine(ch_multiqc_config_combined.map { [it] })
         .combine(ch_multiqc_logo.ifEmpty([]).toList().map { [it.flatten()] })
         .map { meta, files, config, logo ->
             [ meta, files, config.flatten(), logo.flatten() ?: [], [], [] ]
