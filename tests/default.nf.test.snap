@@ -4,13 +4,13 @@
             24,
             {
                 "CELLPROFILER_ANALYSIS": {
-                    "cellprofiler": "stub"
+                    "cellprofiler": "4.2.8"
                 },
                 "CELLPROFILER_ASSAYDEVELOPMENT": {
-                    "cellprofiler": "stub"
+                    "cellprofiler": "4.2.8"
                 },
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
-                    "cellprofiler": "stub"
+                    "cellprofiler": "4.2.8"
                 },
                 "Workflow": {
                     "nf-core/cellpainting": "v1.0.0dev"
@@ -83,6 +83,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T10:38:46.424972"
+        "timestamp": "2026-04-01T13:08:52.800116"
     }
 }

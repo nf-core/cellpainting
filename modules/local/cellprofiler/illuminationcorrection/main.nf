@@ -52,7 +52,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: stub
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 }

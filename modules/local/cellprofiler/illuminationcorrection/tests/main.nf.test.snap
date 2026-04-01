@@ -14,7 +14,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,a3e2027095deb5fa8c8ae6ff88602979"
+                    "versions.yml:md5,2ac487cff1aad377ac84d9f33953a160"
                 ],
                 "illumination_corrections": [
                     [
@@ -28,7 +28,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a3e2027095deb5fa8c8ae6ff88602979"
+                    "versions.yml:md5,2ac487cff1aad377ac84d9f33953a160"
                 ]
             }
         ],
@@ -36,7 +36,7 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T13:05:41.618476"
+        "timestamp": "2026-04-01T13:07:51.443752"
     },
     "cellprofiler - illumination correction": {
         "content": [
@@ -75,6 +75,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T13:05:28.803113"
+        "timestamp": "2026-04-01T13:07:39.157067"
     }
 }
