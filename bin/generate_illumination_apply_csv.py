@@ -57,7 +57,7 @@ def find_illumination_files(images_dir):
     if not illum_by_channel:
         raise ValueError(
             f"No illumination .npy files found in {images_dir}. "
-            f"Expected pattern: {{plate}}_Illum{{channel}}.npy"
+            "Expected pattern: <plate>_Illum<channel>.npy"
         )
 
     print(f"Found illumination files for channels: {sorted(illum_by_channel.keys())}", file=sys.stderr)
