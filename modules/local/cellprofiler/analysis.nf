@@ -21,7 +21,9 @@ process CELLPROFILER_ANALYSIS {
 
     script:
     def args = task.ext.args ?: ''
-    def metadata_json = groovy.json.JsonOutput.toJson([meta: meta, images: images_meta])
+    def meta_plain = [id: meta.id, batch: meta.batch, plate: meta.plate, well: meta.well, site: meta.site]
+    def images_plain = images_meta.collect { img -> [filename: img.filename, batch: img.batch, plate: img.plate, well: img.well, col: img.col, row: img.row, site: img.site, channel: img.channel] }
+    def metadata_json = groovy.json.JsonOutput.toJson([meta: meta_plain, images: images_plain])
     """
     echo '${metadata_json}' > metadata.json
     generate_illumination_apply_csv.py --metadata metadata.json --images-dir ./images --output load_data.csv
