@@ -21,50 +21,64 @@
 
 ## Introduction
 
-**nf-core/cellpainting** is a community-developed bioinformatics pipeline designed to orchestrate scalable and reproducible image-based profiling analyses, primarily using the [Cell Painting assay](https://doi.org/10.1038/nprot.2016.105) and related approaches.
+**nf-core/cellpainting** is a bioinformatics pipeline for scalable, reproducible image-based profiling of [Cell Painting](https://doi.org/10.1038/nprot.2016.105) assays. It takes high-content microscopy images, applies illumination correction, extracts morphological features with [CellProfiler](https://cellprofiler.org/), and converts the results to analysis-ready [Parquet](https://parquet.apache.org/) files with [CytoTable](https://github.com/cytomining/CytoTable).
 
-Current dev-planning summary, workflow map, and ownership split are tracked in [`docs/development_plan.md`](docs/development_plan.md).
-Architecture and data-contract design docs are tracked in [`docs/architecture.md`](docs/architecture.md), [`docs/data_contracts.md`](docs/data_contracts.md), and [`docs/implementation_design.md`](docs/implementation_design.md).
+The pipeline supports two modes controlled by `--cellprofiler_mode`:
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+- **`assay_development`** — illumination correction and single-site QC only
+- **`analysis`** (default) — full pipeline including feature extraction and format conversion
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/guidelines/graphic_design/workflow_diagrams#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+```mermaid
+graph LR
+    A[Samplesheet] --> B[Illumination Correction]
+    B --> C[Assay Development]
+    C --> D[Analysis]
+    D --> E[CytoTable]
+    E --> F[MultiQC]
+```
+
+The pipeline performs the following steps:
+
+1. Compute illumination correction functions per channel and plate ([CellProfiler](https://cellprofiler.org/))
+2. Segment a single site per well for visual QC ([CellProfiler](https://cellprofiler.org/))
+3. Extract morphological features per site ([CellProfiler](https://cellprofiler.org/)) — `analysis` mode only
+4. Convert CellProfiler CSV outputs to Parquet ([CytoTable](https://github.com/cytomining/CytoTable)) — `analysis` mode only
+5. Aggregate QC metrics into a report ([MultiQC](https://multiqc.info/))
 
 ## Usage
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
+First, prepare a samplesheet with your input data. The samplesheet is in tall format with one row per image:
 
-First, prepare a samplesheet with your input data that looks as follows:
-
-`samplesheet.csv`:
-
-```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+```csv title="samplesheet.csv"
+channel,path,source,batch,plate,well,site,row,col
+Mito,/data/images/r01c01f01p01-ch1sk1fk1fl1.tiff,source_4,Batch1,BR00117035,A01,1,1,1
+DNA,/data/images/r01c01f01p01-ch5sk1fk1fl1.tiff,source_4,Batch1,BR00117035,A01,1,1,1
+ER,/data/images/r01c01f01p01-ch4sk1fk1fl1.tiff,source_4,Batch1,BR00117035,A01,1,1,1
+RNA,/data/images/r01c01f01p01-ch3sk1fk1fl1.tiff,source_4,Batch1,BR00117035,A01,1,1,1
+AGP,/data/images/r01c01f01p01-ch2sk1fk1fl1.tiff,source_4,Batch1,BR00117035,A01,1,1,1
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
-
--->
+Each row maps a single `.tif`/`.tiff` image to its channel and plate/well/site metadata. See [usage docs](https://nf-co.re/cellpainting/usage) for the full column reference.
 
 Now, you can run the pipeline using:
-
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
 nextflow run nf-core/cellpainting \
    -profile <docker/singularity/.../institute> \
    --input samplesheet.csv \
+   --outdir <OUTDIR>
+```
+
+To run in assay development mode (QC only, no full analysis):
+
+```bash
+nextflow run nf-core/cellpainting \
+   -profile <docker/singularity/.../institute> \
+   --input samplesheet.csv \
+   --cellprofiler_mode assay_development \
    --outdir <OUTDIR>
 ```
 
@@ -75,17 +89,12 @@ For more details and further functionality, please refer to the [usage documenta
 
 ## Pipeline output
 
-To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/cellpainting/results) tab on the nf-core website pipeline page.
 For more details about the output files and reports, please refer to the
 [output documentation](https://nf-co.re/cellpainting/output).
 
 ## Credits
 
-nf-core/cellpainting was originally written by Kenneth Brewer.
-
-We thank the following people for their extensive assistance in the development of this pipeline:
-
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+nf-core/cellpainting was originally written by [Kenneth Brewer](https://github.com/kenibrewer).
 
 ## Contributions and Support
 
@@ -97,8 +106,6 @@ For further information or help, don't hesitate to get in touch on the [Slack `#
 
 <!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
 <!-- If you use nf-core/cellpainting for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
-
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
