@@ -12,6 +12,7 @@ lint:
   template_strings:
     - assets/cellprofiler/illumination.cppipe.jinja
     - modules/local/cellprofiler/illuminationcorrection/main.nf
+    - docs/usage.md
     - AGENTS.md
     - CLAUDE.md
 nf_core_version: 3.5.1
