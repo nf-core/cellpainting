@@ -47,7 +47,6 @@
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
                 "multiqc",
                 "multiqc/multiqc_data",
-                "multiqc/multiqc_data/.stub",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
@@ -74,14 +73,13 @@
                 "2021_04_26_Batch1_BR00117035_A02_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_A02_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "2021_04_26_Batch1_BR00117035_B01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "2021_04_26_Batch1_BR00117035_B01_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e",
-                ".stub:md5,d41d8cd98f00b204e9800998ecf8427e"
+                "2021_04_26_Batch1_BR00117035_B01_2.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
         "meta": {
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T16:50:14.868073"
+        "timestamp": "2026-04-01T17:04:21.7245"
     }
 }
