@@ -177,11 +177,10 @@ def validateInputSamplesheet(input) {
 // Generate methods description for MultiQC
 //
 def toolCitationText() {
-    // TODO nf-core: Optionally add in-text citation tools to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "Tool (Foo et al. 2023)" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def citation_text = [
             "Tools used in the workflow included:",
+            "CellProfiler (McQuin et al. 2018),",
+            "CytoTable (Way et al. 2024),",
             "MultiQC (Ewels et al. 2016)",
             "."
         ].join(' ').trim()
@@ -190,11 +189,10 @@ def toolCitationText() {
 }
 
 def toolBibliographyText() {
-    // TODO nf-core: Optionally add bibliographic entries to this list.
-    // Can use ternary operators to dynamically construct based conditions, e.g. params["run_xyz"] ? "<li>Author (2023) Pub name, Journal, DOI</li>" : "",
-    // Uncomment function in methodsDescriptionText to render in MultiQC report
     def reference_text = [
-            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics , 32(19), 3047–3048. doi: /10.1093/bioinformatics/btw354</li>"
+            "<li>McQuin, C., Goodman, A., Cherber, V., Kamentsky, L., Cimini, B. A., Karhohs, K. W., Doan, M., Ding, L., Rafelski, S. M., Thirstrup, D., Welf, E., Singh, S., Becker, T., Caicedo, J. C., & Carpenter, A. E. (2018). CellProfiler 3.0: Next-generation image processing for biology. PLOS Biology, 16(7), e2005970. doi: <a href=\"https://doi.org/10.1371/journal.pbio.2005970\">10.1371/journal.pbio.2005970</a></li>",
+            "<li>Way, G. P., Chandrasekaran, S. N., Bornholdt, R., Fleming, S. J., Tsang, H., Adeboye, A., Cimini, B. A., Weisbart, E., Ryder, P., Stirling, D., Jamali, N., Carpenter, A. E., & Singh, S. (2024). CytoTable: Transforming CellProfiler outputs for single-cell analysis. bioRxiv. doi: <a href=\"https://doi.org/10.1101/2024.06.18.599565\">10.1101/2024.06.18.599565</a></li>",
+            "<li>Ewels, P., Magnusson, M., Lundin, S., & Käller, M. (2016). MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics, 32(19), 3047–3048. doi: <a href=\"https://doi.org/10.1093/bioinformatics/btw354\">10.1093/bioinformatics/btw354</a></li>"
         ].join(' ').trim()
 
     return reference_text
@@ -221,12 +219,8 @@ def methodsDescriptionText(mqc_methods_yaml) {
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     // Tool references
-    meta["tool_citations"] = ""
-    meta["tool_bibliography"] = ""
-
-    // TODO nf-core: Only uncomment below if logic in toolCitationText/toolBibliographyText has been filled!
-    // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
-    // meta["tool_bibliography"] = toolBibliographyText()
+    meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
+    meta["tool_bibliography"] = toolBibliographyText()
 
 
     def methods_text = mqc_methods_yaml.text
