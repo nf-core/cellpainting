@@ -35,6 +35,7 @@ nextflow_pipeline {
 
     test("-profile test -stub") {
 
+        tag "stub_test"
         options '-stub'
 
         when {
