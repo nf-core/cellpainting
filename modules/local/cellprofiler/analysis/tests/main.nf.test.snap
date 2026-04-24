@@ -1,4 +1,71 @@
 {
+    "cellprofiler - analysis": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        [
+                            "Cells.csv:md5,cf0fbe967445b902a35eaa01abc20f00",
+                            "Cytoplasm.csv:md5,8c793dcf8ded0d248cbc38a2df51ae22",
+                            "Experiment.csv:md5,c1de25438f466485f312ecc80652cfca",
+                            "Image.csv:md5,8e6944aff0cf5f169315af1d97bfb079",
+                            "Nuclei.csv:md5,9d2ca15a8a72bf6afd96cb0fee99663e",
+                            [
+                                "A01_s1--cell_outlines.png:md5,db3c919bc3744c170cede533f72b9109",
+                                "A01_s1--nuclei_outlines.png:md5,bd13decbe6163fb6a89e5abedd46027c"
+                            ]
+                        ]
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,ed38c5cbdd0e37599722ed1b5832c21d"
+                ],
+                "output_dir": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        [
+                            "Cells.csv:md5,cf0fbe967445b902a35eaa01abc20f00",
+                            "Cytoplasm.csv:md5,8c793dcf8ded0d248cbc38a2df51ae22",
+                            "Experiment.csv:md5,c1de25438f466485f312ecc80652cfca",
+                            "Image.csv:md5,8e6944aff0cf5f169315af1d97bfb079",
+                            "Nuclei.csv:md5,9d2ca15a8a72bf6afd96cb0fee99663e",
+                            [
+                                "A01_s1--cell_outlines.png:md5,db3c919bc3744c170cede533f72b9109",
+                                "A01_s1--nuclei_outlines.png:md5,bd13decbe6163fb6a89e5abedd46027c"
+                            ]
+                        ]
+                    ]
+                ],
+                "pngs": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,ed38c5cbdd0e37599722ed1b5832c21d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-24T15:51:26.045586"
+    },
     "cellprofiler - analysis - stub": {
         "content": [
             {

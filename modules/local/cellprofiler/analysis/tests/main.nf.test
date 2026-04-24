@@ -5,6 +5,56 @@ nextflow_process {
     tag "cellprofiler"
     tag "cellprofiler/analysis"
 
+    test("cellprofiler - analysis") {
+        when {
+            process {
+                """
+                def images_meta = [
+                    [filename:'r01c01f01p01-ch5sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'DNA'],
+                    [filename:'r01c01f01p01-ch2sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'AGP'],
+                    [filename:'r01c01f01p01-ch3sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'RNA'],
+                    [filename:'r01c01f01p01-ch4sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'ER'],
+                    [filename:'r01c01f01p01-ch1sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Mito'],
+                    [filename:'r01c01f01p01-ch8sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield'],
+                    [filename:'r01c01f01p01-ch6sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_H'],
+                    [filename:'r01c01f01p01-ch7sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_L'],
+                ]
+                input[0] = [
+                    [id:"2021_04_26_Batch1_BR00117035_A01_1", batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', site:1],
+                    images_meta,
+                    [
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff"),
+                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff"),
+                    ],
+                    [
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy"),
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy"),
+                    ]
+                ]
+                input[1] = file("${projectDir}/assets/cellprofiler/analysis.cppipe", checkIfExists: true)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
     test("cellprofiler - analysis - stub") {
         options "-stub"
         when {

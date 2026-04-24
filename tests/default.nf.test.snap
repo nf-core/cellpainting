@@ -1,4 +1,101 @@
 {
+    "-profile test": {
+        "content": [
+            {
+                "CELLPROFILER_ANALYSIS": {
+                    "cellprofiler": "4.2.8"
+                },
+                "CELLPROFILER_ASSAYDEVELOPMENT": {
+                    "cellprofiler": "4.2.8"
+                },
+                "CELLPROFILER_ILLUMINATIONCORRECTION": {
+                    "cellprofiler": "4.2.8"
+                },
+                "Workflow": {
+                    "nf-core/cellpainting": "v1.0.0dev"
+                }
+            },
+            [
+                "cellprofiler",
+                "cellprofiler/analysis",
+                "cellprofiler/analysis/analysis",
+                "cellprofiler/analysis/analysis/Cells.csv",
+                "cellprofiler/analysis/analysis/Cytoplasm.csv",
+                "cellprofiler/analysis/analysis/Experiment.csv",
+                "cellprofiler/analysis/analysis/Image.csv",
+                "cellprofiler/analysis/analysis/Nuclei.csv",
+                "cellprofiler/analysis/analysis/outlines",
+                "cellprofiler/analysis/analysis/outlines/B01_s1--cell_outlines.png",
+                "cellprofiler/analysis/analysis/outlines/B01_s1--nuclei_outlines.png",
+                "cellprofiler/assay_development",
+                "cellprofiler/assay_development/assaydevelopment",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_A02_ObjectOverlay.png",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_B01_ObjectOverlay.png",
+                "cellprofiler/illumination_correction",
+                "cellprofiler/illumination_correction/illumination_corrections",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumAGP.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumBrightfield.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumBrightfield_H.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumBrightfield_L.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumDNA.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumER.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumMito.npy",
+                "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
+                "cytotable",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"
+            ],
+            [
+                "Cells.csv:md5,5d57df0c1184d7edfa95f6d38771647d",
+                "Cytoplasm.csv:md5,b7075fe16dcc218cc3efe9a98f3cc915",
+                "Experiment.csv:md5,35b4fdbc8d268df3d47961ddff601427",
+                "Image.csv:md5,eee9b42696df988d89ec7a183ba499f5",
+                "Nuclei.csv:md5,c121c3878928a805ef4dd5a0fe2d8410",
+                "B01_s1--cell_outlines.png:md5,7f8059838a199598a8db7b6d7dbdd2f6",
+                "B01_s1--nuclei_outlines.png:md5,15e9d8ef521f7cb79ebe68a4efc038a8",
+                "2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png:md5,42de736cbb856f9bb86ce77a418e78c7",
+                "2021_04_26_Batch1_BR00117035_A02_ObjectOverlay.png:md5,07134a2bf8b06d3b9339d0b34ad20a23",
+                "2021_04_26_Batch1_BR00117035_B01_ObjectOverlay.png:md5,a5ca1cced588d3745218dabe73b488a5",
+                "BR00117035_IllumAGP.npy:md5,2307a4c1d2eaac146dae9be884b92c89",
+                "BR00117035_IllumBrightfield.npy:md5,ad696d9d1246713bbfb64c91b34953b2",
+                "BR00117035_IllumBrightfield_H.npy:md5,0499bf0399e0f504c7ad6165b0d3d8c7",
+                "BR00117035_IllumBrightfield_L.npy:md5,7c067ae86fe0f0b33066b253f4ac862a",
+                "BR00117035_IllumDNA.npy:md5,807009e66d710ecc505c2a3db48509a6",
+                "BR00117035_IllumER.npy:md5,75062bcc5f10eb9db2ee9e18b9fc4d40",
+                "BR00117035_IllumMito.npy:md5,d33a48d56045736f46a470f44955ff07",
+                "BR00117035_IllumRNA.npy:md5,c21cb042cfb15cc7ca939eef99d4ebd3",
+                "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,ec236e5bcf3aca6d95257a27f1906cb7",
+                "2021_04_26_Batch1_BR00117035_A01_2.parquet:md5,5e0616316797a121ffa30a287a508ef8",
+                "2021_04_26_Batch1_BR00117035_A02_1.parquet:md5,cc9e73bf429ee0775639b0c54973f2b5",
+                "2021_04_26_Batch1_BR00117035_A02_2.parquet:md5,327a6a8d939d49b956ed89b7976d1ae9",
+                "2021_04_26_Batch1_BR00117035_B01_1.parquet:md5,0daf7f50f7945b82385b679458c45bfe",
+                "2021_04_26_Batch1_BR00117035_B01_2.parquet:md5,c181dc2db0779e190852e925749396d7",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-24T15:56:22.596814"
+    },
     "-profile test -stub": {
         "content": [
             {
