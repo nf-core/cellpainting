@@ -56,7 +56,7 @@ nextflow_process {
     }
 
     test("cellprofiler - analysis - stub") {
-        tag "stub_test"
+        tag "stub"
         options "-stub"
         when {
             process {

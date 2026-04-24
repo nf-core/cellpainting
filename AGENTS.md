@@ -7,14 +7,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Pre-push verification (required before every push)
 
 ```bash
-# 1. Fast: stub variants of every test (pipeline + modules), filtered by `stub_test` tag (~3min)
-nf-test test tests/default.nf.test modules/local --profile test,docker --tag stub_test
+# 1. Fast: stub variants of every test (pipeline + modules), filtered by `stub` tag (~3min)
+nf-test test tests/default.nf.test modules/local --profile test,docker --tag stub
 
 # 2. Full: every test including real CellProfiler runs (~13min, needs Docker with >= 16GB memory)
 nf-test test tests/default.nf.test modules/local --profile test,docker
 ```
 
-Do not push if either fails. Both stub and real variants live in the same `*.nf.test` file (per nf-core convention); the `stub_test` tag on the stub variants lets the fast pre-push command skip the slow real runs.
+Do not push if either fails. Both stub and real variants live in the same `*.nf.test` file (per nf-core convention); the `stub` tag on the stub variants lets the fast pre-push command skip the slow real runs.
 
 ### Linting
 

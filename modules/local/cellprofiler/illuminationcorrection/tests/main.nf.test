@@ -45,7 +45,7 @@ nextflow_process {
 
     test("cellprofiler - illumination correction - stub") {
 
-        tag "stub_test"
+        tag "stub"
         options "-stub"
 
         when {
