@@ -32,4 +32,29 @@ nextflow_process {
 
     }
 
+    test("cytotable - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                // Create a dummy analysis directory
+                def analysisDir = file("${workDir}/analysis")
+                analysisDir.mkdirs()
+                file("${workDir}/analysis/Image.csv").text = "ImageNumber"
+
+                input[0] = [
+                    [batch: '2021_04_26_Batch1', plate: 'BR00117035', well: 'A01', site: '1'],
+                    analysisDir
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
 }

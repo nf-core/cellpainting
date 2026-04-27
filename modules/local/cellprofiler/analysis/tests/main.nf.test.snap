@@ -1,0 +1,79 @@
+{
+    "cellprofiler - analysis - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        [
+                            "Cells.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "Cytoplasm.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "Image.csv:md5,430c6339bcd290f7837657c15db12ffb",
+                            "Nuclei.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,ed38c5cbdd0e37599722ed1b5832c21d"
+                ],
+                "output_dir": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        [
+                            "Cells.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "Cytoplasm.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "Image.csv:md5,430c6339bcd290f7837657c15db12ffb",
+                            "Nuclei.csv:md5,cdead07f939579f92afcf8d9a5617589",
+                            "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "pngs": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01_1",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ed38c5cbdd0e37599722ed1b5832c21d"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-01T16:34:25.163603"
+    }
+}

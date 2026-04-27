@@ -1,21 +1,16 @@
 process CELLPROFILER_ASSAYDEVELOPMENT {
-    tag "$meta.id"
-    label 'process_low'
+    tag "${meta.id}"
+    label 'process_medium'
 
-    // TODO nf-core: List required Conda package(s).
-    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
         ? 'https://depot.galaxyproject.org/singularity/cellprofiler:4.2.8--pyhdfd78af_0'
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(images, stageAs: "images/*"), path(illumination_correction_files, stageAs: "images/*"), path(load_data_csv) // channel: [ val(meta), [ list_of_images ], [ list_of_illumination_correction_files ], load_data_csv ]
-    path(assay_development_cppipe)
+    tuple val(meta), val(images_meta), path(images, stageAs: "images/*"), path(illum_files, stageAs: "images/*")
+    path assay_development_cppipe
 
-   output:
+    output:
     tuple val(meta), path("assaydevelopment/*.png"), emit: png
     tuple val(meta), path("assaydevelopment/Image.csv"), emit: csv, optional: true
     path "versions.yml", emit: versions
@@ -25,33 +20,38 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def meta_plain = [id: meta.id, batch: meta.batch, plate: meta.plate, well: meta.well, site: meta.site]
+    def images_plain = images_meta.collect { img -> [filename: img.filename, batch: img.batch, plate: img.plate, well: img.well, col: img.col, row: img.row, site: img.site, channel: img.channel] }
+    def metadata_json = groovy.json.JsonOutput.toJson([meta: meta_plain, images: images_plain])
     """
-    mkdir -p assaydevelopment
-        mkdir -p assaydevelopment
-    echo 'this is not assay development' > assaydevelopment/mock_segmentedimage.png
-    echo 'this is not assay development' > assaydevelopment/mock_Image.csv
+    echo '${metadata_json}' > metadata.json
+    generate_illumination_apply_csv.py --metadata metadata.json --images-dir ./images --output load_data.csv
 
+    mkdir -p assaydevelopment
+
+    cellprofiler -c -r \
+    ${args} \
+    -p ${assay_development_cppipe} \
+    -o assaydevelopment \
+    --data-file=load_data.csv \
+    --image-directory ./images/ \
+    -g Metadata_Plate=${meta.plate},Metadata_Well=${meta.well}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version )
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
     """
-    touch ${prefix}.bam
+    mkdir -p assaydevelopment
+    echo 'stub' > assaydevelopment/mock_segmentedimage.png
+    echo 'ImageNumber,Metadata_Plate' > assaydevelopment/Image.csv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version )
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 }

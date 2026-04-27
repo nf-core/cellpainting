@@ -1,0 +1,67 @@
+{
+    "cellprofiler - assay development - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "Image.csv:md5,430c6339bcd290f7837657c15db12ffb"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,766f4a17b8a2ba2a5e108b7f5fee144e"
+                ],
+                "csv": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "Image.csv:md5,430c6339bcd290f7837657c15db12ffb"
+                    ]
+                ],
+                "png": [
+                    [
+                        {
+                            "id": "2021_04_26_Batch1_BR00117035_A01",
+                            "batch": "2021_04_26_Batch1",
+                            "plate": "BR00117035",
+                            "well": "A01",
+                            "site": 1
+                        },
+                        "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,766f4a17b8a2ba2a5e108b7f5fee144e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-01T16:34:38.445556"
+    }
+}

@@ -4,15 +4,17 @@ lint:
     - conf/igenomes_ignored.config
     - conf/igenomes.config
     - conf/igenomes_ignored.config
-  template_strings:
-    - assets/cellprofiler/illumination.cppipe.jinja
-    - modules/local/cellprofiler/illuminationcorrection/main.nf
   nextflow_config:
     - config_defaults:
         - params.cellprofiler_illumination_cppipe
         - params.cellprofiler_analysis_cppipe
         - params.cellprofiler_assaydevelopment_cppipe
-nf_core_version: 3.3.2
+  template_strings:
+    - assets/cellprofiler/illumination.cppipe.jinja
+    - modules/local/cellprofiler/illuminationcorrection/main.nf
+    - AGENTS.md
+    - CLAUDE.md
+nf_core_version: 3.5.1
 repository_type: pipeline
 template:
   author: Kenneth Brewer

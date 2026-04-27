@@ -8,8 +8,7 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
-    tuple val(meta), path(images, stageAs: "images/*"), path(load_data_csv)
-
+    tuple val(meta), val(images_meta), path(images, stageAs: "images/*")
     path illumination_cppipe
 
     output:
@@ -21,19 +20,24 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def meta_plain = [id: meta.id, batch: meta.batch, plate: meta.plate, channel: meta.channel]
+    def images_plain = images_meta.collect { img -> [filename: img.filename, batch: img.batch, plate: img.plate, well: img.well, col: img.col, row: img.row, site: img.site, channel: img.channel] }
+    def metadata_json = groovy.json.JsonOutput.toJson([meta: meta_plain, images: images_plain])
     """
-    mkdir -p illumination_corrections
-    # Replace the channel name in the cppipe file
+    echo '${metadata_json}' > metadata.json
+    generate_illumination_calc_csv.py --metadata metadata.json --output load_data.csv
+
     sed 's/{{channel}}/${meta.channel}/g' ${illumination_cppipe} > illumination.cppipe
+
+    mkdir -p illumination_corrections
 
     cellprofiler -c -r \
     ${args} \
     -p illumination.cppipe \
     -o illumination_corrections \
-    --data-file=${load_data_csv} \
+    --data-file=load_data.csv \
     --image-directory ./images/ \
-    -g Metadata_Plate=${meta.plate} \
+    -g Metadata_Plate=${meta.plate}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -42,15 +46,13 @@ process CELLPROFILER_ILLUMINATIONCORRECTION {
     """
 
     stub:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir -p illumination_corrections
-    echo 'this is not an illumination correction' > illumination_corrections/${meta.plate}_Illum${meta.channel}.npy
+    touch illumination_corrections/${meta.plate}_Illum${meta.channel}.npy
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cellprofiler: \$(cellprofiler --version )
+        cellprofiler: \$(cellprofiler --version)
     END_VERSIONS
     """
 }

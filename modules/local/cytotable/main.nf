@@ -7,7 +7,7 @@ process CYTOTABLE {
     }
 
     input:
-    tuple val(meta), path(cellprofiler_output)
+    tuple val(meta), path(cellprofiler_output_dir)
 
     output:
     tuple val(meta), path("*.parquet")
@@ -24,9 +24,8 @@ import os
 current_dir = os.getcwd()
 os.environ["HOME"] = current_dir
 
-# using a local path with cellprofiler csv presets
 convert(
-    source_path="$cellprofiler_output",
+    source_path="${cellprofiler_output_dir}",
     source_datatype="csv",
     dest_path="${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet",
     dest_datatype="parquet",
@@ -35,6 +34,10 @@ convert(
         executors=[ThreadPoolExecutor(max_threads=${task.cpus})],
     )
 )
+    """
 
+    stub:
+    """
+    touch ${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet
     """
 }

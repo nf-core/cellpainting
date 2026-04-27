@@ -8,8 +8,6 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
-include { CELLPROFILER_LOAD_DATA_CSV as ILLUMINATION_LOAD_DATA_CSV } from '../subworkflows/local/cellprofiler_load_data_csv'
-include { CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM } from '../subworkflows/local/cellprofiler_load_data_csv_with_illum'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -29,56 +27,157 @@ workflow CELLPAINTING {
     cellprofiler_mode // value: assay_development, analysis
     cellprofiler_illumination_cppipe // value: path to illumination cppipe
     cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_assaydevelopment_site // value: site number for assay development
     cellprofiler_analysis_cppipe // value: path to analysis cppipe
-
 
     main:
 
-    ch_versions = Channel.empty()
-    ch_multiqc_files = Channel.empty()
+    ch_versions = channel.empty()
+    ch_multiqc_files = channel.empty()
 
-    // Get the list of unique channels from the samplesheet
+    // Sort grouped image pairs by filename for deterministic resume caching
+    def sortGroupedImages = { meta, images_meta, images ->
+        def sorted = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
+        [meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
+    }
 
+    //
+    // Enrich samplesheet with filename metadata
+    //
+    ch_samplesheet
+        .map { meta, image ->
+            def image_meta = meta.clone()
+            image_meta.filename = image.name
+            [image_meta, image]
+        }
+        .set { ch_enriched }
 
-    // Create load_data.csv files for illumination correction
-    // Group by batch, plate, and channel for illumination correction
-    ILLUMINATION_LOAD_DATA_CSV(
-        ch_samplesheet,
-        ['batch', 'plate', 'channel'],
-        'illumination'
-    )
-
-    ch_illumination_correction_images_with_load_data_csv = ILLUMINATION_LOAD_DATA_CSV.out.images_with_load_data_csv
-
+    //
+    // ILLUMINATION CORRECTION
+    // Group by [batch, plate, channel], carry per-image metadata
+    //
+    ch_enriched
+        .map { meta, image ->
+            def group_key = meta.subMap(['batch', 'plate', 'channel'])
+            def group_id = [meta.batch, meta.plate, meta.channel].join('_')
+            [group_key + [id: group_id], meta, image]
+        }
+        .groupTuple()
+        .map(sortGroupedImages)
+        .set { ch_illumination_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
-        ch_illumination_correction_images_with_load_data_csv,
+        ch_illumination_images,
         cellprofiler_illumination_cppipe
     )
 
-    if (cellprofiler_mode == 'assay_development') {
+    ch_versions = ch_versions.mix(CELLPROFILER_ILLUMINATIONCORRECTION.out.versions)
 
-        // Create the LOAD_DATA.CSV files for assay development
-        CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM(
-            ch_samplesheet,
-            ['batch', 'plate','well'],
-            CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections,
-            'assay_development'
+    //
+    // Flatten illumination corrections to plate level
+    //
+    CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections
+        .map { meta, npy_files ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, npy_files]
+        }
+        .groupTuple()
+        .map { key, npy_lists -> [key, npy_lists.flatten()] }
+        .set { ch_illum_by_plate }
+
+    //
+    // ASSAY DEVELOPMENT
+    // Runs in both assay_development and analysis modes
+    // Group by [batch, plate, well], filter to single site, join with illum
+    //
+    ch_enriched
+        .filter { meta, _image -> meta.site == cellprofiler_assaydevelopment_site }
+        .map { meta, image ->
+            def group_id = [meta.batch, meta.plate, meta.well].join('_')
+            def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id]
+            [group_key, meta, image]
+        }
+        .groupTuple()
+        .map { meta, images_meta, images ->
+            def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+            def plate_key = [m.batch, m.plate].join('_')
+            [plate_key, m, im, imgs]
+        }
+        .combine(ch_illum_by_plate, by: 0)
+        .map { _key, meta, images_meta, images, illum_files ->
+            [meta, images_meta, images, illum_files]
+        }
+        .set { ch_assay_dev_with_illum }
+
+    CELLPROFILER_ASSAYDEVELOPMENT(
+        ch_assay_dev_with_illum,
+        cellprofiler_assaydevelopment_cppipe
+    )
+
+    ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
+
+    if (cellprofiler_mode == 'analysis') {
+
+        //
+        // ANALYSIS
+        // Group by [batch, plate, well, site], join with illum
+        //
+        ch_enriched
+            .map { meta, image ->
+                def group_id = [meta.batch, meta.plate, meta.well, meta.site].join('_')
+                def group_key = meta.subMap(['batch', 'plate', 'well', 'site']) + [id: group_id]
+                [group_key, meta, image]
+            }
+            .groupTuple()
+            .map { meta, images_meta, images ->
+                def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+                def plate_key = [m.batch, m.plate].join('_')
+                [plate_key, m, im, imgs]
+            }
+            .combine(ch_illum_by_plate, by: 0)
+            .map { _key, meta, images_meta, images, illum_files ->
+                [meta, images_meta, images, illum_files]
+            }
+            .set { ch_analysis_with_illum }
+
+        CELLPROFILER_ANALYSIS(
+            ch_analysis_with_illum,
+            cellprofiler_analysis_cppipe
         )
 
-        CELLPROFILER_ASSAYDEVELOPMENT(
-            CELLPROFILER_LOAD_DATA_CSV_WITH_ILLUM.out.images_with_illum_load_data_csv,
-            cellprofiler_assaydevelopment_cppipe
+        ch_versions = ch_versions.mix(CELLPROFILER_ANALYSIS.out.versions)
+
+        //
+        // CYTOTABLE - convert analysis CSVs to Parquet
+        //
+        CYTOTABLE(
+            CELLPROFILER_ANALYSIS.out.output_dir
         )
 
     }
 
-
-
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name: 'nf_core_'  +  'cellpainting_software_'  + 'mqc_'  + 'versions.yml',
@@ -86,28 +185,27 @@ workflow CELLPAINTING {
             newLine: true
         ).set { ch_collated_versions }
 
-
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config        = Channel.fromPath(
+    ch_multiqc_config        = channel.fromPath(
         "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
     ch_multiqc_custom_config = params.multiqc_config ?
-        Channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        Channel.empty()
+        channel.fromPath(params.multiqc_config, checkIfExists: true) :
+        channel.empty()
     ch_multiqc_logo          = params.multiqc_logo ?
-        Channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        Channel.empty()
+        channel.fromPath(params.multiqc_logo, checkIfExists: true) :
+        channel.empty()
 
     summary_params      = paramsSummaryMap(
         workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary = Channel.value(paramsSummaryMultiqc(summary_params))
+    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
     ch_multiqc_files = ch_multiqc_files.mix(
         ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
     ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
         file(params.multiqc_methods_description, checkIfExists: true) :
         file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = Channel.value(
+    ch_methods_description                = channel.value(
         methodsDescriptionText(ch_multiqc_custom_methods_description))
 
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
