@@ -2,7 +2,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/cellpainting/master/nextflow_schema.json",
     "title": "nf-core/cellpainting pipeline parameters",
-    "description": "A wonderful pipeline for cell painting",
+    "description": "Image-based profiling pipeline for Cell Painting assays using CellProfiler",
     "type": "object",
     "$defs": {
         "cellprofiler": {
