@@ -41,6 +41,37 @@ nf-test test tests/default.nf.test modules/local --profile test,docker --update-
 nextflow run . -profile test,docker --outdir results -resume
 ```
 
+### Staging a local Cell Painting Gallery mirror (offline / low-bandwidth)
+
+The non-stub `cellprofiler/*` tests fetch source TIFFs and illumination `.npy`
+files from `s3://cellpainting-gallery/cpg0016-jump/source_4/...` via the
+`params.cellpainting_gallery_testdata_base_path` parameter (defined in
+`tests/nextflow.config`, default `s3://cellpainting-gallery/`). Override that
+default by activating the `cached_test_data` profile (`conf/cached_test_data.config`),
+which points the parameter at `${projectDir}/.nf-test/testdata/`. Stage the mirror
+once, then add the profile to every nf-test command:
+
+```bash
+# 1. Stage the illumination .npy files (~37MB)
+aws s3 sync \
+  s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/ \
+  .nf-test/testdata/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/ \
+  --no-sign-request
+
+# 2. Stage the source TIFFs for wells A01, A02, B01 (sites 1+2, ~150MB)
+aws s3 sync \
+  s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/ \
+  .nf-test/testdata/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/ \
+  --exclude '*' \
+  --include 'r01c01f0[12]*' --include 'r01c02f0[12]*' --include 'r02c01f0[12]*' \
+  --no-sign-request
+
+# 3. Run nf-test against the local mirror via the cached_test_data profile
+nf-test test tests/default.nf.test modules/local --profile test,docker,cached_test_data
+```
+
+`.nf-test/` is gitignored, so the mirror stays out of version control.
+
 ## Architecture
 
 ### Pipeline flow

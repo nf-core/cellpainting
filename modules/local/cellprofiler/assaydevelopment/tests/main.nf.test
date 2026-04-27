@@ -19,28 +19,30 @@ nextflow_process {
                     [filename:'r01c01f01p01-ch6sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_H'],
                     [filename:'r01c01f01p01-ch7sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_L'],
                 ]
+                def imagePrefix = 'cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/'
+                def illumPrefix = 'cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/'
                 input[0] = [
                     [id:"2021_04_26_Batch1_BR00117035_A01", batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', site:1],
                     images_meta,
                     [
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch8sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch6sk1fk1fl1.tiff"),
-                        file("s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch7sk1fk1fl1.tiff"),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch5sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch2sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch3sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch4sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch1sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch8sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch6sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch7sk1fk1fl1.tiff', checkIfExists: true),
                     ],
                     [
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumDNA.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumAGP.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumRNA.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumER.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumMito.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_H.npy"),
-                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/BR00117035_IllumBrightfield_L.npy"),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumDNA.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumAGP.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumRNA.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumER.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumMito.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield_H.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield_L.npy', checkIfExists: true),
                     ]
                 ]
                 input[1] = file("${projectDir}/assets/cellprofiler/assaydevelopment.cppipe", checkIfExists: true)

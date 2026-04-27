@@ -1,4 +1,10 @@
 .DS_Store
+# Image.csv and Experiment.csv embed non-deterministic values (Image.csv:
+# PathName_CellOutlines + PathName_NucleiOutlines = work-dir absolute paths;
+# Experiment.csv: Run_Timestamp). Excluded from md5-based snapshots until
+# a more granular assertion strategy is in place. Tracked in #38.
+**/Image.csv
+**/Experiment.csv
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
