@@ -6,61 +6,91 @@
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+This pipeline processes [Cell Painting](https://doi.org/10.1038/nprot.2016.105) assay images through illumination correction, segmentation QC, morphological feature extraction, and format conversion. For technical architecture details, see the [architecture documentation](architecture.md).
 
 ## Samplesheet input
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+You will need to create a samplesheet with information about the images you would like to analyse before running the pipeline. Use the `--input` parameter to specify its location.
 
 ```bash
 --input '[path to samplesheet file]'
 ```
 
-### Multiple runs of the same sample
-
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
+The samplesheet is in **tall format** — one row per image. Each row associates a single `.tif`/`.tiff` image file with its channel and plate/well/site metadata.
 
 ```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
+channel,path,source,batch,plate,well,site,row,col
+Mito,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
+DNA,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
+ER,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch4sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
+RNA,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch3sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
+AGP,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch2sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
 ```
+
+A standard Cell Painting experiment images 5-8 channels (e.g., `DNA`, `Mito`, `ER`, `RNA`, `AGP`) across multiple plates, wells, and sites. Each unique combination of `batch`, `plate`, `well`, `site`, and `channel` should have exactly one row in the samplesheet.
 
 ### Full samplesheet
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
+The samplesheet requires the following columns:
 
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
-```
-
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
+| Column     | Required | Type   | Description                                                                                                 |
+| ---------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------- |
+| `channel`  | Yes      | string | Channel identifier (e.g., `DNA`, `Mito`, `ER`, `RNA`, `AGP`). Alphanumeric characters and underscores only. |
+| `path`     | Yes      | string | Path to a `.tif` or `.tiff` image file. Supports local filesystem paths and S3 URIs.                        |
+| `source`   | Yes      | string | Data source identifier (e.g., `source_4`).                                                                  |
+| `batch`    | Yes      | string | Batch identifier (e.g., `2021_04_26_Batch1`).                                                               |
+| `plate`    | Yes      | string | Plate identifier (e.g., `BR00117035`).                                                                      |
+| `well`     | Yes      | string | Well identifier (e.g., `A01`).                                                                              |
+| `site`     | Yes      | number | Site/field number within the well.                                                                          |
+| `row`      | Yes      | number | Plate row number.                                                                                           |
+| `col`      | Yes      | number | Plate column number.                                                                                        |
+| `field_id` | No       | number | Field identifier (optional additional metadata).                                                            |
+| `plane_id` | No       | number | Z-plane identifier (optional additional metadata).                                                          |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+## Pipeline modes
+
+The `--cellprofiler_mode` parameter controls which pipeline steps are executed:
+
+- **`assay_development`** — Runs illumination correction and assay development QC only. Use this mode to validate segmentation quality before committing to a full analysis run.
+- **`analysis`** (default) — Runs the full pipeline: illumination correction, assay development QC, feature extraction, and CytoTable conversion.
+
+Assay development always runs as a QC gate, even in `analysis` mode.
+
+## CellProfiler pipeline files
+
+The pipeline uses CellProfiler `.cppipe` pipeline files for each processing step. Default pipelines are included in the `assets/cellprofiler/` directory. You can provide your own pipelines using the following parameters:
+
+| Parameter                                | Default                                         | Description                                                                                                                     |
+| ---------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `--cellprofiler_illumination_cppipe`     | `assets/cellprofiler/illumination.cppipe.jinja` | CellProfiler pipeline for illumination correction. Uses `{{channel}}` Jinja-style placeholders that are substituted at runtime. |
+| `--cellprofiler_assaydevelopment_cppipe` | `assets/cellprofiler/assaydevelopment.cppipe`   | CellProfiler pipeline for assay development QC.                                                                                 |
+| `--cellprofiler_analysis_cppipe`         | `assets/cellprofiler/analysis.cppipe`           | CellProfiler pipeline for full feature extraction.                                                                              |
+| `--cellprofiler_assaydevelopment_site`   | `1`                                             | Site number to use for assay development (single site per well).                                                                |
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run nf-core/cellpainting --input ./samplesheet.csv --outdir ./results  -profile docker
+nextflow run nf-core/cellpainting \
+   --input ./samplesheet.csv \
+   --outdir ./results \
+   -profile docker
 ```
 
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
+This will launch the pipeline with the `docker` configuration profile in the default `analysis` mode. See below for more information about profiles.
+
+To run in assay development mode (QC only):
+
+```bash
+nextflow run nf-core/cellpainting \
+   --input ./samplesheet.csv \
+   --cellprofiler_mode assay_development \
+   --outdir ./results \
+   -profile docker
+```
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -87,9 +117,9 @@ nextflow run nf-core/cellpainting -profile docker -params-file params.yaml
 with:
 
 ```yaml title="params.yaml"
-input: './samplesheet.csv'
-outdir: './results/'
-<...>
+input: "./samplesheet.csv"
+outdir: "./results/"
+cellprofiler_mode: "analysis"
 ```
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
