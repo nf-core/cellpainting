@@ -6,8 +6,8 @@
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
-include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis.nf'
-include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment.nf'
+include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
+include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
