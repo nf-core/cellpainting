@@ -1,0 +1,381 @@
+2026-04-28 16:48:08.704 parsl:947 156 MainThread [INFO]  
+  Python version: 3.13.3 | packaged by conda-forge | (main, Apr 14 2025, 20:44:03) [GCC 13.3.0]
+  Debug logging: False
+  Certificates dir: None
+  Log dir: /mnt/runinfo/000/htex_default_for_cytotable
+  Manager ID: 054565ab9a60
+  Block ID: 0
+  cores_per_worker: 1.0
+  mem_per_worker: None
+  task_port: 54216
+  result_port: 54862
+  addresses: 127.0.0.1,50.234.104.125,172.17.0.3
+  max_workers_per_node: inf
+  poll_period: 10
+  address_probe_timeout: 30
+  Prefetch capacity: 0
+  Heartbeat threshold: 120
+  Heartbeat period: 30
+  Drain period: None
+  CPU affinity: none
+  Accelerators: 
+  enable_mpi_mode: False
+  mpi_launcher: mpiexec
+2026-04-28 16:48:08.705 parsl:155 156 MainThread [INFO]  Manager initializing
+2026-04-28 16:48:08.732 parsl.executors.high_throughput.probe:50 156 MainThread [INFO]  Connected to interchange on 127.0.0.1
+2026-04-28 16:48:08.745 parsl:164 156 MainThread [INFO]  Connection to Interchange successful on 127.0.0.1
+2026-04-28 16:48:08.745 parsl:167 156 MainThread [INFO]  Task url : tcp://127.0.0.1:54216
+2026-04-28 16:48:08.746 parsl:168 156 MainThread [INFO]  Result url : tcp://127.0.0.1:54862
+2026-04-28 16:48:09.386 parsl:251 156 MainThread [INFO]  Manager will spawn 10 workers
+2026-04-28 16:48:09.449 parsl:301 156 Task-Puller [INFO]  starting
+2026-04-28 16:48:09.452 parsl:405 156 Result-Pusher [INFO]  Manager result pipe connected to interchange
+2026-04-28 16:48:09.453 parsl:309 156 Task-Puller [INFO]  Manager task pipe connected to interchange
+2026-04-28 16:48:09.471 parsl:513 156 MainThread [INFO]  Manager threads started
+2026-04-28 16:48:39.522 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:48:39.533 parsl:436 156 worker-watchdog [ERROR]  Worker 1 has died
+2026-04-28 16:48:39.676 parsl:439 156 worker-watchdog [INFO]  Worker 1 was busy when it died
+2026-04-28 16:48:39.679 parsl:443 156 worker-watchdog [INFO]  Putting exception for executor task 14 in the pending result queue
+2026-04-28 16:48:39.757 parsl:453 156 worker-watchdog [INFO]  Worker 1 has been restarted
+2026-04-28 16:48:39.770 parsl:436 156 worker-watchdog [ERROR]  Worker 5 has died
+2026-04-28 16:48:39.771 parsl:439 156 worker-watchdog [INFO]  Worker 5 was busy when it died
+2026-04-28 16:48:39.771 parsl:443 156 worker-watchdog [INFO]  Putting exception for executor task 17 in the pending result queue
+2026-04-28 16:48:39.780 parsl:453 156 worker-watchdog [INFO]  Worker 5 has been restarted
+2026-04-28 16:48:39.781 parsl:436 156 worker-watchdog [ERROR]  Worker 6 has died
+2026-04-28 16:48:39.782 parsl:439 156 worker-watchdog [INFO]  Worker 6 was busy when it died
+2026-04-28 16:48:39.782 parsl:443 156 worker-watchdog [INFO]  Putting exception for executor task 15 in the pending result queue
+2026-04-28 16:48:39.786 parsl:453 156 worker-watchdog [INFO]  Worker 6 has been restarted
+2026-04-28 16:48:39.786 parsl:436 156 worker-watchdog [ERROR]  Worker 8 has died
+2026-04-28 16:48:39.787 parsl:439 156 worker-watchdog [INFO]  Worker 8 was busy when it died
+2026-04-28 16:48:39.787 parsl:443 156 worker-watchdog [INFO]  Putting exception for executor task 16 in the pending result queue
+2026-04-28 16:48:39.791 parsl:453 156 worker-watchdog [INFO]  Worker 8 has been restarted
+2026-04-28 16:49:09.602 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:49:39.610 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:50:09.620 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:50:39.630 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:51:09.639 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:51:39.646 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:52:09.660 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:52:39.670 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:53:09.679 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:53:39.697 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:54:09.711 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:54:39.728 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:55:09.738 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:55:39.749 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:56:09.765 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:56:39.776 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:57:09.785 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:57:39.796 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:58:09.806 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:58:39.820 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:59:09.834 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 16:59:39.845 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:00:09.854 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:00:39.864 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:01:09.884 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:01:39.895 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:02:09.905 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:02:39.913 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:03:09.927 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:03:39.939 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:04:09.948 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:04:39.957 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:05:09.969 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:05:39.980 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:06:09.987 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:06:39.998 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:07:10.007 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:07:40.022 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:08:10.032 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:08:40.038 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:09:10.047 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:09:40.055 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:10:10.064 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:10:40.076 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:11:10.085 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:11:40.096 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:12:10.104 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:12:40.114 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:13:10.126 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:13:40.136 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:14:10.144 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:14:40.157 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:15:10.172 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:15:40.184 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:16:10.198 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:16:40.207 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:17:10.219 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:17:40.228 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:18:10.240 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:18:40.257 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:19:10.266 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:19:40.279 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:20:10.290 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:20:40.300 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:21:10.312 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:21:40.321 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:22:10.333 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:22:40.342 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:23:10.354 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:23:40.366 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:24:10.381 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:24:40.392 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:25:10.402 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:25:40.416 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:26:10.429 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:26:40.436 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:27:10.444 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:27:40.452 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:28:10.469 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:28:40.480 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:29:10.493 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:29:40.506 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:30:10.519 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:30:40.532 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:31:10.550 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:31:40.709 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:32:10.770 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:32:40.782 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:33:10.802 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:33:40.835 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:34:10.852 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:34:40.873 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:35:10.889 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:35:40.906 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:36:10.920 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:36:40.935 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:37:10.948 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:37:40.958 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:38:10.977 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:38:40.994 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:39:11.008 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:39:41.026 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:40:11.044 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:40:41.055 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:41:11.073 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:41:41.083 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:42:11.097 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:42:41.116 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:43:11.132 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:43:41.145 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:44:11.154 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:44:41.166 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:45:11.181 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:45:41.195 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:46:11.211 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:46:41.217 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:47:11.230 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:47:41.237 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:48:11.246 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:48:41.263 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:49:11.271 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:49:41.286 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:50:11.296 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:50:41.308 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:51:11.316 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:51:41.328 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:52:11.337 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:52:41.346 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:53:11.353 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:53:41.367 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:54:11.378 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:54:41.393 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:55:11.401 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:55:41.414 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:56:11.424 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:56:41.434 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:57:11.442 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:57:41.454 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:58:11.462 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:58:41.472 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:59:11.482 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 17:59:41.494 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:00:11.504 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:00:41.519 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:01:11.529 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:01:41.540 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:02:11.551 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:02:41.560 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:03:11.568 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:03:41.579 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:04:11.590 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:04:41.597 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:05:11.611 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:05:41.620 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:06:11.634 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:06:41.642 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:07:11.655 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:07:41.664 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:08:11.678 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:08:41.688 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:09:11.699 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:09:41.708 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:10:11.716 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:10:41.727 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:11:11.741 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:11:41.751 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:12:11.766 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:12:41.776 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:13:11.789 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:13:41.811 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:14:11.820 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:14:41.830 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:15:11.838 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:15:41.855 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:16:11.868 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:16:41.878 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:17:11.887 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:17:41.895 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:18:11.902 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:18:41.920 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:19:11.929 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:19:41.940 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:20:11.949 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:20:41.961 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:21:11.972 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:21:41.982 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:22:11.991 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:22:42.000 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:23:12.009 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:23:42.019 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:24:12.032 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:24:42.043 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:25:12.051 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:25:42.060 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:26:12.076 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:26:42.098 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:27:12.106 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:27:42.115 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:28:12.129 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:28:42.148 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:29:12.168 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:29:42.183 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:30:12.195 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:30:42.210 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:31:12.247 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:31:42.293 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:32:12.309 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:32:42.331 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:33:12.344 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:33:42.371 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:34:12.397 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:34:42.408 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:35:12.418 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:35:42.427 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:36:12.446 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:36:42.458 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:37:12.467 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:37:42.477 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:38:12.489 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:38:42.501 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:39:12.532 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:39:42.552 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:40:12.566 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:40:42.572 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:41:12.581 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:41:42.590 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:42:12.602 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:42:42.612 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:43:12.623 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:43:42.636 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:44:12.643 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:44:42.651 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:45:12.665 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:45:42.675 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:46:12.681 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:46:42.686 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:47:12.700 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:47:42.709 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:48:12.715 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:48:42.723 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:49:12.730 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:49:42.739 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:50:12.753 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:50:42.769 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:51:12.777 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:51:42.794 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:52:12.803 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:52:42.823 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:53:12.835 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:53:42.854 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:54:12.869 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:54:42.875 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:55:12.887 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:55:42.895 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:56:12.910 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:56:42.918 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:57:12.937 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:57:42.955 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:58:12.962 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:58:42.978 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:59:12.994 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 18:59:43.007 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:00:13.012 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:00:43.020 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:01:13.026 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:01:43.032 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:02:13.038 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:02:43.049 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:03:13.058 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:03:43.066 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:04:13.072 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:04:43.080 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:05:13.099 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:05:43.108 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:06:13.113 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:06:43.130 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:07:13.147 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:07:43.156 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:08:13.162 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:08:43.172 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:09:13.177 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:09:43.188 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:10:13.198 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:10:43.208 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:11:13.217 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:11:43.225 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:12:13.230 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:12:43.247 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:13:13.256 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:13:43.265 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:14:13.275 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:14:43.284 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:15:13.297 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:15:43.319 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:16:13.333 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:16:43.351 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:17:13.368 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:17:43.400 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:18:13.413 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:18:43.432 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:19:13.454 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:19:43.473 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:20:13.496 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:20:43.506 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:21:13.519 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:21:43.533 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:22:13.552 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:22:43.568 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:23:13.580 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:23:43.600 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:24:13.615 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:24:43.628 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:25:13.646 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:25:43.658 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:26:13.671 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:26:43.685 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:27:13.701 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:27:43.722 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:28:13.735 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:28:43.746 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:29:13.758 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:29:43.767 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:30:13.777 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:30:43.790 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:31:13.803 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:31:43.819 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:32:13.830 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:32:43.842 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:33:13.852 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:33:43.868 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
+2026-04-28 19:34:13.885 parsl:426 156 Heartbeater [INFO]  Sending heartbeat via results connection: heartbeat_period=30 seconds
