@@ -11,6 +11,9 @@
 **/Cells.csv
 **/Cytoplasm.csv
 **/Nuclei.csv
+# CYTOTABLE parquets are derived from the per-cell CSVs above and inherit
+# the same BLAS-driven drift. Tracked in #41.
+cytotable/*.parquet
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
