@@ -1,6 +1,6 @@
 nextflow_process {
     name "Test Process CELLPROFILER_ANALYSIS"
-    script "../../analysis.nf"
+    script "../main.nf"
     process "CELLPROFILER_ANALYSIS"
     tag "cellprofiler"
     tag "cellprofiler/analysis"

@@ -1,18 +1,19 @@
-process CELLPROFILER_ASSAYDEVELOPMENT {
+process CELLPROFILER_ANALYSIS {
     tag "${meta.id}"
     label 'process_medium'
 
+    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
         ? 'https://depot.galaxyproject.org/singularity/cellprofiler:4.2.8--pyhdfd78af_0'
         : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
 
     input:
     tuple val(meta), val(images_meta), path(images, stageAs: "images/*"), path(illum_files, stageAs: "images/*")
-    path assay_development_cppipe
+    path analysis_cppipe
 
     output:
-    tuple val(meta), path("assaydevelopment/*.png"), emit: png
-    tuple val(meta), path("assaydevelopment/Image.csv"), emit: csv, optional: true
+    tuple val(meta), path("analysis"), emit: output_dir
+    tuple val(meta), path("analysis/*.png"), emit: pngs, optional: true
     path "versions.yml", emit: versions
 
     when:
@@ -27,15 +28,15 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
     echo '${metadata_json}' > metadata.json
     generate_illumination_apply_csv.py --metadata metadata.json --images-dir ./images --output load_data.csv
 
-    mkdir -p assaydevelopment
+    mkdir -p analysis
 
     cellprofiler -c -r \
     ${args} \
-    -p ${assay_development_cppipe} \
-    -o assaydevelopment \
+    -p ${analysis_cppipe} \
+    -o analysis \
     --data-file=load_data.csv \
     --image-directory ./images/ \
-    -g Metadata_Plate=${meta.plate},Metadata_Well=${meta.well}
+    -g Metadata_Plate=${meta.plate},Metadata_Well=${meta.well},Metadata_Site=${meta.site}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -45,9 +46,12 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
 
     stub:
     """
-    mkdir -p assaydevelopment
-    echo 'stub' > assaydevelopment/mock_segmentedimage.png
-    echo 'ImageNumber,Metadata_Plate' > assaydevelopment/Image.csv
+    mkdir -p analysis
+    echo 'ImageNumber,Metadata_Plate' > analysis/Image.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Nuclei.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Cells.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Cytoplasm.csv
+    touch analysis/mock_overlay.png
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
