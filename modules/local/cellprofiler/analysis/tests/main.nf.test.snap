@@ -1,4 +1,20 @@
 {
+    "cellprofiler - analysis": {
+        "content": [
+            [
+                "A01_s1--cell_outlines.png:md5,db3c919bc3744c170cede533f72b9109",
+                "A01_s1--nuclei_outlines.png:md5,bd13decbe6163fb6a89e5abedd46027c"
+            ],
+            [
+                "versions.yml:md5,ed38c5cbdd0e37599722ed1b5832c21d"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2026-04-28T11:04:51.459357"
+    },
     "cellprofiler - analysis - stub": {
         "content": [
             {

@@ -1,4 +1,19 @@
 .DS_Store
+# Image.csv and Experiment.csv embed non-deterministic values (Image.csv:
+# PathName_CellOutlines + PathName_NucleiOutlines = work-dir absolute paths;
+# Experiment.csv: Run_Timestamp). Excluded from md5-based snapshots until
+# a more granular assertion strategy is in place. Tracked in #38.
+**/Image.csv
+**/Experiment.csv
+# Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements whose
+# floating-point values drift across BLAS implementations (macOS Accelerate
+# vs Linux OpenBLAS in CI). Tracked in #41.
+**/Cells.csv
+**/Cytoplasm.csv
+**/Nuclei.csv
+# CYTOTABLE parquets are derived from the per-cell CSVs above and inherit
+# the same BLAS-driven drift. Tracked in #41.
+cytotable/*.parquet
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json

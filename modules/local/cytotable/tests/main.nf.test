@@ -33,6 +33,7 @@ nextflow_process {
     }
 
     test("cytotable - stub") {
+        tag "stub"
         options "-stub"
         when {
             process {

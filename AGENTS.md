@@ -4,17 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-### Pre-push verification (required before every push)
+### Test commands
 
 ```bash
-# 1. Run nf-test (stub mode, fast ~45s)
-nf-test test tests/default.nf.test --profile test,docker
+# 1. Fast: stub variants of every test (pipeline + modules), filtered by `stub` tag (~3min)
+nf-test test tests/default.nf.test modules/local --profile test,docker --tag stub
 
-# 2. Run full pipeline with test data (~15min, needs Docker with >= 16GB memory)
-nextflow run . -profile test,docker --outdir results
+# 2. Full: every test including real CellProfiler runs (~13min, needs Docker with >= 16GB memory)
+nf-test test tests/default.nf.test modules/local --profile test,docker
 ```
-
-Do not push if either fails.
 
 ### Linting
 
@@ -32,7 +30,7 @@ nf-test test modules/local/cellprofiler/illuminationcorrection/tests/main.nf.tes
 ### Regenerating snapshots after process output changes
 
 ```bash
-nf-test test tests/default.nf.test --profile test,docker --update-snapshot
+nf-test test tests/default.nf.test modules/local --profile test,docker --update-snapshot
 ```
 
 ### Resume a failed pipeline run
@@ -40,6 +38,37 @@ nf-test test tests/default.nf.test --profile test,docker --update-snapshot
 ```bash
 nextflow run . -profile test,docker --outdir results -resume
 ```
+
+### Staging a local Cell Painting Gallery mirror for minimal test data
+
+The non-stub `cellprofiler/*` tests fetch source TIFFs and illumination `.npy`
+files from `s3://cellpainting-gallery/cpg0016-jump/source_4/...` via the
+`params.cellpainting_gallery_testdata_base_path` parameter (defined in
+`tests/nextflow.config`, default `s3://cellpainting-gallery/`). To run the real
+tests without going to S3 every time, mirror the relevant subtree once and
+point the env var at the local copy:
+
+```bash
+# 1. Stage the illumination .npy files (~37MB)
+aws s3 sync \
+  s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/ \
+  .nf-test/testdata/cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/ \
+  --no-sign-request
+
+# 2. Stage the source TIFFs for wells A01, A02, B01 (sites 1+2, ~150MB)
+aws s3 sync \
+  s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/ \
+  .nf-test/testdata/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/ \
+  --exclude '*' \
+  --include 'r01c01f0[12]*' --include 'r01c02f0[12]*' --include 'r02c01f0[12]*' \
+  --no-sign-request
+
+# 3. Run nf-test against the local mirror
+export CELLPAINTING_GALLERY_TESTDATA_BASE_PATH=$PWD/.nf-test/testdata/
+nf-test test tests/default.nf.test modules/local --profile test,docker
+```
+
+`.nf-test/` is gitignored, so the mirror stays out of version control.
 
 ## Architecture
 

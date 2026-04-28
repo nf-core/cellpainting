@@ -5,7 +5,71 @@ nextflow_process {
     tag "cellprofiler"
     tag "cellprofiler/analysis"
 
+    test("cellprofiler - analysis") {
+        when {
+            process {
+                """
+                def images_meta = [
+                    [filename:'r01c01f01p01-ch5sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'DNA'],
+                    [filename:'r01c01f01p01-ch2sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'AGP'],
+                    [filename:'r01c01f01p01-ch3sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'RNA'],
+                    [filename:'r01c01f01p01-ch4sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'ER'],
+                    [filename:'r01c01f01p01-ch1sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Mito'],
+                    [filename:'r01c01f01p01-ch8sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield'],
+                    [filename:'r01c01f01p01-ch6sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_H'],
+                    [filename:'r01c01f01p01-ch7sk1fk1fl1.tiff', batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', col:1, row:1, site:1, channel:'Brightfield_L'],
+                ]
+                def imagePrefix = 'cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/'
+                def illumPrefix = 'cpg0016-jump/source_4/images/2021_04_26_Batch1/illum/BR00117035/'
+                input[0] = [
+                    [id:"2021_04_26_Batch1_BR00117035_A01_1", batch:'2021_04_26_Batch1', plate:'BR00117035', well:'A01', site:1],
+                    images_meta,
+                    [
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch5sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch2sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch3sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch4sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch1sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch8sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch6sk1fk1fl1.tiff', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + imagePrefix + 'r01c01f01p01-ch7sk1fk1fl1.tiff', checkIfExists: true),
+                    ],
+                    [
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumDNA.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumAGP.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumRNA.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumER.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumMito.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield_H.npy', checkIfExists: true),
+                        file(params.cellpainting_gallery_testdata_base_path + illumPrefix + 'BR00117035_IllumBrightfield_L.npy', checkIfExists: true),
+                    ]
+                ]
+                input[1] = file("${projectDir}/assets/cellprofiler/analysis.cppipe", checkIfExists: true)
+                """
+            }
+        }
+        then {
+            // Image.csv and Experiment.csv embed non-deterministic values (work-dir absolute
+            // paths in PathName_*Outlines columns, and Run_Timestamp); see #38.
+            // Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements that drift
+            // across BLAS implementations (macOS vs Linux CI); see #41.
+            def stable_files = getAllFilesFromDir(
+                process.out.output_dir[0][1].toString(),
+                ignore: [
+                    'Image.csv', 'Experiment.csv', 'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
+                    '**/Image.csv', '**/Experiment.csv', '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
+                ]
+            )
+            assertAll(
+                { assert process.success },
+                { assert snapshot(stable_files, process.out.versions).match() }
+            )
+        }
+    }
+
     test("cellprofiler - analysis - stub") {
+        tag "stub"
         options "-stub"
         when {
             process {
