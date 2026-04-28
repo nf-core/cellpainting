@@ -6,6 +6,7 @@ process CYTOTABLE {
         'community.wave.seqera.io/library/pip_cytotable:e5e76f6f7c7bea96'
     }
 
+    // TODO: remove once https://github.com/cytomining/CytoTable/issues/440 is fixed (tracked in #42)
     stageInMode 'copy'
 
     input:
