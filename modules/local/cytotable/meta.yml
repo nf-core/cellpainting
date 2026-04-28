@@ -19,5 +19,13 @@ output:
       - "*.parquet":
           type: file
           description: parquet file format.
+  - stats:
+      - "*_stats.json":
+          type: file
+          description: |
+            JSON file containing per-parquet QC counts: num_cells (row count),
+            num_channels (distinct intensity channels detected via
+            Cells_Intensity_MeanIntensity_* column names), num_columns (total
+            column count), and a metadata echo of batch, plate, well, and site.
 authors:
   - "@ybaeus"
