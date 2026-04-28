@@ -33,8 +33,7 @@ nextflow_pipeline {
                 {
                     // Parse all CYTOTABLE per-site stats JSONs and assert structural QC counts.
                     // Spec: docs/superpowers/specs/2026-04-28-cytotable-stats-json-design.md
-                    def stats_dir   = file("$outputDir/cytotable")
-                    def stats_files = stats_dir.listFiles().findAll { it.name.endsWith('_stats.json') }
+                    def stats_files = files("$outputDir/cytotable/*_stats.json")
                     def all_stats   = stats_files.collect { path(it.toString()).json }
 
                     // Test fixture: 3 wells x 2 sites = 6 site-level parquets.
