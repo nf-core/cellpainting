@@ -50,20 +50,62 @@ nextflow_process {
             }
         }
         then {
-            // Image.csv and Experiment.csv embed non-deterministic values (work-dir absolute
-            // paths in PathName_*Outlines columns, and Run_Timestamp); see #38.
-            // Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements that drift
-            // across BLAS implementations (macOS vs Linux CI); see #41.
+            // Files excluded from the snapshot:
+            //   - Image.csv, Experiment.csv: embed non-deterministic values (work-dir
+            //     absolute paths in PathName_*Outlines, Run_Timestamp). See #38.
+            //   - Cells.csv, Cytoplasm.csv, Nuclei.csv: per-cell measurements drift
+            //     across BLAS implementations (macOS Accelerate vs Linux OpenBLAS),
+            //     so md5 snapshots cannot match cross-platform. These three files are
+            //     covered separately by the schema/row-count/area-mean assertions
+            //     below. See #41.
             def stable_files = getAllFilesFromDir(
                 process.out.output_dir[0][1].toString(),
                 ignore: [
-                    'Image.csv', 'Experiment.csv', 'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
-                    '**/Image.csv', '**/Experiment.csv', '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
+                    'Image.csv', 'Experiment.csv',
+                    'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
+                    '**/Image.csv', '**/Experiment.csv',
+                    '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
                 ]
             )
+
+            // Content-aware assertions for the BLAS-sensitive per-cell measurement CSVs.
+            // Expected values were captured from a verified Linux Docker run; see #41.
+            def parseCsv = { p ->
+                def lines = file(p).readLines()
+                [header: lines[0].split(',') as List,
+                 rows:   lines[1..-1].collect { it.split(',', -1) as List }]
+            }
+            def meanOf = { csv, col ->
+                def i = csv.header.indexOf(col)
+                csv.rows.collect { (it[i] as Double) }.sum() / csv.rows.size()
+            }
+            def withinPct = { actual, expected, pct ->
+                Math.abs(actual - expected) / expected < pct
+            }
+            def expectedHeader = { name ->
+                file("${projectDir}/modules/local/cellprofiler/analysis/tests/expected_headers/${name}.txt").text.trim().split(',') as List
+            }
+
+            def analysisDir = process.out.output_dir[0][1].toString()
+            def cells = parseCsv("${analysisDir}/Cells.csv")
+            def cytoplasm = parseCsv("${analysisDir}/Cytoplasm.csv")
+            def nuclei = parseCsv("${analysisDir}/Nuclei.csv")
+
             assertAll(
                 { assert process.success },
-                { assert snapshot(stable_files, process.out.versions).match() }
+                { assert snapshot(stable_files, process.out.versions).match() },
+
+                { assert cells.header == expectedHeader('Cells') },
+                { assert cells.rows.size() == 66 },
+                { assert withinPct(meanOf(cells, 'AreaShape_Area'), 6668.818181818182, 0.01) },
+
+                { assert cytoplasm.header == expectedHeader('Cytoplasm') },
+                { assert cytoplasm.rows.size() == 66 },
+                { assert withinPct(meanOf(cytoplasm, 'AreaShape_Area'), 5689.833333333333, 0.01) },
+
+                { assert nuclei.header == expectedHeader('Nuclei') },
+                { assert nuclei.rows.size() == 66 },
+                { assert withinPct(meanOf(nuclei, 'AreaShape_Area'), 1134.8636363636363, 0.01) },
             )
         }
     }
