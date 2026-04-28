@@ -2,9 +2,6 @@
     "cellprofiler - analysis": {
         "content": [
             [
-                "Cells.csv:md5,cf0fbe967445b902a35eaa01abc20f00",
-                "Cytoplasm.csv:md5,8c793dcf8ded0d248cbc38a2df51ae22",
-                "Nuclei.csv:md5,9d2ca15a8a72bf6afd96cb0fee99663e",
                 "A01_s1--cell_outlines.png:md5,db3c919bc3744c170cede533f72b9109",
                 "A01_s1--nuclei_outlines.png:md5,bd13decbe6163fb6a89e5abedd46027c"
             ],
@@ -16,7 +13,7 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-27T16:17:22.606722"
+        "timestamp": "2026-04-28T11:04:51.459357"
     },
     "cellprofiler - analysis - stub": {
         "content": [

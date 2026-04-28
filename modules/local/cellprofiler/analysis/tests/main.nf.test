@@ -50,12 +50,16 @@ nextflow_process {
             }
         }
         then {
-            // Image.csv and Experiment.csv are excluded from snapshots because they embed
-            // non-deterministic values (work-dir absolute paths in PathName_*Outlines columns,
-            // and Run_Timestamp). See #38 for tracking a more intelligent assertion strategy.
+            // Image.csv and Experiment.csv embed non-deterministic values (work-dir absolute
+            // paths in PathName_*Outlines columns, and Run_Timestamp); see #38.
+            // Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements that drift
+            // across BLAS implementations (macOS vs Linux CI); see #41.
             def stable_files = getAllFilesFromDir(
                 process.out.output_dir[0][1].toString(),
-                ignore: ['Image.csv', 'Experiment.csv', '**/Image.csv', '**/Experiment.csv']
+                ignore: [
+                    'Image.csv', 'Experiment.csv', 'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
+                    '**/Image.csv', '**/Experiment.csv', '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
+                ]
             )
             assertAll(
                 { assert process.success },

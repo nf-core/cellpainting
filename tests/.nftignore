@@ -5,6 +5,12 @@
 # a more granular assertion strategy is in place. Tracked in #38.
 **/Image.csv
 **/Experiment.csv
+# Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements whose
+# floating-point values drift across BLAS implementations (macOS Accelerate
+# vs Linux OpenBLAS in CI). Tracked in #41.
+**/Cells.csv
+**/Cytoplasm.csv
+**/Nuclei.csv
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
