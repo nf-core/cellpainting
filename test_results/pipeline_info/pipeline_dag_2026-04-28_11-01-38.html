@@ -1,0 +1,118 @@
+<!--
+  ~ Copyright 2013-2024, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<pre class="mermaid" style="text-align: center;">
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#B6ECE2',
+      'primaryTextColor': '#160F26',
+      'primaryBorderColor': '#065647',
+      'lineColor': '#545555',
+      'clusterBkg': '#BABCBD22',
+      'clusterBorder': '#DDDEDE',
+      'fontFamily': 'arial'
+    }
+  }
+}%%
+flowchart TB
+    subgraph " "
+    v2["Channel.fromList"]
+    v9["illumination_cppipe"]
+    v21["assay_development_cppipe"]
+    v31["analysis_cppipe"]
+    v37[" "]
+    v47["Channel.of"]
+    v51["Channel.fromPath"]
+    v54["ch_workflow_summary"]
+    v58["ch_methods_description"]
+    v65["replace_names"]
+    v66["sample_names"]
+    end
+    subgraph "NFCORE_CELLPAINTING [NFCORE_CELLPAINTING]"
+    subgraph "NFCORE_CELLPAINTING:CELLPAINTING [CELLPAINTING]"
+    v10(["CELLPROFILER_ILLUMINATIONCORRECTION"])
+    v22(["CELLPROFILER_ASSAYDEVELOPMENT"])
+    v32(["CELLPROFILER_ANALYSIS"])
+    v35(["CYTOTABLE"])
+    v67(["MULTIQC"])
+    v5(( ))
+    v11(( ))
+    v62(( ))
+    v63(( ))
+    v64(( ))
+    v71(( ))
+    end
+    end
+    subgraph " "
+    v23[" "]
+    v24[" "]
+    v33[" "]
+    v36[" "]
+    v68[" "]
+    v69[" "]
+    v70[" "]
+    v73[" "]
+    end
+    subgraph "PIPELINE_COMPLETION [PIPELINE_COMPLETION]"
+    v72(( ))
+    end
+    v2 --> v5
+    v9 --> v10
+    v5 --> v10
+    v10 --> v5
+    v10 --> v11
+    v21 --> v22
+    v5 --> v22
+    v22 --> v24
+    v22 --> v23
+    v22 --> v11
+    v31 --> v32
+    v5 --> v32
+    v32 --> v35
+    v32 --> v33
+    v32 --> v11
+    v35 --> v36
+    v37 --> v11
+    v47 --> v11
+    v51 --> v62
+    v54 --> v11
+    v58 --> v11
+    v65 --> v67
+    v66 --> v67
+    v11 --> v67
+    v62 --> v67
+    v63 --> v67
+    v64 --> v67
+    v67 --> v70
+    v67 --> v69
+    v67 --> v68
+    v67 --> v71
+    v72 --> v73
+    v71 --> v72
+
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, maxTextSize: Number.MAX_SAFE_INTEGER, maxEdges: Number.MAX_SAFE_INTEGER });
+</script>
+</body>
+</html>

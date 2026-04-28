@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	15/63ddfc	-	NFCORE_CELLPAINTING:CELLPAINTING:CELLPROFILER_ILLUMINATIONCORRECTION (2021_04_26_Batch1_BR00117035_Brightfield_L)	FAILED	-	-	-	-	-	-	-	-	-

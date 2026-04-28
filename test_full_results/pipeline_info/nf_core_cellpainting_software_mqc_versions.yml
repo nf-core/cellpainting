@@ -1,0 +1,5 @@
+CELLPROFILER_ILLUMINATIONCORRECTION:
+  cellprofiler: 4.2.8
+Workflow:
+    nf-core/cellpainting: v1.0.0dev-g4b4bd43
+    Nextflow: 25.10.4
