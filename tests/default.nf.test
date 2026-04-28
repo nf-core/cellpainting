@@ -33,7 +33,8 @@ nextflow_pipeline {
                 {
                     // Parse all CYTOTABLE per-site stats JSONs and assert structural QC counts.
                     // Spec: docs/superpowers/specs/2026-04-28-cytotable-stats-json-design.md
-                    def stats_files = files("$outputDir/cytotable/*_stats.json")
+                    def stats_dir   = file("$outputDir/cytotable")
+                    def stats_files = stats_dir.exists() ? stats_dir.listFiles().findAll { it.name.endsWith('_stats.json') } : []
                     def all_stats   = stats_files.collect { path(it.toString()).json }
 
                     // Test fixture: 3 wells x 2 sites = 6 site-level parquets.
@@ -55,21 +56,16 @@ nextflow_pipeline {
                     assert channel_counts.size() == 1 : "num_channels disagrees across sites: ${channel_counts}"
 
                     // Total cell count: BLAS drift can flip a handful of segmentation edge
-                    // cells, so we allow 1% tolerance against an observed baseline. Run this
-                    // test once with the placeholder values below to capture the observed
-                    // numbers from the assertion failure messages, then replace them.
+                    // cells, so we allow 1% tolerance against an observed baseline.
                     def total_cells           = all_stats.sum { it.num_cells }
                     def observed_num_channels = channel_counts.first()
-                    println "[cytotable stats] total_cells=${total_cells}, num_channels=${observed_num_channels}"
 
-                    def expected_total_cells  = 0  // TODO Task 5: replace with observed value
-                    def expected_num_channels = 0  // TODO Task 5: replace with observed value
-                    def tolerance             = 0.01  // 1%
+                    def expected_total_cells  = 832  // observed 2026-04-28 on Linux/Docker
+                    def expected_num_channels = 8    // observed 2026-04-28
+                    def tolerance             = 0.01 // 1%
 
                     assert observed_num_channels == expected_num_channels :
-                        "Set expected_num_channels = ${observed_num_channels} in tests/default.nf.test"
-                    assert expected_total_cells > 0 :
-                        "Set expected_total_cells = ${total_cells} in tests/default.nf.test (placeholder is 0)"
+                        "num_channels ${observed_num_channels} disagrees with baseline ${expected_num_channels}"
                     assert Math.abs(total_cells - expected_total_cells) / expected_total_cells < tolerance :
                         "total_cells ${total_cells} drifted >${tolerance*100}% from baseline ${expected_total_cells}"
                 }

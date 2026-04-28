@@ -95,11 +95,17 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_2_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_2_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_2_stats.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -144,7 +150,7 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-28T11:39:54.721462"
+        "timestamp": "2026-04-28T17:00:09.5803"
     },
     "-profile test -stub": {
         "content": [
@@ -223,11 +229,17 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A01_2_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_A02_2_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_1_stats.json",
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_B01_2_stats.json",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -257,6 +269,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-28T11:41:35.247037"
+        "timestamp": "2026-04-28T17:03:07.163024"
     }
 }
