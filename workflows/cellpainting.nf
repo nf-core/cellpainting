@@ -148,11 +148,25 @@ workflow CELLPAINTING {
         ch_versions = ch_versions.mix(CELLPROFILER_ANALYSIS.out.versions)
 
         //
-        // CYTOTABLE - convert analysis CSVs to Parquet
+        // CYTOTABLE - convert analysis CSVs to Parquet (one file per plate)
         //
-        CYTOTABLE(
-            CELLPROFILER_ANALYSIS.out.output_dir
-        )
+        CELLPROFILER_ANALYSIS.out.output_dir
+            .map { meta, output_dir ->
+                def group_id = [meta.batch, meta.plate].join('_')
+                def group_key = meta.subMap(['batch', 'plate']) + [id: group_id]
+                [group_key, meta, output_dir]
+            }
+            .groupTuple()
+            .map { plate_meta, site_metas, output_dirs ->
+                def sorted_dirs = [site_metas, output_dirs]
+                    .transpose()
+                    .sort { a, b -> a[0].id <=> b[0].id }
+                    .collect { it[1] }
+                [plate_meta, sorted_dirs]
+            }
+            .set { ch_cytotable_input }
+
+        CYTOTABLE(ch_cytotable_input)
 
     }
 
