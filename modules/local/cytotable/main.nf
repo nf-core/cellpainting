@@ -47,7 +47,7 @@ convert(
 parquet_metadata = pq.read_metadata(dest_path)
 column_names = parquet_metadata.schema.to_arrow_schema().names
 
-# \$ is Nextflow's dollar-escape; Python re sees a bare \$ (end-of-string anchor).
+# \$ is Nextflow's escape for the regex end-of-string anchor used below.
 channel_pattern = re.compile(r"^Cells_Intensity_MeanIntensity_([A-Za-z0-9]+)\$")
 channels = {m.group(1) for name in column_names for m in [channel_pattern.match(name)] if m}
 
