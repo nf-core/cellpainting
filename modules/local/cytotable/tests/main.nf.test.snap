@@ -1,46 +1,64 @@
 {
     "cytotable - stub": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035",
-                            "well": "A01",
-                            "site": "1"
-                        },
-                        "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035",
+                        "well": "A01",
+                        "site": "1"
+                    },
+                    "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
-            }
+            ],
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035",
+                        "well": "A01",
+                        "site": "1"
+                    },
+                    "2021_04_26_Batch1_BR00117035_A01_1_stats.json:md5,64e2e010e091a7107eb1580b6172cd1e"
+                ]
+            ]
         ],
         "meta": {
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T16:35:12.452789"
+        "timestamp": "2026-04-28T15:34:50.426603"
     },
-    "*.parquet": {
+    "Should run without failures": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035",
-                            "well": "A01",
-                            "site": "1"
-                        },
-                        "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,2ca5fe9f60ab445ee3ed458729725c03"
-                    ]
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035",
+                        "well": "A01",
+                        "site": "1"
+                    },
+                    "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,2ca5fe9f60ab445ee3ed458729725c03"
                 ]
-            }
+            ],
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035",
+                        "well": "A01",
+                        "site": "1"
+                    },
+                    "2021_04_26_Batch1_BR00117035_A01_1_stats.json:md5,b738ef7a64a42c07afd33fad8515649d"
+                ]
+            ]
         ],
         "meta": {
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T16:35:07.784117"
+        "timestamp": "2026-04-28T15:35:55.213567"
     }
 }
