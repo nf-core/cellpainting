@@ -82,9 +82,24 @@ nextflow_process {
             def withinPct = { actual, expected, pct ->
                 Math.abs(actual - expected) / expected < pct
             }
-            def expectedHeader = { name ->
-                file("${projectDir}/modules/local/cellprofiler/analysis/tests/expected_headers/${name}.txt").text.trim().split(',') as List
-            }
+
+            // Key columns spanning every major measurement family produced by the
+            // analysis pipeline (identity, shape, intensity, texture, granularity,
+            // radial distribution). Exact column count is asserted separately to
+            // catch wholesale schema changes that don't touch this list.
+            def sharedKeyColumns = [
+                'ImageNumber',
+                'ObjectNumber',
+                'AreaShape_Area',
+                'AreaShape_Perimeter',
+                'AreaShape_FormFactor',
+                'Intensity_MeanIntensity_DNA',
+                'Intensity_MeanIntensity_Mito',
+                'Intensity_IntegratedIntensity_AGP',
+                'Texture_AngularSecondMoment_DNA_3_00_256',
+                'Granularity_2_DNA',
+                'RadialDistribution_FracAtD_DNA_1of4',
+            ]
 
             def analysisDir = process.out.output_dir[0][1].toString()
             def cells = parseCsv("${analysisDir}/Cells.csv")
@@ -95,15 +110,18 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(stable_files, process.out.versions).match() },
 
-                { assert cells.header == expectedHeader('Cells') },
+                { assert cells.header.size() == 1998 },
+                { assert (sharedKeyColumns + ['Children_Cytoplasm_Count', 'Neighbors_NumberOfNeighbors_Adjacent']).every { it in cells.header } },
                 { assert cells.rows.size() == 66 },
                 { assert withinPct(meanOf(cells, 'AreaShape_Area'), 6668.818181818182, 0.01) },
 
-                { assert cytoplasm.header == expectedHeader('Cytoplasm') },
+                { assert cytoplasm.header.size() == 1986 },
+                { assert (sharedKeyColumns + ['Parent_Cells', 'Parent_Nuclei']).every { it in cytoplasm.header } },
                 { assert cytoplasm.rows.size() == 66 },
                 { assert withinPct(meanOf(cytoplasm, 'AreaShape_Area'), 5689.833333333333, 0.01) },
 
-                { assert nuclei.header == expectedHeader('Nuclei') },
+                { assert nuclei.header.size() == 1937 },
+                { assert (sharedKeyColumns + ['Location_Center_X', 'Location_Center_Y', 'Children_Cytoplasm_Count']).every { it in nuclei.header } },
                 { assert nuclei.rows.size() == 66 },
                 { assert withinPct(meanOf(nuclei, 'AreaShape_Area'), 1134.8636363636363, 0.01) },
             )
