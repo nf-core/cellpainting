@@ -55,7 +55,7 @@ nextflow_process {
             // and Run_Timestamp). See #38 for tracking a more intelligent assertion strategy.
             def stable_files = getAllFilesFromDir(
                 process.out.output_dir[0][1].toString(),
-                ignore: ['**/Image.csv', '**/Experiment.csv']
+                ignore: ['Image.csv', 'Experiment.csv', '**/Image.csv', '**/Experiment.csv']
             )
             assertAll(
                 { assert process.success },
