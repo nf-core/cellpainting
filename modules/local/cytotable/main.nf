@@ -6,6 +6,8 @@ process CYTOTABLE {
         'community.wave.seqera.io/library/pip_cytotable:e5e76f6f7c7bea96'
     }
 
+    stageInMode 'copy'
+
     input:
     tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?/*")
 
