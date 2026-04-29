@@ -11,3 +11,4 @@ null/
 docs/superpowers/
 .superset/
 .duckdb/
+runinfo/
