@@ -36,6 +36,15 @@
                 }
             }
         },
+        "pycytominer": {
+        "title": "PyCytoMiner",
+            "type": "object",
+            "description": "Parameters related to PyCytoMiner",
+            "default": "",
+            "properties": {
+            "pycytominer_annotation_join_on":
+            }
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -54,6 +63,17 @@
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/cellpainting/usage#samplesheet-input).",
                     "fa_icon": "fas fa-file-csv"
                 },
+                "metadata": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples metadta in the experiment.",
+                    "help_text": "You will need to create a meta data file containing information regarding each plate & well with any descriptive or associated information."
+                    "fa_icon": "fas fa-file-csv"
+                }
                 "outdir": {
                     "type": "string",
                     "format": "directory-path",
