@@ -105,7 +105,9 @@
                 "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
                 "imagemagick",
                 "imagemagick/montage",
-                "imagemagick/montage/2021_04_26_Batch1_BR00117035_montage_mqc.png",
+                "imagemagick/montage/full",
+                "imagemagick/montage/thumbnail",
+                "imagemagick/montage/thumbnail/2021_04_26_Batch1_BR00117035_montage_mqc.png",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -145,16 +147,14 @@
                 "BR00117035_IllumER.npy:md5,75062bcc5f10eb9db2ee9e18b9fc4d40",
                 "BR00117035_IllumMito.npy:md5,d33a48d56045736f46a470f44955ff07",
                 "BR00117035_IllumRNA.npy:md5,c21cb042cfb15cc7ca939eef99d4ebd3",
-                "2021_04_26_Batch1_BR00117035_montage_mqc.png:md5,6577f6d755e7b007ccc20b2ea279ae0e",
-                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
-                "plate_montages_mqc.html:md5,9ace299df0cf84d9530795829827669f"
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-29T02:12:33.838134"
+        "timestamp": "2026-04-29T15:28:36.626446"
     },
     "-profile test -stub": {
         "content": [
