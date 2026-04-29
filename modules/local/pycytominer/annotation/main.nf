@@ -18,7 +18,7 @@ process PYCYTOMINER_ANNO {
         --platemap $meta_table_csv \\
         --output_type parquet \\
         --output_file ${meta.batch}_${meta.plate}_${meta.well}_${meta.site}_anno.parquet \\
-        --join_on Metadata_Well,Metadata_Well
+        --join_on ${params.join_on}
     """
 
     stub:
