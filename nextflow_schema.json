@@ -260,6 +260,9 @@
             "$ref": "#/$defs/cellprofiler"
         },
         {
+            "$ref": "#/$defs/pycytominer"
+        },
+        {
             "$ref": "#/$defs/input_output_options"
         },
         {
