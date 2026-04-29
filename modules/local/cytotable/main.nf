@@ -16,7 +16,7 @@ process CYTOTABLE {
     tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?")
 
     output:
-    tuple val(meta), path("${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet")
+    tuple val(meta), path("${meta.batch}_${meta.plate}.parquet")
 
     script:
     """
@@ -74,7 +74,7 @@ for col in df.columns:
 if rename_map:
     df = df.rename(columns=rename_map)
 
-df.to_parquet("${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet", index=False)
+df.to_parquet("${meta.batch}_${meta.plate}.parquet", index=False)
     """
 
     stub:
