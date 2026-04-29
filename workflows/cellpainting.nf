@@ -120,7 +120,9 @@ workflow CELLPAINTING {
 
     //
     // PLATE MONTAGE
-    // Collect assay dev overlay PNGs by [batch, plate], montage into plate grid for MultiQC
+    // Collect assay dev overlay PNGs by [batch, plate], montage into plate grid for MultiQC.
+    // Each well shows one representative site (cellprofiler_assaydevelopment_site) with all
+    // channels composited into a single segmentation overlay image.
     //
 
     // Derive plate dimensions from samplesheet (max row/col per batch+plate)

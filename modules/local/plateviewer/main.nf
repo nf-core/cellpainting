@@ -36,7 +36,7 @@ process PLATEVIEWER {
     html = f'''<!--
     id: "plate-montages"
     section_name: "Plate Montages"
-    description: "Segmentation overlay montages arranged in plate grid layout. Select a plate from the dropdown to view."
+    description: "Segmentation overlay montages arranged in plate grid layout. Each well shows a single representative site (controlled by <code>cellprofiler_assaydevelopment_site</code>, default site 1) with all channels composited into one overlay image. Select a plate from the dropdown to view."
     -->
     <div style="margin: 10px 0;">
         <label for="plate-select" style="font-weight: bold; margin-right: 8px;">Plate:</label>

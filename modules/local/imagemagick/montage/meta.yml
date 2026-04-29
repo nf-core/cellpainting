@@ -1,6 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "imagemagick_montage"
-description: Generate a plate-grid montage from per-well overlay PNGs for visual QC
+description: >
+  Generate a plate-grid montage from per-well overlay PNGs for visual QC.
+  Each well shows a single representative site (controlled by
+  cellprofiler_assaydevelopment_site) with all channels composited into
+  one segmentation overlay image.
 keywords:
   - montage
   - plate

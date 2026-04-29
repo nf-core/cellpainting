@@ -1,6 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "plateviewer"
-description: Aggregate plate montage PNGs into an interactive HTML viewer for MultiQC
+description: >
+  Aggregate plate montage PNGs into an interactive HTML viewer for MultiQC.
+  Each montage shows one representative site per well (controlled by
+  cellprofiler_assaydevelopment_site) with all channels composited into
+  one segmentation overlay image.
 keywords:
   - plate
   - montage
