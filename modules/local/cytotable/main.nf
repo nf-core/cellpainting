@@ -1,4 +1,5 @@
 process CYTOTABLE {
+    label 'process_low'
 
     container {
         workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -10,7 +11,7 @@ process CYTOTABLE {
     stageInMode 'copy'
 
     input:
-    tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?/*")
+    tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?")
 
     output:
     tuple val(meta), path("*.parquet")
