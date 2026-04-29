@@ -66,11 +66,9 @@
     },
     "cellprofiler - assay development": {
         "content": [
-            {
-                "versions": [
-                    "versions.yml:md5,766f4a17b8a2ba2a5e108b7f5fee144e"
-                ]
-            }
+            [
+                "versions.yml:md5,766f4a17b8a2ba2a5e108b7f5fee144e"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.1",
