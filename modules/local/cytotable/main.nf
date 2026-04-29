@@ -1,5 +1,5 @@
 process CYTOTABLE {
-    label 'process_low'
+    label 'process_medium'
     container {
         workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'oras://community.wave.seqera.io/library/pip_cytotable:75a940a0fcae75db' :
