@@ -52,169 +52,50 @@
     },
     "imagemagick - montage - 24 well plate sparse (18 of 24 wells)": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "Batch1_Plate24",
-                            "batch": "Batch1",
-                            "plate": "Plate24"
-                        },
-                        "Batch1_Plate24_montage_mqc.png:md5,a9d851759bcae8fb8b27363f22cf37f5"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
-                ],
-                "montage": [
-                    [
-                        {
-                            "id": "Batch1_Plate24",
-                            "batch": "Batch1",
-                            "plate": "Plate24"
-                        },
-                        "Batch1_Plate24_montage_mqc.png:md5,a9d851759bcae8fb8b27363f22cf37f5"
-                    ]
-                ],
-                "montage_full": [
-                    
-                ],
-                "versions_imagemagick": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-29T01:52:43.164055"
+        "timestamp": "2026-04-29T14:31:58.45139"
     },
     "imagemagick - montage - 96 well plate thumbnail": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "Batch1_Plate96",
-                            "batch": "Batch1",
-                            "plate": "Plate96"
-                        },
-                        "Batch1_Plate96_montage_mqc.png:md5,8a685dbdb2d9eaedee32671abdc6f1ef"
-                    ]
-                ],
-                "1": [
-                    
-                ],
-                "2": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
-                ],
-                "montage": [
-                    [
-                        {
-                            "id": "Batch1_Plate96",
-                            "batch": "Batch1",
-                            "plate": "Plate96"
-                        },
-                        "Batch1_Plate96_montage_mqc.png:md5,8a685dbdb2d9eaedee32671abdc6f1ef"
-                    ]
-                ],
-                "montage_full": [
-                    
-                ],
-                "versions_imagemagick": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-29T01:52:19.852555"
+        "timestamp": "2026-04-29T14:31:40.449879"
     },
     "imagemagick - montage - 4 well plate full resolution": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "Batch1_Plate4",
-                            "batch": "Batch1",
-                            "plate": "Plate4"
-                        },
-                        "Batch1_Plate4_montage_mqc.png:md5,a5c29c7d15b7195f51864b558b74d50c"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "Batch1_Plate4",
-                            "batch": "Batch1",
-                            "plate": "Plate4"
-                        },
-                        "Batch1_Plate4_montage_full.png:md5,e93a50846d424b524421764bc9776d4e"
-                    ]
-                ],
-                "2": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
-                ],
-                "montage": [
-                    [
-                        {
-                            "id": "Batch1_Plate4",
-                            "batch": "Batch1",
-                            "plate": "Plate4"
-                        },
-                        "Batch1_Plate4_montage_mqc.png:md5,a5c29c7d15b7195f51864b558b74d50c"
-                    ]
-                ],
-                "montage_full": [
-                    [
-                        {
-                            "id": "Batch1_Plate4",
-                            "batch": "Batch1",
-                            "plate": "Plate4"
-                        },
-                        "Batch1_Plate4_montage_full.png:md5,e93a50846d424b524421764bc9776d4e"
-                    ]
-                ],
-                "versions_imagemagick": [
-                    [
-                        "IMAGEMAGICK_MONTAGE",
-                        "imagemagick",
-                        "7.1.2-21"
-                    ]
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-29T01:52:31.892259"
+        "timestamp": "2026-04-29T14:31:46.612347"
     }
 }
