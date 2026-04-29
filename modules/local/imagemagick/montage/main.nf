@@ -3,8 +3,6 @@ process IMAGEMAGICK_MONTAGE {
     label 'process_single' // montage is single-threaded (OpenMP disabled in conda-forge build)
 
     conda "${moduleDir}/environment.yml"
-    // Multi-arch manifest (linux/amd64 + linux/arm64), built via:
-    //   wave --conda-package conda-forge::imagemagick=7.1.2 --platform linux/amd64,linux/arm64 --freeze --await
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'oras://community.wave.seqera.io/library/imagemagick:imagemagick-7.1.2--d0b725a537542464' :
         'community.wave.seqera.io/library/imagemagick:imagemagick-7.1.2--d0b725a537542464' }"
