@@ -274,15 +274,13 @@
                 "BR00117035_IllumDNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumER.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumMito.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "BR00117035_IllumRNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "2021_04_26_Batch1_BR00117035_montage_mqc.png:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "plate_montages_mqc.html:md5,4bf6d7cff478bfd63ac32dd7442547cf"
+                "BR00117035_IllumRNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-29T12:08:01.374704"
+        "timestamp": "2026-04-29T14:52:21.494679"
     }
 }
