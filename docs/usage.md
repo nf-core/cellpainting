@@ -167,10 +167,10 @@ They are loaded in sequence, so later profiles can overwrite earlier profiles.
 If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
-  - A profile with a complete configuration for automated testing with a **minimal** samplesheet (3 wells with 2 sites per well)
+  - A profile with a complete configuration for automated testing with a **minimal** samplesheet (3 wells with 2 sites per well and 8 channels per site)
   - Includes links to test data so needs no other parameters
 - `test_full`
-  - A profile with a complete configuration for automated testing with a **larger** samplesheet (4 wells with 9 sites per well; negative control well included)
+  - A profile with a complete configuration for automated testing with a **larger** samplesheet (4 wells with 9 sites per well and 8 channels per site; negative control well included)
   - Includes links to test_full data so needs no other parameters
 - `docker`
   - A generic configuration profile to be used with [Docker](https://docker.com/)
