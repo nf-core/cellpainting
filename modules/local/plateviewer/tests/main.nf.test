@@ -1,0 +1,58 @@
+nextflow_process {
+
+    name "Test Process PLATEVIEWER"
+    script "../main.nf"
+    process "PLATEVIEWER"
+
+    tag "modules"
+    tag "modules_local"
+    tag "plateviewer"
+
+    test("plateviewer - 3 plates") {
+        when {
+            process {
+                """
+                def srcPng = file(params.pipelines_testdata_base_path + '/minimal_dataset/cpg0016-jump/source_4/workspace/assaydev/BR00117035-A01/BR00117035A01.png', checkIfExists: true)
+
+                def ids = ['Batch1_Plate1', 'Batch1_Plate2', 'Batch1_Plate3']
+                def pngs = ids.collect { id ->
+                    def p = workDir.resolve("\${id}_montage_mqc.png")
+                    java.nio.file.Files.copy(srcPng, p, java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                    p
+                }
+                input[0] = [ids, pngs]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.html },
+                { assert path(process.out.html[0]).text.contains('plate-select') },
+                { assert path(process.out.html[0]).text.contains('Batch1_Plate1') },
+                { assert path(process.out.html[0]).text.contains('Batch1_Plate3') },
+            )
+        }
+    }
+
+    test("plateviewer - stub") {
+        tag "stub"
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = [
+                    ['Batch1_Plate1'],
+                    [file("dummy_montage.png")]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.html },
+            )
+        }
+    }
+}
