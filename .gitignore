@@ -10,6 +10,3 @@ null/
 .nf-test*
 docs/superpowers/
 .superset/
-test_full_results/
-test_results/
-.DS_Store
