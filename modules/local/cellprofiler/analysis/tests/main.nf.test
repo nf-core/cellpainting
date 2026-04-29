@@ -120,7 +120,7 @@ nextflow_process {
                 { assert imageRow["Metadata_Well"]  == "A01" },
 
                 // At least one cell was detected (sanity check on real CellProfiler output)
-                { assert imageRow["Count_Cells"].toInteger() > 0 },
+                { assert imageRow["Count_Cells"].toFloat().toInteger() > 0 },
 
                 // PathName_* columns contain a path ending in /outlines but the work-dir
                 // hash in the middle changes every run — match the suffix only
