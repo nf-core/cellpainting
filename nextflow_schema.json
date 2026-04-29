@@ -42,7 +42,11 @@
             "description": "Parameters related to PyCytoMiner",
             "default": "",
             "properties": {
-            "pycytominer_annotation_join_on":
+                "pycytominer_annotation_join_on": {
+                    "type": "string",
+                    "default": "Metadata_Well"
+                    "description": "Column name to join metadata on with cytotable parquet"
+                }
             }
         },
         "input_output_options": {
