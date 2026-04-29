@@ -149,8 +149,10 @@ workflow CELLPAINTING {
         }
         .groupTuple(by: [0, 1, 2])
         .map { plate_key, batch, plate, wells_meta, pngs ->
+            // Sort wells_meta and pngs together by well name for deterministic -resume caching
+            def sorted = [wells_meta, pngs].transpose().sort { a, b -> a[0].well <=> b[0].well }
             def plate_meta = [id: plate_key, batch: batch, plate: plate]
-            [plate_key, plate_meta, wells_meta, pngs]
+            [plate_key, plate_meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
         }
         .combine(ch_plate_dims, by: 0)
         .map { _key, meta, wells_meta, pngs, plate_rows, plate_cols ->

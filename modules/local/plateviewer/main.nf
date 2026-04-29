@@ -11,22 +11,26 @@ process PLATEVIEWER {
     task.ext.when == null || task.ext.when
 
     script:
-    def plate_ids_json = new groovy.json.JsonOutput().toJson(plate_ids)
+    // plate_ids and montage_pngs are parallel lists — build explicit mapping
+    def png_list = montage_pngs instanceof List ? montage_pngs : [montage_pngs]
+    def plate_map = [:]
+    plate_ids.eachWithIndex { id, idx ->
+        if (idx < png_list.size()) {
+            plate_map[id] = png_list[idx].name
+        }
+    }
+    def plate_map_json = new groovy.json.JsonOutput().toJson(plate_map)
     """
     #!/usr/bin/env python3
-    import base64, json, os, sys
+    import base64, json
 
-    plate_ids = json.loads('${plate_ids_json}')
-    png_files = sorted(f for f in os.listdir('.') if f.endswith('.png'))
+    plate_map = json.loads('${plate_map_json}')
 
-    if len(plate_ids) != len(png_files):
-        print(f"Warning: {len(plate_ids)} plate IDs but {len(png_files)} PNGs", file=sys.stderr)
-
-    # Base64-encode each plate montage
+    # Base64-encode each plate montage using the metadata-driven mapping
     plates = {}
-    for pid, png in zip(sorted(plate_ids), png_files):
-        with open(png, 'rb') as f:
-            plates[pid] = base64.b64encode(f.read()).decode()
+    for plate_id, filename in plate_map.items():
+        with open(filename, 'rb') as f:
+            plates[plate_id] = base64.b64encode(f.read()).decode()
 
     sorted_ids = sorted(plates.keys())
     options = ''.join(f'<option value="{pid}">{pid}</option>' for pid in sorted_ids)

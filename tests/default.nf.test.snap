@@ -97,12 +97,7 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumMito.npy",
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035.parquet",
                 "imagemagick",
                 "imagemagick/montage",
                 "imagemagick/montage/full",
@@ -150,11 +145,11 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
+        "timestamp": "2026-04-30T00:47:51.296500534",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.5",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-04-29T15:28:36.626446"
+        }
     },
     "-profile test -stub": {
         "content": [
@@ -237,12 +232,7 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumMito.npy",
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035.parquet",
                 "imagemagick",
                 "imagemagick/montage",
                 "imagemagick/montage/full",
@@ -277,10 +267,10 @@
                 "BR00117035_IllumRNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
+        "timestamp": "2026-04-29T23:50:40.756411",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-04-29T14:52:21.494679"
+        }
     }
 }
