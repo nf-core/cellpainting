@@ -1,4 +1,0 @@
-2026-04-28 16:48:10.675 worker_log:640 173 MainThread [INFO]  Worker 4 started
-2026-04-28 16:48:16.553 worker_log:753 173 MainThread [INFO]  Received executor task 10
-2026-04-28 16:48:17.108 worker_log:771 173 MainThread [INFO]  Completed executor task 10
-2026-04-28 16:48:17.111 worker_log:782 173 MainThread [INFO]  All processing finished for executor task 10
