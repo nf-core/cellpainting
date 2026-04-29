@@ -50,20 +50,71 @@ nextflow_process {
             }
         }
         then {
-            // Image.csv and Experiment.csv embed non-deterministic values (work-dir absolute
-            // paths in PathName_*Outlines columns, and Run_Timestamp); see #38.
-            // Cells.csv, Cytoplasm.csv, Nuclei.csv contain per-cell measurements that drift
-            // across BLAS implementations (macOS vs Linux CI); see #41.
+            // Image/Experiment CSVs excluded for path/timestamp drift (#38);
+            // per-cell CSVs excluded for BLAS-driven numeric drift (#41) and
+            // covered by content-aware assertions below.
             def stable_files = getAllFilesFromDir(
                 process.out.output_dir[0][1].toString(),
                 ignore: [
-                    'Image.csv', 'Experiment.csv', 'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
-                    '**/Image.csv', '**/Experiment.csv', '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
+                    'Image.csv', 'Experiment.csv',
+                    'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
+                    '**/Image.csv', '**/Experiment.csv',
+                    '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
                 ]
             )
+
+            def parseCsv = { p ->
+                def lines = file(p).readLines()
+                [header: lines[0].split(',') as List,
+                 rows:   lines[1..-1].collect { it.split(',', -1) as List }]
+            }
+            def meanOf = { csv, col ->
+                def i = csv.header.indexOf(col)
+                csv.rows.collect { (it[i] as Double) }.sum() / csv.rows.size()
+            }
+            def withinPct = { actual, expected, pct ->
+                Math.abs(actual - expected) / expected < pct
+            }
+
+            // One representative column per measurement family (shape, intensity,
+            // texture, granularity, radial). Column count is asserted separately.
+            def sharedKeyColumns = [
+                'ImageNumber',
+                'ObjectNumber',
+                'AreaShape_Area',
+                'AreaShape_Perimeter',
+                'AreaShape_FormFactor',
+                'Intensity_MeanIntensity_DNA',
+                'Intensity_MeanIntensity_Mito',
+                'Intensity_IntegratedIntensity_AGP',
+                'Texture_AngularSecondMoment_DNA_3_00_256',
+                'Granularity_2_DNA',
+                'RadialDistribution_FracAtD_DNA_1of4',
+            ]
+
+            def analysisDir = process.out.output_dir[0][1].toString()
+            def cells = parseCsv("${analysisDir}/Cells.csv")
+            def cytoplasm = parseCsv("${analysisDir}/Cytoplasm.csv")
+            def nuclei = parseCsv("${analysisDir}/Nuclei.csv")
+
             assertAll(
                 { assert process.success },
-                { assert snapshot(stable_files, process.out.versions).match() }
+                { assert snapshot(stable_files, process.out.versions).match() },
+
+                { assert cells.header.size() == 1998 },
+                { assert (sharedKeyColumns + ['Children_Cytoplasm_Count', 'Neighbors_NumberOfNeighbors_Adjacent']).every { it in cells.header } },
+                { assert cells.rows.size() == 66 },
+                { assert withinPct(meanOf(cells, 'AreaShape_Area'), 6668.818181818182, 0.01) },
+
+                { assert cytoplasm.header.size() == 1986 },
+                { assert (sharedKeyColumns + ['Parent_Cells', 'Parent_Nuclei']).every { it in cytoplasm.header } },
+                { assert cytoplasm.rows.size() == 66 },
+                { assert withinPct(meanOf(cytoplasm, 'AreaShape_Area'), 5689.833333333333, 0.01) },
+
+                { assert nuclei.header.size() == 1937 },
+                { assert (sharedKeyColumns + ['Location_Center_X', 'Location_Center_Y', 'Children_Cytoplasm_Count']).every { it in nuclei.header } },
+                { assert nuclei.rows.size() == 66 },
+                { assert withinPct(meanOf(nuclei, 'AreaShape_Area'), 1134.8636363636363, 0.01) },
             )
         }
     }
