@@ -3,7 +3,7 @@ process CYTOTABLE {
     container {
         workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'oras://community.wave.seqera.io/library/pip_cytotable:75a940a0fcae75db' :
-        'community.wave.seqera.io/library/pip_cytotable:e5e76f6f7c7bea96'
+        'community.wave.seqera.io/library/pip_cytotable_pandas:f9bd5512f71acd86'
     }
 
     // TODO: remove once https://github.com/cytomining/CytoTable/issues/440 is fixed (tracked in #42)
