@@ -29,6 +29,46 @@ nextflow_pipeline {
                     // All files with stable contents
                     stable_path
                 ).match() }
+                ,
+                {
+                    // Parse all CYTOTABLE per-site stats JSONs and assert structural QC counts.
+                    // Spec: docs/superpowers/specs/2026-04-28-cytotable-stats-json-design.md
+                    def stats_dir   = file("$outputDir/cytotable")
+                    def stats_files = stats_dir.exists() ? stats_dir.listFiles().findAll { it.name.endsWith('_stats.json') } : []
+                    def all_stats   = stats_files.collect { path(it.toString()).json }
+
+                    // Test fixture: 3 wells x 2 sites = 6 site-level parquets.
+                    def expected_wells          = ['A01', 'A02', 'B01']
+                    def expected_sites_per_well = 2
+
+                    assert all_stats.size() == expected_wells.size() * expected_sites_per_well
+
+                    def observed_wells = all_stats.collect { it.metadata.well }.unique().sort()
+                    assert observed_wells == expected_wells
+
+                    expected_wells.each { w ->
+                        assert all_stats.count { it.metadata.well == w } == expected_sites_per_well
+                    }
+
+                    // Channel count is identical across all sites (a function of the imaging
+                    // protocol, not BLAS).
+                    def channel_counts = all_stats.collect { it.num_channels }.unique()
+                    assert channel_counts.size() == 1 : "num_channels disagrees across sites: ${channel_counts}"
+
+                    // Total cell count: BLAS drift can flip a handful of segmentation edge
+                    // cells, so we allow 1% tolerance against an observed baseline.
+                    def total_cells           = all_stats.sum { it.num_cells }
+                    def observed_num_channels = channel_counts.first()
+
+                    def expected_total_cells  = 832  // observed 2026-04-28 on Linux/Docker
+                    def expected_num_channels = 8    // observed 2026-04-28
+                    def tolerance             = 0.01 // 1%
+
+                    assert observed_num_channels == expected_num_channels :
+                        "num_channels ${observed_num_channels} disagrees with baseline ${expected_num_channels}"
+                    assert Math.abs(total_cells - expected_total_cells) / expected_total_cells < tolerance :
+                        "total_cells ${total_cells} drifted >${tolerance*100}% from baseline ${expected_total_cells}"
+                }
             )
         }
     }

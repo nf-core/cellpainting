@@ -14,6 +14,11 @@
 # CYTOTABLE parquets are derived from the per-cell CSVs above and inherit
 # the same BLAS-driven drift. Tracked in #41.
 cytotable/*.parquet
+# CYTOTABLE per-parquet stats JSONs contain only integer counts, but we
+# assert on parsed structure rather than file md5 so changes to one count
+# value can be expressed as targeted test edits instead of opaque snapshot
+# churn. Tracked alongside the corresponding parquet ignore above.
+cytotable/*_stats.json
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
