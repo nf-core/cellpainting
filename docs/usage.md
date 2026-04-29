@@ -33,19 +33,19 @@ A standard Cell Painting experiment images 5-8 channels (e.g., `DNA`, `Mito`, `E
 
 The samplesheet requires the following columns:
 
-| Column       | Required | Type   | Description                                                                                                          |
-| ------------ | -------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| Column     | Required | Type   | Description                                                                                                |
+| ---------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------- |
 | `channel`  | Yes      | string | Channel identifier (e.g.,`DNA`, `Mito`, `ER`, `RNA`, `AGP`). Alphanumeric characters and underscores only. |
-| `path`     | Yes      | string | Path to a `.tif` or `.tiff` image file. Supports local filesystem paths and S3 URIs.                             |
-| `source`   | Yes      | string | Data source identifier (e.g.,`source_4`).                                                                          |
-| `batch`    | Yes      | string | Batch identifier (e.g.,`2021_04_26_Batch1`).                                                                       |
-| `plate`    | Yes      | string | Plate identifier (e.g.,`BR00117035`).                                                                              |
-| `well`     | Yes      | string | Well identifier (e.g.,`A01`).                                                                                      |
-| `site`     | Yes      | number | Site/field number within the well.                                                                                   |
-| `row`      | Yes      | number | Plate row number.                                                                                                    |
-| `col`      | Yes      | number | Plate column number.                                                                                                 |
-| `field_id` | No       | number | Field identifier (optional additional metadata).                                                                     |
-| `plane_id` | No       | number | Z-plane identifier (optional additional metadata).                                                                   |
+| `path`     | Yes      | string | Path to a `.tif` or `.tiff` image file. Supports local filesystem paths and S3 URIs.                       |
+| `source`   | Yes      | string | Data source identifier (e.g.,`source_4`).                                                                  |
+| `batch`    | Yes      | string | Batch identifier (e.g.,`2021_04_26_Batch1`).                                                               |
+| `plate`    | Yes      | string | Plate identifier (e.g.,`BR00117035`).                                                                      |
+| `well`     | Yes      | string | Well identifier (e.g.,`A01`).                                                                              |
+| `site`     | Yes      | number | Site/field number within the well.                                                                         |
+| `row`      | Yes      | number | Plate row number.                                                                                          |
+| `col`      | Yes      | number | Plate column number.                                                                                       |
+| `field_id` | No       | number | Field identifier (optional additional metadata).                                                           |
+| `plane_id` | No       | number | Z-plane identifier (optional additional metadata).                                                         |
 
 An [example minimal samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
@@ -62,12 +62,12 @@ Assay development always runs as a QC gate, even in `analysis` mode.
 
 The pipeline uses CellProfiler `.cppipe` pipeline files for each processing step. Default pipelines are included in the `assets/cellprofiler/` directory. You can provide your own pipelines using the following parameters:
 
-| Parameter                                  | Default                                           | Description                                                                                                                       |
-| ------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                                | Default                                         | Description                                                                                                                     |
+| ---------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `--cellprofiler_illumination_cppipe`     | `assets/cellprofiler/illumination.cppipe.jinja` | CellProfiler pipeline for illumination correction. Uses `{{channel}}` Jinja-style placeholders that are substituted at runtime. |
-| `--cellprofiler_assaydevelopment_cppipe` | `assets/cellprofiler/assaydevelopment.cppipe`   | CellProfiler pipeline for assay development QC.                                                                                   |
-| `--cellprofiler_analysis_cppipe`         | `assets/cellprofiler/analysis.cppipe`           | CellProfiler pipeline for full feature extraction.                                                                                |
-| `--cellprofiler_assaydevelopment_site`   | `1`                                             | Site number to use for assay development (single site per well).                                                                  |
+| `--cellprofiler_assaydevelopment_cppipe` | `assets/cellprofiler/assaydevelopment.cppipe`   | CellProfiler pipeline for assay development QC.                                                                                 |
+| `--cellprofiler_analysis_cppipe`         | `assets/cellprofiler/analysis.cppipe`           | CellProfiler pipeline for full feature extraction.                                                                              |
+| `--cellprofiler_assaydevelopment_site`   | `1`                                             | Site number to use for assay development (single site per well).                                                                |
 
 ## Running the pipeline
 

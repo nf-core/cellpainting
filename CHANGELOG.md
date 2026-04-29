@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Credits
 
-* [Rachel Bozadjian](https://github.com/rboz1)
+- [Rachel Bozadjian](https://github.com/rboz1)
 
 ### `Added`
 
-* [PR#50](https://github.com/nf-core/cellpainting/pull/50) - added test with larger plate
+- [PR#50](https://github.com/nf-core/cellpainting/pull/50) - added test with larger plate
 
 ### `Fixed`
 
