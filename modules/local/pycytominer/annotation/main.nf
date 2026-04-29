@@ -24,6 +24,6 @@ process PYCYTOMINER_ANNO {
 
     stub:
     """
-    touch ${meta.batch}_${meta.plate}_${meta.well}_${meta.site}_anno.parquet
+    touch ${meta.batch}_${meta.plate}_anno.parquet
     """
 }
