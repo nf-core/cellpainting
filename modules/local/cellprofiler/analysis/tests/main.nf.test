@@ -50,14 +50,9 @@ nextflow_process {
             }
         }
         then {
-            // Files excluded from the snapshot:
-            //   - Image.csv, Experiment.csv: embed non-deterministic values (work-dir
-            //     absolute paths in PathName_*Outlines, Run_Timestamp). See #38.
-            //   - Cells.csv, Cytoplasm.csv, Nuclei.csv: per-cell measurements drift
-            //     across BLAS implementations (macOS Accelerate vs Linux OpenBLAS),
-            //     so md5 snapshots cannot match cross-platform. These three files are
-            //     covered separately by the schema/row-count/area-mean assertions
-            //     below. See #41.
+            // Image/Experiment CSVs excluded for path/timestamp drift (#38);
+            // per-cell CSVs excluded for BLAS-driven numeric drift (#41) and
+            // covered by content-aware assertions below.
             def stable_files = getAllFilesFromDir(
                 process.out.output_dir[0][1].toString(),
                 ignore: [
@@ -68,8 +63,6 @@ nextflow_process {
                 ]
             )
 
-            // Content-aware assertions for the BLAS-sensitive per-cell measurement CSVs.
-            // Expected values were captured from a verified Linux Docker run; see #41.
             def parseCsv = { p ->
                 def lines = file(p).readLines()
                 [header: lines[0].split(',') as List,
@@ -83,10 +76,8 @@ nextflow_process {
                 Math.abs(actual - expected) / expected < pct
             }
 
-            // Key columns spanning every major measurement family produced by the
-            // analysis pipeline (identity, shape, intensity, texture, granularity,
-            // radial distribution). Exact column count is asserted separately to
-            // catch wholesale schema changes that don't touch this list.
+            // One representative column per measurement family (shape, intensity,
+            // texture, granularity, radial). Column count is asserted separately.
             def sharedKeyColumns = [
                 'ImageNumber',
                 'ObjectNumber',
