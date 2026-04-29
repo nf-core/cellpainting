@@ -9,7 +9,7 @@ process CYTOTABLE {
     tuple val(meta), path(cellprofiler_output_dir)
 
     output:
-    tuple val(meta), path("*.parquet")
+    tuple val(meta), path("${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet")
 
     script:
     """

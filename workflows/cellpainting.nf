@@ -156,13 +156,26 @@ workflow CELLPAINTING {
         )
         
         Channel
-            .fromPath(params.meta_table)
+            .fromPath(params.metadata)
             .splitCsv(header: true)
             .map { row -> tuple(row.Metadata_Plate, row) }
+            .groupTuple()
+            .map { plate, rows ->
+                def header = rows[0].keySet().join(',')
+                def body = rows.collect { it.values().join(',') }.join('\n')
+                def tmpFile = file("${workDir}/platemap_${plate}.csv")
+                tmpFile.text = header + '\n' + body
+                tuple(plate, tmpFile)
+            }
+            .set { ch_meta }
+
+        CYTOTABLE.out.map { meta, parquet_file -> [meta.plate, meta, parquet_file] }
+                    .combine(ch_meta, by: 0)
+                    .map { plate, meta, parquet_file, meta_file -> [meta, parquet_file, meta_file] }
+                    .set { ch_cytotable_with_meta }
 
         PYCYTOMINER_ANNO(
-            CYTOTABLE.out,
-            file(params.meta_table)
+            ch_cytotable_with_meta
         )
 
     }

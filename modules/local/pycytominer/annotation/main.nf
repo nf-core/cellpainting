@@ -6,8 +6,7 @@ process PYCYTOMINER_ANNO {
     }
 
     input:
-    tuple val(meta), path(cytotable_parquet)
-    path(meta_table_csv)
+    tuple val(meta), path(cytotable_parquet), path(meta_table_csv)
 
     output:
     tuple val(meta), path("*.parquet")
