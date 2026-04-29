@@ -52,7 +52,18 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+
+                // versions.yml is fully deterministic — keep as md5 snapshot
+                { assert snapshot(process.out.versions).match() },
+
+                // PNG overlay — binary content drifts across libpng versions (macOS vs Linux CI);
+                // assert existence and non-trivial file size instead of an md5 hash
+                { assert process.out.png.size() == 1 },
+                { assert path(process.out.png[0][1]).exists() },
+                { assert path(process.out.png[0][1]).size() > 1000 },
+
+                // Image.csv is optional and not always emitted by assay development
+                { assert process.out.csv.size() == 0 },
             )
         }
     }
