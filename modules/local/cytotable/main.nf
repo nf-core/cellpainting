@@ -11,6 +11,9 @@ process CYTOTABLE {
     stageInMode 'copy'
 
     input:
+    // Rename each input dir to a unique number (no '/*' glob) so cytotable.convert sees
+    // distinct immediate-parent names per source. Works around the upstream path-collision
+    // bug at https://github.com/cytomining/CytoTable/issues/442.
     tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?")
 
     output:
