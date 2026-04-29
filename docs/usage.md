@@ -1,6 +1,6 @@
 # nf-core/cellpainting: Usage
 
-## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/cellpainting/usage](https://nf-co.re/cellpainting/usage)
+## ⚠️ Please read this documentation on the nf-core website: [https://nf-co.re/cellpainting/usage](https://nf-co.re/cellpainting/usage)
 
 > _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
 
@@ -18,7 +18,7 @@ You will need to create a samplesheet with information about the images you woul
 
 The samplesheet is in **tall format** — one row per image. Each row associates a single `.tif`/`.tiff` image file with its channel and plate/well/site metadata.
 
-```csv title="samplesheet.csv"
+```csv
 channel,path,source,batch,plate,well,site,row,col
 Mito,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch1sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
 DNA,s3://cellpainting-gallery/cpg0016-jump/source_4/images/2021_04_26_Batch1/images/BR00117035__2021-05-02T16_02_51-Measurement1/Images/r01c01f01p01-ch5sk1fk1fl1.tiff,source_4,2021_04_26_Batch1,BR00117035,A01,1,1,1
@@ -33,21 +33,21 @@ A standard Cell Painting experiment images 5-8 channels (e.g., `DNA`, `Mito`, `E
 
 The samplesheet requires the following columns:
 
-| Column     | Required | Type   | Description                                                                                                 |
-| ---------- | -------- | ------ | ----------------------------------------------------------------------------------------------------------- |
-| `channel`  | Yes      | string | Channel identifier (e.g., `DNA`, `Mito`, `ER`, `RNA`, `AGP`). Alphanumeric characters and underscores only. |
-| `path`     | Yes      | string | Path to a `.tif` or `.tiff` image file. Supports local filesystem paths and S3 URIs.                        |
-| `source`   | Yes      | string | Data source identifier (e.g., `source_4`).                                                                  |
-| `batch`    | Yes      | string | Batch identifier (e.g., `2021_04_26_Batch1`).                                                               |
-| `plate`    | Yes      | string | Plate identifier (e.g., `BR00117035`).                                                                      |
-| `well`     | Yes      | string | Well identifier (e.g., `A01`).                                                                              |
-| `site`     | Yes      | number | Site/field number within the well.                                                                          |
-| `row`      | Yes      | number | Plate row number.                                                                                           |
-| `col`      | Yes      | number | Plate column number.                                                                                        |
-| `field_id` | No       | number | Field identifier (optional additional metadata).                                                            |
-| `plane_id` | No       | number | Z-plane identifier (optional additional metadata).                                                          |
+| Column       | Required | Type   | Description                                                                                                          |
+| ------------ | -------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| `channel`  | Yes      | string | Channel identifier (e.g.,`DNA`, `Mito`, `ER`, `RNA`, `AGP`). Alphanumeric characters and underscores only. |
+| `path`     | Yes      | string | Path to a `.tif` or `.tiff` image file. Supports local filesystem paths and S3 URIs.                             |
+| `source`   | Yes      | string | Data source identifier (e.g.,`source_4`).                                                                          |
+| `batch`    | Yes      | string | Batch identifier (e.g.,`2021_04_26_Batch1`).                                                                       |
+| `plate`    | Yes      | string | Plate identifier (e.g.,`BR00117035`).                                                                              |
+| `well`     | Yes      | string | Well identifier (e.g.,`A01`).                                                                                      |
+| `site`     | Yes      | number | Site/field number within the well.                                                                                   |
+| `row`      | Yes      | number | Plate row number.                                                                                                    |
+| `col`      | Yes      | number | Plate column number.                                                                                                 |
+| `field_id` | No       | number | Field identifier (optional additional metadata).                                                                     |
+| `plane_id` | No       | number | Z-plane identifier (optional additional metadata).                                                                   |
 
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+An [example minimal samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
 ## Pipeline modes
 
@@ -62,12 +62,12 @@ Assay development always runs as a QC gate, even in `analysis` mode.
 
 The pipeline uses CellProfiler `.cppipe` pipeline files for each processing step. Default pipelines are included in the `assets/cellprofiler/` directory. You can provide your own pipelines using the following parameters:
 
-| Parameter                                | Default                                         | Description                                                                                                                     |
-| ---------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                                  | Default                                           | Description                                                                                                                       |
+| ------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `--cellprofiler_illumination_cppipe`     | `assets/cellprofiler/illumination.cppipe.jinja` | CellProfiler pipeline for illumination correction. Uses `{{channel}}` Jinja-style placeholders that are substituted at runtime. |
-| `--cellprofiler_assaydevelopment_cppipe` | `assets/cellprofiler/assaydevelopment.cppipe`   | CellProfiler pipeline for assay development QC.                                                                                 |
-| `--cellprofiler_analysis_cppipe`         | `assets/cellprofiler/analysis.cppipe`           | CellProfiler pipeline for full feature extraction.                                                                              |
-| `--cellprofiler_assaydevelopment_site`   | `1`                                             | Site number to use for assay development (single site per well).                                                                |
+| `--cellprofiler_assaydevelopment_cppipe` | `assets/cellprofiler/assaydevelopment.cppipe`   | CellProfiler pipeline for assay development QC.                                                                                   |
+| `--cellprofiler_analysis_cppipe`         | `assets/cellprofiler/analysis.cppipe`           | CellProfiler pipeline for full feature extraction.                                                                                |
+| `--cellprofiler_assaydevelopment_site`   | `1`                                             | Site number to use for assay development (single site per well).                                                                  |
 
 ## Running the pipeline
 
@@ -116,7 +116,7 @@ nextflow run nf-core/cellpainting -profile docker -params-file params.yaml
 
 with:
 
-```yaml title="params.yaml"
+```yaml
 input: "./samplesheet.csv"
 outdir: "./results/"
 cellprofiler_mode: "analysis"
@@ -167,8 +167,11 @@ They are loaded in sequence, so later profiles can overwrite earlier profiles.
 If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer environment.
 
 - `test`
-  - A profile with a complete configuration for automated testing
+  - A profile with a complete configuration for automated testing with a **minimal** samplesheet (3 wells with 2 sites per well)
   - Includes links to test data so needs no other parameters
+- `test_full`
+  - A profile with a complete configuration for automated testing with a **larger** samplesheet (4 wells with 9 sites per well; negative control well included)
+  - Includes links to test_full data so needs no other parameters
 - `docker`
   - A generic configuration profile to be used with [Docker](https://docker.com/)
 - `singularity`
