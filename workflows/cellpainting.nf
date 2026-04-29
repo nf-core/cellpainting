@@ -8,6 +8,7 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
+include { PYCYTOMINER_ANNO } from '../modules/local/pycytominer/annotation'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -152,6 +153,16 @@ workflow CELLPAINTING {
         //
         CYTOTABLE(
             CELLPROFILER_ANALYSIS.out.output_dir
+        )
+        
+        Channel
+            .fromPath(params.meta_table)
+            .splitCsv(header: true)
+            .map { row -> tuple(row.Metadata_Plate, row) }
+
+        PYCYTOMINER_ANNO(
+            CYTOTABLE.out,
+            file(params.meta_table)
         )
 
     }
