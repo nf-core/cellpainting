@@ -64,11 +64,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 <summary>Output files</summary>
 
 - `cytotable/`
-  - `<batch>_<plate>_<well>_<site>.parquet`: Collated CellProfiler measurements in Parquet format
+  - `<batch>_<plate>.parquet`: Collated CellProfiler measurements for the entire plate (all wells and sites) in Parquet format.
 
 </details>
 
-[CytoTable](https://github.com/cytomining/CytoTable) converts CellProfiler CSV outputs into a single Parquet file per site using the `cellprofiler_csv` preset. Parquet files are columnar, compressed, and ready for downstream analysis with tools like [Pycytominer](https://github.com/cytomining/pycytominer). This step only runs in `analysis` mode.
+[CytoTable](https://github.com/cytomining/CytoTable) consolidates the per-site CellProfiler CSV outputs of a plate into a single Parquet file using the `cellprofiler_csv` preset. Per-site `CELLPROFILER_ANALYSIS` runs are joined in one `cytotable.convert` call, producing one row per CellProfiler image set per plate. Parquet files are columnar, compressed, and ready for downstream analysis with tools like [Pycytominer](https://github.com/cytomining/pycytominer). This step only runs in `analysis` mode.
 
 ### Pipeline information
 

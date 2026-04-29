@@ -1,12 +1,19 @@
 process CYTOTABLE {
+    label 'process_low'
     container {
         workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'oras://community.wave.seqera.io/library/pip_cytotable:75a940a0fcae75db' :
         'community.wave.seqera.io/library/pip_cytotable:e5e76f6f7c7bea96'
     }
 
+    // TODO: remove once https://github.com/cytomining/CytoTable/issues/440 is fixed (tracked in #42)
+    stageInMode 'copy'
+
     input:
-    tuple val(meta), path(cellprofiler_output_dir)
+    // Rename each input dir to a unique number (no '/*' glob) so cytotable.convert sees
+    // distinct immediate-parent names per source. Works around the upstream path-collision
+    // bug at https://github.com/cytomining/CytoTable/issues/442.
+    tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?")
 
     output:
     tuple val(meta), path("${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet")
@@ -39,7 +46,7 @@ custom_join = '''
 '''
 
 convert(
-    source_path="${cellprofiler_output_dir}",
+    source_path="analyses",
     source_datatype="csv",
     dest_path="temp_output.parquet",
     dest_datatype="parquet",
@@ -72,6 +79,6 @@ df.to_parquet("${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet", i
 
     stub:
     """
-    touch ${meta.batch}_${meta.plate}_${meta.well}_${meta.site}.parquet
+    touch ${meta.batch}_${meta.plate}.parquet
     """
 }

@@ -6,11 +6,9 @@
                     [
                         {
                             "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035",
-                            "well": "A01",
-                            "site": "1"
+                            "plate": "BR00117035"
                         },
-                        "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "2021_04_26_Batch1_BR00117035.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
@@ -19,7 +17,7 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T16:35:12.452789"
+        "timestamp": "2026-04-28T11:36:53.790958"
     },
     "*.parquet": {
         "content": [
@@ -28,11 +26,9 @@
                     [
                         {
                             "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035",
-                            "well": "A01",
-                            "site": "1"
+                            "plate": "BR00117035"
                         },
-                        "2021_04_26_Batch1_BR00117035_A01_1.parquet:md5,2ca5fe9f60ab445ee3ed458729725c03"
+                        "2021_04_26_Batch1_BR00117035.parquet:md5,2ca5fe9f60ab445ee3ed458729725c03"
                     ]
                 ]
             }
@@ -41,6 +37,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-01T16:35:07.784117"
+        "timestamp": "2026-04-28T11:42:29.420817"
     }
 }

@@ -94,12 +94,7 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumMito.npy",
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035.parquet",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -144,7 +139,7 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-28T11:39:54.721462"
+        "timestamp": "2026-04-29T12:30:20.129752"
     },
     "-profile test -stub": {
         "content": [
@@ -222,12 +217,7 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumMito.npy",
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A01_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_A02_2.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_1.parquet",
-                "cytotable/2021_04_26_Batch1_BR00117035_B01_2.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035.parquet",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
@@ -257,6 +247,6 @@
             "nf-test": "0.9.1",
             "nextflow": "25.10.0"
         },
-        "timestamp": "2026-04-28T11:41:35.247037"
+        "timestamp": "2026-04-29T12:31:39.486475"
     }
 }
