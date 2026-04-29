@@ -75,7 +75,7 @@
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.csv$",
                     "description": "Path to comma-separated file containing information about the samples metadta in the experiment.",
-                    "help_text": "You will need to create a meta data file containing information regarding each plate & well with any descriptive or associated information."
+                    "help_text": "You will need to create a meta data file containing information regarding each plate & well with any descriptive or associated information.",
                     "fa_icon": "fas fa-file-csv"
                 }
                 "outdir": {
