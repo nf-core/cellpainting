@@ -1,0 +1,12 @@
+name: cytotable-metadata
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - jupyter
+  - papermill
+  - pandas
+  - pyarrow
+  - numpy
