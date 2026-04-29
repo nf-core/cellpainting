@@ -1,5 +1,0 @@
-Sample	cellprofiler	nf-core/cellpainting	Nextflow
-CELLPROFILER_ANALYSIS	4.2.8		
-CELLPROFILER_ASSAYDEVELOPMENT	4.2.8		
-CELLPROFILER_ILLUMINATIONCORRECTION	4.2.8		
-Workflow		v1.0.0dev-g4b4bd43	25.10.4
