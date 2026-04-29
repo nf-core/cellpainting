@@ -50,19 +50,24 @@ nextflow_process {
             }
         }
         then {
-            // Image/Experiment CSVs excluded for path/timestamp drift (#38);
-            // per-cell CSVs excluded for BLAS-driven numeric drift (#41) and
-            // covered by content-aware assertions below.
-            def stable_files = getAllFilesFromDir(
-                process.out.output_dir[0][1].toString(),
-                ignore: [
-                    'Image.csv', 'Experiment.csv',
-                    'Cells.csv', 'Cytoplasm.csv', 'Nuclei.csv',
-                    '**/Image.csv', '**/Experiment.csv',
-                    '**/Cells.csv', '**/Cytoplasm.csv', '**/Nuclei.csv'
-                ]
-            )
+            def analysisDir    = path(process.out.output_dir[0][1])
+            def analysisDirStr = process.out.output_dir[0][1].toString()
 
+            // Parse Image.csv. Guard the row count first so a missing data row
+            // produces a clear assertion failure rather than IndexOutOfBoundsException.
+            // Both split calls use -1 limit to preserve trailing empty fields (symmetric).
+            def imageLines  = analysisDir.resolve("Image.csv").readLines()
+            assert imageLines.size() == 2 : "Image.csv should have header + 1 data row, got ${imageLines.size()} line(s)"
+            def imageHeader = imageLines[0].split(",", -1) as List
+            def imageRow    = [imageHeader, imageLines[1].split(",", -1) as List]
+                                  .transpose().collectEntries()
+
+            // Scan Experiment.csv line-by-line for the version key to avoid loading
+            // the full file (it embeds large pipeline metadata as base64 blobs).
+            def cpVersionLine = analysisDir.resolve("Experiment.csv").readLines()
+                                    .find { it.startsWith("CellProfiler_Version,") }
+
+            // Helpers for per-cell CSV assertions (column count, row count, mean value)
             def parseCsv = { p ->
                 def lines = file(p).readLines()
                 [header: lines[0].split(',') as List,
@@ -92,15 +97,52 @@ nextflow_process {
                 'RadialDistribution_FracAtD_DNA_1of4',
             ]
 
-            def analysisDir = process.out.output_dir[0][1].toString()
-            def cells = parseCsv("${analysisDir}/Cells.csv")
-            def cytoplasm = parseCsv("${analysisDir}/Cytoplasm.csv")
-            def nuclei = parseCsv("${analysisDir}/Nuclei.csv")
+            def cells     = parseCsv("${analysisDirStr}/Cells.csv")
+            def cytoplasm = parseCsv("${analysisDirStr}/Cytoplasm.csv")
+            def nuclei    = parseCsv("${analysisDirStr}/Nuclei.csv")
 
             assertAll(
                 { assert process.success },
-                { assert snapshot(stable_files, process.out.versions).match() },
 
+                // versions.yml is fully deterministic — keep as md5 snapshot
+                { assert snapshot(process.out.versions).match() },
+
+                // --- Image.csv (#38) ---
+                // Expected columns are present
+                { assert "Metadata_Plate"          in imageHeader },
+                { assert "Metadata_Well"           in imageHeader },
+                { assert "Count_Cells"             in imageHeader },
+                { assert "PathName_CellOutlines"   in imageHeader },
+                { assert "PathName_NucleiOutlines" in imageHeader },
+
+                // Stable metadata fields match the test inputs
+                { assert imageRow["Metadata_Plate"] == "BR00117035" },
+                { assert imageRow["Metadata_Well"]  == "A01" },
+
+                // At least one cell was detected (sanity check on real CellProfiler output)
+                { assert imageRow["Count_Cells"].toFloat().toInteger() > 0 },
+
+                // PathName_* columns contain a path ending in /outlines but the work-dir
+                // hash in the middle changes every run — match the suffix only
+                { assert imageRow["PathName_CellOutlines"]   ==~ /.*\/outlines/ },
+                { assert imageRow["PathName_NucleiOutlines"] ==~ /.*\/outlines/ },
+
+                // --- Experiment.csv (#38) ---
+                // Assert version matches semver pattern; decoupled from the specific
+                // version string so the assertion survives a CellProfiler version bump.
+                // Run_Timestamp is deliberately not checked.
+                { assert cpVersionLine != null },
+                { assert cpVersionLine ==~ /^CellProfiler_Version,\d+\.\d+(\.\d+)?$/ },
+
+                // --- PNG outlines (#38) ---
+                // Binary content drifts across libpng versions (macOS vs Linux CI), so we
+                // assert existence and non-trivial file size instead of an md5 hash
+                { assert analysisDir.resolve("outlines/A01_s1--cell_outlines.png").exists() },
+                { assert analysisDir.resolve("outlines/A01_s1--cell_outlines.png").size() > 1000 },
+                { assert analysisDir.resolve("outlines/A01_s1--nuclei_outlines.png").exists() },
+                { assert analysisDir.resolve("outlines/A01_s1--nuclei_outlines.png").size() > 1000 },
+
+                // --- Per-cell CSVs (#41) ---
                 { assert cells.header.size() == 1998 },
                 { assert (sharedKeyColumns + ['Children_Cytoplasm_Count', 'Neighbors_NumberOfNeighbors_Adjacent']).every { it in cells.header } },
                 { assert cells.rows.size() == 66 },
