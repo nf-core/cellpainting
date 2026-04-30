@@ -11,7 +11,7 @@
                             "well": "A01",
                             "site": 1
                         },
-                        "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
+                        "2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "1": [
@@ -50,7 +50,7 @@
                             "well": "A01",
                             "site": 1
                         },
-                        "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
+                        "2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png:md5,f50b84b1db4b83ba62ec1deacc69c260"
                     ]
                 ],
                 "versions": [
@@ -59,10 +59,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "25.10.0"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-04-01T16:34:38.445556"
+        "timestamp": "2026-04-29T12:11:35.873819"
     },
     "cellprofiler - assay development": {
         "content": [

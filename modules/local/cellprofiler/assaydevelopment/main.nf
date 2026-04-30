@@ -47,7 +47,7 @@ process CELLPROFILER_ASSAYDEVELOPMENT {
     stub:
     """
     mkdir -p assaydevelopment
-    echo 'stub' > assaydevelopment/mock_segmentedimage.png
+    echo 'stub' > assaydevelopment/${meta.batch}_${meta.plate}_${meta.well}_ObjectOverlay.png
     echo 'ImageNumber,Metadata_Plate' > assaydevelopment/Image.csv
 
     cat <<-END_VERSIONS > versions.yml

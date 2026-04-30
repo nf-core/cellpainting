@@ -1,0 +1,88 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "imagemagick_montage"
+description: >
+  Generate a plate-grid montage from per-well overlay PNGs for visual QC.
+  Each well shows a single representative site (controlled by
+  cellprofiler_assaydevelopment_site) with all channels composited into
+  one segmentation overlay image.
+keywords:
+  - montage
+  - plate
+  - qc
+  - cell-painting
+  - imaging
+tools:
+  - "imagemagick":
+      description: "Software suite to create, edit, compose, or convert bitmap images"
+      homepage: "https://imagemagick.org"
+      documentation: "https://imagemagick.org/script/montage.php"
+      tool_dev_url: "https://github.com/ImageMagick/ImageMagick"
+      licence: ["Apache-2.0"]
+      identifier: biotools:imagemagick
+      args_id: "$args"
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing plate information.
+          e.g. `[ id:'2021_04_26_Batch1_BR00117035', batch:'2021_04_26_Batch1', plate:'BR00117035' ]`
+    - wells_meta:
+        type: list
+        description: |
+          List of maps describing each well's position.
+          e.g. `[ [well:'A01', row:1, col:1], [well:'A02', row:1, col:2] ]`
+    - pngs:
+        type: file
+        description: Per-well overlay PNG files from assay development
+        pattern: "*.png"
+    - plate_rows:
+        type: integer
+        description: Number of rows in the plate grid (auto-detected from samplesheet)
+    - plate_cols:
+        type: integer
+        description: Number of columns in the plate grid (auto-detected from samplesheet)
+
+output:
+  montage:
+    - - meta:
+          type: map
+          description: Groovy Map containing plate information
+      - "*_montage_mqc.png":
+          type: file
+          description: Downscaled plate-grid montage PNG for MultiQC embedding
+          pattern: "*_montage_mqc.png"
+  montage_full:
+    - - meta:
+          type: map
+          description: Groovy Map containing plate information
+      - "*_montage_full.tiff":
+          type: file
+          description: Full-resolution plate-grid montage TIFF (lossless)
+          pattern: "*_montage_full.tiff"
+  versions_imagemagick:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - imagemagick:
+          type: string
+          description: The name of the tool
+      - "montage -version | sed -n 's/^Version: ImageMagick //p' | awk '{print $1}'":
+          type: eval
+          description: The expression to obtain the version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - imagemagick:
+          type: string
+          description: The name of the tool
+      - "montage -version | sed -n 's/^Version: ImageMagick //p' | awk '{print $1}'":
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@benjibromberg"
+maintainers:
+  - "@benjibromberg"

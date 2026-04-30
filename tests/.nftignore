@@ -14,6 +14,10 @@
 # CYTOTABLE parquets are derived from the per-cell CSVs above and inherit
 # the same BLAS-driven drift. Tracked in #41.
 cytotable/*.parquet
+# Montage PNGs and plate viewer HTML contain font-rendered text whose
+# pixel output differs between ARM and x86 (different freetype rendering).
+imagemagick/montage/**/*.png
+plateviewer/plate_montages_mqc.html
 multiqc/multiqc_data/multiqc.parquet
 multiqc/multiqc_data/multiqc.log
 multiqc/multiqc_data/multiqc_data.json
