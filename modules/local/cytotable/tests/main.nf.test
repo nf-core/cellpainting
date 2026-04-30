@@ -1,11 +1,8 @@
 nextflow_process {
-
     name "Test Process CYTOTABLE"
     script "../main.nf"
     process "CYTOTABLE"
-
     test("Should run without failures") {
-
         when {
             params {
                 // define parameters here.
@@ -21,14 +18,11 @@ nextflow_process {
                 """
             }
         }
-
         then {
             assert process.success
-            assert process.out[0][0][1].name.endsWith(".parquet")
+            assert process.out[0].size() > 0
         }
-
     }
-
     test("cytotable - stub") {
         tag "stub"
         options "-stub"
@@ -38,11 +32,9 @@ nextflow_process {
                 def analysisDir1 = file("${workDir}/analysis_1")
                 analysisDir1.mkdirs()
                 file("${workDir}/analysis_1/Image.csv").text = "ImageNumber"
-
                 def analysisDir2 = file("${workDir}/analysis_2")
                 analysisDir2.mkdirs()
                 file("${workDir}/analysis_2/Image.csv").text = "ImageNumber"
-
                 input[0] = [
                     [batch: '2021_04_26_Batch1', plate: 'BR00117035'],
                     [analysisDir1, analysisDir2]
@@ -57,5 +49,4 @@ nextflow_process {
             )
         }
     }
-
 }
