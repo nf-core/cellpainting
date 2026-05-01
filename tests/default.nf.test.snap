@@ -11,6 +11,9 @@
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
                     "cellprofiler": "4.2.8"
                 },
+                "IMAGEMAGICK_MONTAGE": {
+                    "imagemagick": "7.1.2-21"
+                },
                 "Workflow": {
                     "nf-core/cellpainting": "v1.0.0dev"
                 }
@@ -95,6 +98,11 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035.parquet",
+                "imagemagick",
+                "imagemagick/montage",
+                "imagemagick/montage/full",
+                "imagemagick/montage/thumbnail",
+                "imagemagick/montage/thumbnail/2021_04_26_Batch1_BR00117035_montage_mqc.png",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -106,7 +114,9 @@
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"
+                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
+                "plateviewer",
+                "plateviewer/plate_montages_mqc.html"
             ],
             [
                 "A01_s1--cell_outlines.png:md5,7e9daf852c256b16e14bfcaf46236bab",
@@ -135,11 +145,11 @@
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f"
             ]
         ],
+        "timestamp": "2026-04-30T00:47:51.296500534",
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-04-29T12:30:20.129752"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
     },
     "-profile test -stub": {
         "content": [
@@ -152,6 +162,9 @@
                 },
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
                     "cellprofiler": "4.2.8"
+                },
+                "IMAGEMAGICK_MONTAGE": {
+                    "imagemagick": "7.1.2-21"
                 },
                 "Workflow": {
                     "nf-core/cellpainting": "v1.0.0dev"
@@ -204,8 +217,10 @@
                 "cellprofiler/analysis/2021_04_26_Batch1_BR00117035_B01_2/analysis/mock_overlay.png",
                 "cellprofiler/assay_development",
                 "cellprofiler/assay_development/assaydevelopment",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_A02_ObjectOverlay.png",
+                "cellprofiler/assay_development/assaydevelopment/2021_04_26_Batch1_BR00117035_B01_ObjectOverlay.png",
                 "cellprofiler/assay_development/assaydevelopment/Image.csv",
-                "cellprofiler/assay_development/assaydevelopment/mock_segmentedimage.png",
                 "cellprofiler/illumination_correction",
                 "cellprofiler/illumination_correction/illumination_corrections",
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumAGP.npy",
@@ -218,12 +233,19 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035.parquet",
+                "imagemagick",
+                "imagemagick/montage",
+                "imagemagick/montage/full",
+                "imagemagick/montage/thumbnail",
+                "imagemagick/montage/thumbnail/2021_04_26_Batch1_BR00117035_montage_mqc.png",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_report.html",
                 "pipeline_info",
-                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"
+                "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
+                "plateviewer",
+                "plateviewer/plate_montages_mqc.html"
             ],
             [
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -232,7 +254,9 @@
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "mock_segmentedimage.png:md5,f50b84b1db4b83ba62ec1deacc69c260",
+                "2021_04_26_Batch1_BR00117035_A01_ObjectOverlay.png:md5,f50b84b1db4b83ba62ec1deacc69c260",
+                "2021_04_26_Batch1_BR00117035_A02_ObjectOverlay.png:md5,f50b84b1db4b83ba62ec1deacc69c260",
+                "2021_04_26_Batch1_BR00117035_B01_ObjectOverlay.png:md5,f50b84b1db4b83ba62ec1deacc69c260",
                 "BR00117035_IllumAGP.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumBrightfield.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumBrightfield_H.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -243,10 +267,10 @@
                 "BR00117035_IllumRNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
+        "timestamp": "2026-04-29T23:50:40.756411",
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-04-29T12:31:39.486475"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        }
     }
 }

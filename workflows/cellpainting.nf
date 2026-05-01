@@ -9,6 +9,8 @@ include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofi
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
 include { PYCYTOMINER_ANNO } from '../modules/local/pycytominer/annotation'
+include { IMAGEMAGICK_MONTAGE } from '../modules/local/imagemagick/montage'
+include { PLATEVIEWER } from '../modules/local/plateviewer'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -116,6 +118,70 @@ workflow CELLPAINTING {
     )
 
     ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
+
+    //
+    // PLATE MONTAGE
+    // Collect assay dev overlay PNGs by [batch, plate], montage into plate grid for MultiQC.
+    // Each well shows one representative site (cellprofiler_assaydevelopment_site) with all
+    // channels composited into a single segmentation overlay image.
+    //
+
+    // Derive plate dimensions from samplesheet (max row/col per batch+plate)
+    ch_enriched
+        .map { meta, _image ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, meta.row as int, meta.col as int]
+        }
+        .groupTuple()
+        .map { key, rows, cols -> [key, rows.max(), cols.max()] }
+        .set { ch_plate_dims }
+
+    // Collect overlay PNGs by [batch, plate], derive well row/col from well name.
+    // Each assay dev emission is one well — flatMap to one entry per PNG, then
+    // groupTuple keeps well_info (pos 3) and png (pos 4) as parallel lists.
+    CELLPROFILER_ASSAYDEVELOPMENT.out.png
+        .flatMap { meta, pngs ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            def well_row = (meta.well[0] as char) - ('A' as char) + 1
+            def well_col = (meta.well.substring(1)) as int
+            def well_info = [well: meta.well, row: well_row, col: well_col]
+            def png_list = pngs instanceof List ? pngs.flatten() : [pngs]
+            png_list.collect { png -> [plate_key, meta.batch, meta.plate, well_info, png] }
+        }
+        .groupTuple(by: [0, 1, 2])
+        .map { plate_key, batch, plate, wells_meta, pngs ->
+            // Sort wells_meta and pngs together by well name for deterministic -resume caching
+            def sorted = [wells_meta, pngs].transpose().sort { a, b -> a[0].well <=> b[0].well }
+            def plate_meta = [id: plate_key, batch: batch, plate: plate]
+            [plate_key, plate_meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
+        }
+        .combine(ch_plate_dims, by: 0)
+        .map { _key, meta, wells_meta, pngs, plate_rows, plate_cols ->
+            [meta, wells_meta, pngs, plate_rows, plate_cols]
+        }
+        .set { ch_montage_input }
+
+    IMAGEMAGICK_MONTAGE(ch_montage_input)
+
+    //
+    // PLATE VIEWER
+    // Aggregate all plate montages into an interactive HTML viewer for MultiQC
+    //
+    IMAGEMAGICK_MONTAGE.out.montage
+        .map { meta, png -> [meta.id, png] }
+        .collect()
+        .map { items ->
+            // items is a flat list: [id1, png1, id2, png2, ...]
+            def pairs = items.collate(2)
+            def ids = pairs.collect { List pair -> pair[0] }
+            def pngs = pairs.collect { List pair -> pair[1] }
+            [ids, pngs]
+        }
+        .set { ch_all_montages }
+
+    PLATEVIEWER(ch_all_montages)
+
+    ch_multiqc_files = ch_multiqc_files.mix(PLATEVIEWER.out.html)
 
     if (cellprofiler_mode == 'analysis') {
 
