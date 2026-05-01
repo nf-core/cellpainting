@@ -5,6 +5,8 @@
 */
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { CYTOTABLE              } from '../modules/local/cytotable'
+include { CYTOTABLE_METADATA     } from '../modules/local/reports/cytotable/metadata'
+include { CYTOTABLE_DESCRIPTIVESTATS } from '../modules/local/reports/cytotable/descriptivestats'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
@@ -233,6 +235,24 @@ workflow CELLPAINTING {
             .set { ch_cytotable_input }
 
         CYTOTABLE(ch_cytotable_input)
+
+        //
+        // CYTOTABLE_METADATA - extract metadata from parquet files to JSON
+        //
+        CYTOTABLE_METADATA(
+            CYTOTABLE.out
+        )
+
+        ch_versions = ch_versions.mix(CYTOTABLE_METADATA.out.versions)
+
+        //
+        // CYTOTABLE_DESCRIPTIVESTATS - generate descriptive statistics and visualizations
+        //
+        CYTOTABLE_DESCRIPTIVESTATS(
+            CYTOTABLE.out
+        )
+
+        ch_versions = ch_versions.mix(CYTOTABLE_DESCRIPTIVESTATS.out.versions)
 
     }
 
