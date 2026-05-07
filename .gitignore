@@ -10,3 +10,6 @@ null/
 .nf-test*
 docs/superpowers/
 .superset/
+.duckdb/
+runinfo/
+runinfo/

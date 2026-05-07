@@ -8,6 +8,7 @@ include { CYTOTABLE              } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
+include { PYCYTOMINER_ANNO } from '../modules/local/pycytominer/annotation'
 include { IMAGEMAGICK_MONTAGE } from '../modules/local/imagemagick/montage'
 include { PLATEVIEWER } from '../modules/local/plateviewer'
 
@@ -215,7 +216,6 @@ workflow CELLPAINTING {
 
         //
         // CYTOTABLE - convert analysis CSVs to Parquet (one file per plate)
-        //
         CELLPROFILER_ANALYSIS.out.output_dir
             .map { meta, output_dir ->
                 def group_id = [meta.batch, meta.plate].join('_')
@@ -231,8 +231,29 @@ workflow CELLPAINTING {
                 [plate_meta, sorted_dirs]
             }
             .set { ch_cytotable_input }
-
         CYTOTABLE(ch_cytotable_input)
+
+        Channel
+            .fromPath(params.metadata)
+            .splitCsv(header: true)
+            .map { row -> tuple(row.Metadata_Plate, row) }
+            .groupTuple()
+            .map { plate, rows ->
+                def header = rows[0].keySet().join(',')
+                def body = rows.collect { it.values().join('\n') }.join('\n')
+                def tmpFile = file("${workDir}/platemap_${plate}.csv")
+                tmpFile.text = header + '\n' + body
+                tuple(plate, tmpFile)
+            }
+            .set { ch_meta }
+        CYTOTABLE.out.map { meta, parquet_file -> [meta.plate, meta, parquet_file] }
+                    .combine(ch_meta, by: 0)
+                    .map { plate, meta, parquet_file, meta_file -> [meta, parquet_file, meta_file] }
+                    .set { ch_cytotable_with_meta }
+        PYCYTOMINER_ANNO(
+            ch_cytotable_with_meta
+        )
+
 
     }
 
