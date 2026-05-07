@@ -116,7 +116,9 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
                 "plateviewer",
-                "plateviewer/plate_montages_mqc.html"
+                "plateviewer/plate_montages_mqc.html",
+                "pycytominer",
+                "pycytominer/2021_04_26_Batch1_BR00117035_anno.parquet"
             ],
             [
                 "A01_s1--cell_outlines.png:md5,7e9daf852c256b16e14bfcaf46236bab",
@@ -245,7 +247,9 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
                 "plateviewer",
-                "plateviewer/plate_montages_mqc.html"
+                "plateviewer/plate_montages_mqc.html",
+                "pycytominer",
+                "pycytominer/2021_04_26_Batch1_BR00117035_anno.parquet"
             ],
             [
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
