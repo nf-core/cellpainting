@@ -3,11 +3,18 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
-include { paramsSummaryMap       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cellpainting_pipeline'
+include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
+include { CYTOTABLE                           } from '../modules/local/cytotable'
+include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
+include { CELLPROFILER_ANALYSIS               } from '../modules/local/cellprofiler/analysis'
+include { CELLPROFILER_ASSAYDEVELOPMENT       } from '../modules/local/cellprofiler/assaydevelopment'
+include { IMAGEMAGICK_MONTAGE                 } from '../modules/local/imagemagick/montage'
+include { PLATEVIEWER                         } from '../modules/local/plateviewer'
+
+include { paramsSummaryMap                    } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText              } from '../subworkflows/local/utils_nfcore_cellpainting_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16,18 +23,214 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cell
 */
 
 workflow CELLPAINTING {
-
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: images read in from --input samplesheet
     multiqc_config
     multiqc_logo
     multiqc_methods_description
     outdir
+    cellprofiler_mode // value: assay_development, analysis
+    cellprofiler_illumination_cppipe // value: path to illumination cppipe
+    cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
+    cellprofiler_assaydevelopment_site // value: site number for assay development
+    cellprofiler_analysis_cppipe // value: path to analysis cppipe
 
     main:
 
     def ch_versions = channel.empty()
     def ch_multiqc_files = channel.empty()
+
+    //
+    // Enrich samplesheet with filename metadata
+    //
+    ch_samplesheet
+        .map { meta, image ->
+            def image_meta = meta.clone()
+            image_meta.filename = image.name
+            [image_meta, image]
+        }
+        .set { ch_enriched }
+
+    //
+    // ILLUMINATION CORRECTION
+    // Group by [batch, plate, channel], carry per-image metadata
+    //
+    ch_enriched
+        .map { meta, image ->
+            def group_key = meta.subMap(['batch', 'plate', 'channel'])
+            def group_id = [meta.batch, meta.plate, meta.channel].join('_')
+            [group_key + [id: group_id], meta, image]
+        }
+        .groupTuple()
+        .map { meta, images_meta, images -> sortGroupedImages(meta, images_meta, images) }
+        .set { ch_illumination_images }
+
+    CELLPROFILER_ILLUMINATIONCORRECTION(
+        ch_illumination_images,
+        cellprofiler_illumination_cppipe,
+    )
+
+    ch_versions = ch_versions.mix(CELLPROFILER_ILLUMINATIONCORRECTION.out.versions)
+
+    //
+    // Flatten illumination corrections to plate level
+    //
+    CELLPROFILER_ILLUMINATIONCORRECTION.out.illumination_corrections
+        .map { meta, npy_files ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, npy_files]
+        }
+        .groupTuple()
+        .map { key, npy_lists -> [key, npy_lists.flatten()] }
+        .set { ch_illum_by_plate }
+
+    //
+    // ASSAY DEVELOPMENT
+    // Runs in both assay_development and analysis modes
+    // Group by [batch, plate, well], filter to single site, join with illum
+    //
+    ch_enriched
+        .filter { meta, _image -> meta.site == cellprofiler_assaydevelopment_site }
+        .map { meta, image ->
+            def group_id = [meta.batch, meta.plate, meta.well].join('_')
+            def group_key = meta.subMap(['batch', 'plate', 'well']) + [id: group_id]
+            [group_key, meta, image]
+        }
+        .groupTuple()
+        .map { meta, images_meta, images ->
+            def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+            def plate_key = [m.batch, m.plate].join('_')
+            [plate_key, m, im, imgs]
+        }
+        .combine(ch_illum_by_plate, by: 0)
+        .map { _key, meta, images_meta, images, illum_files ->
+            [meta, images_meta, images, illum_files]
+        }
+        .set { ch_assay_dev_with_illum }
+
+    CELLPROFILER_ASSAYDEVELOPMENT(
+        ch_assay_dev_with_illum,
+        cellprofiler_assaydevelopment_cppipe,
+    )
+
+    ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
+
+    //
+    // PLATE MONTAGE
+    // Collect assay dev overlay PNGs by [batch, plate], montage into plate grid for MultiQC.
+    // Each well shows one representative site (cellprofiler_assaydevelopment_site) with all
+    // channels composited into a single segmentation overlay image.
+    //
+
+    // Derive plate dimensions from samplesheet (max row/col per batch+plate)
+    ch_enriched
+        .map { meta, _image ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            [plate_key, meta.row as int, meta.col as int]
+        }
+        .groupTuple()
+        .map { key, rows, cols -> [key, rows.max(), cols.max()] }
+        .set { ch_plate_dims }
+
+    // Collect overlay PNGs by [batch, plate], derive well row/col from well name.
+    // Each assay dev emission is one well — flatMap to one entry per PNG, then
+    // groupTuple keeps well_info (pos 3) and png (pos 4) as parallel lists.
+    CELLPROFILER_ASSAYDEVELOPMENT.out.png
+        .flatMap { meta, pngs ->
+            def plate_key = [meta.batch, meta.plate].join('_')
+            def well_row = (meta.well[0] as char) - ('A' as char) + 1
+            def well_col = (meta.well.substring(1)) as int
+            def well_info = [well: meta.well, row: well_row, col: well_col]
+            def png_list = pngs instanceof List ? pngs.flatten() : [pngs]
+            png_list.collect { png -> [plate_key, meta.batch, meta.plate, well_info, png] }
+        }
+        .groupTuple(by: [0, 1, 2])
+        .map { plate_key, batch, plate, wells_meta, pngs ->
+            // Sort wells_meta and pngs together by well name for deterministic -resume caching
+            def sorted = [wells_meta, pngs].transpose().sort { a, b -> a[0].well <=> b[0].well }
+            def plate_meta = [id: plate_key, batch: batch, plate: plate]
+            [plate_key, plate_meta, sorted.collect { item -> item[0] }, sorted.collect { item -> item[1] }]
+        }
+        .combine(ch_plate_dims, by: 0)
+        .map { _key, meta, wells_meta, pngs, plate_rows, plate_cols ->
+            [meta, wells_meta, pngs, plate_rows, plate_cols]
+        }
+        .set { ch_montage_input }
+
+    IMAGEMAGICK_MONTAGE(ch_montage_input)
+
+    //
+    // PLATE VIEWER
+    // Aggregate all plate montages into an interactive HTML viewer for MultiQC
+    //
+    IMAGEMAGICK_MONTAGE.out.montage
+        .map { meta, png -> [meta.id, png] }
+        .collect()
+        .map { items ->
+            // items is a flat list: [id1, png1, id2, png2, ...]
+            def pairs = items.collate(2)
+            def ids = pairs.collect { pair: List -> pair[0] }
+            def pngs = pairs.collect { pair: List -> pair[1] }
+            [ids, pngs]
+        }
+        .set { ch_all_montages }
+
+    PLATEVIEWER(ch_all_montages)
+
+    ch_multiqc_files = ch_multiqc_files.mix(PLATEVIEWER.out.html)
+
+    if (cellprofiler_mode == 'analysis') {
+
+        //
+        // ANALYSIS
+        // Group by [batch, plate, well, site], join with illum
+        //
+        ch_enriched
+            .map { meta, image ->
+                def group_id = [meta.batch, meta.plate, meta.well, meta.site].join('_')
+                def group_key = meta.subMap(['batch', 'plate', 'well', 'site']) + [id: group_id]
+                [group_key, meta, image]
+            }
+            .groupTuple()
+            .map { meta, images_meta, images ->
+                def (m, im, imgs) = sortGroupedImages(meta, images_meta, images)
+                def plate_key = [m.batch, m.plate].join('_')
+                [plate_key, m, im, imgs]
+            }
+            .combine(ch_illum_by_plate, by: 0)
+            .map { _key, meta, images_meta, images, illum_files ->
+                [meta, images_meta, images, illum_files]
+            }
+            .set { ch_analysis_with_illum }
+
+        CELLPROFILER_ANALYSIS(
+            ch_analysis_with_illum,
+            cellprofiler_analysis_cppipe,
+        )
+
+        ch_versions = ch_versions.mix(CELLPROFILER_ANALYSIS.out.versions)
+
+        //
+        // CYTOTABLE - convert analysis CSVs to Parquet (one file per plate)
+        //
+        CELLPROFILER_ANALYSIS.out.output_dir
+            .map { meta, output_dir ->
+                def group_id = [meta.batch, meta.plate].join('_')
+                def group_key = meta.subMap(['batch', 'plate']) + [id: group_id]
+                [group_key, meta, output_dir]
+            }
+            .groupTuple()
+            .map { plate_meta, site_metas, output_dirs ->
+                def sorted_dirs = [site_metas, output_dirs]
+                    .transpose()
+                    .sort { a, b -> a[0].id <=> b[0].id }
+                    .collect { item -> item[1] }
+                [plate_meta, sorted_dirs]
+            }
+            .set { ch_cytotable_input }
+
+        CYTOTABLE(ch_cytotable_input)
+    }
 
     //
     // Collate and save software versions
@@ -41,9 +244,9 @@ workflow CELLPAINTING {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
@@ -53,9 +256,9 @@ workflow CELLPAINTING {
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${outdir}/pipeline_info",
-            name: 'nf_core_'  +  'cellpainting_software_'  + 'mqc_'  + 'versions.yml',
+            name: 'nf_core_' + 'cellpainting_software_' + 'mqc_' + 'versions.yml',
             sort: true,
-            newLine: true
+            newLine: true,
         )
 
     //
@@ -84,12 +287,20 @@ workflow CELLPAINTING {
             ]
         }
     )
-    emit:multiqc_report = MULTIQC.out.report.map { _meta, report -> [report] }.toList() // channel: /path/to/multiqc_report.html
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+
+    emit:
+    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    versions       = ch_versions // channel: [ path(versions.yml) ]
 }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
+    UTILITY FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+// Sort grouped image pairs by filename for deterministic resume caching
+def sortGroupedImages(meta, images_meta, images) {
+    def sorted = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
+    return [meta, sorted.collect { item -> item[0] }, sorted.collect { item -> item[1] }]
+}

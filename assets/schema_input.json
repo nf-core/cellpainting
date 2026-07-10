@@ -7,27 +7,61 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "channel": {
                 "type": "string",
-                "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "pattern": "^[A-Za-z0-9_]+$",
+                "description": "Channel identifier for the image (alphanumeric characters and underscores only)",
+                "meta": ["channel"]
             },
-            "fastq_1": {
+            "path": {
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "\\.tiff?$",
+                "description": "Path to a .tif or .tiff image"
             },
-            "fastq_2": {
+            "source": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "errorMessage": "Source info must be provided",
+                "meta": ["source"]
+            },
+            "batch": {
+                "type": "string",
+                "errorMessage": "Batch info must be provided",
+                "meta": ["batch"]
+            },
+            "plate": {
+                "type": "string",
+                "errorMessage": "Plate info must be provided",
+                "meta": ["plate"]
+            },
+            "well": {
+                "type": "string",
+                "errorMessage": "Well info must be provided",
+                "meta": ["well"]
+            },
+            "site": {
+                "type": "number",
+                "errorMessage": "Site info must be provided",
+                "meta": ["site"]
+            },
+            "col": {
+                "type": "number",
+                "meta": ["col"]
+            },
+            "field_id": {
+                "type": "number",
+                "meta": ["field_id"]
+            },
+            "plane_id": {
+                "type": "number",
+                "meta": ["plane_id"]
+            },
+            "row": {
+                "type": "number",
+                "meta": ["row"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["channel", "path", "source", "batch", "plate", "well", "site", "row", "col"]
     }
 }

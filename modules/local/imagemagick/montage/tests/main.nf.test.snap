@@ -1,0 +1,101 @@
+{
+    "imagemagick - montage - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "Batch1_Plate1",
+                            "batch": "Batch1",
+                            "plate": "Plate1"
+                        },
+                        "Batch1_Plate1_montage_mqc.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    [
+                        "IMAGEMAGICK_MONTAGE",
+                        "imagemagick",
+                        "7.1.2-21"
+                    ]
+                ],
+                "montage": [
+                    [
+                        {
+                            "id": "Batch1_Plate1",
+                            "batch": "Batch1",
+                            "plate": "Plate1"
+                        },
+                        "Batch1_Plate1_montage_mqc.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "montage_full": [
+                    
+                ],
+                "versions_imagemagick": [
+                    [
+                        "IMAGEMAGICK_MONTAGE",
+                        "imagemagick",
+                        "7.1.2-21"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-28T16:31:00.225367"
+    },
+    "imagemagick - montage - 24 well plate sparse (18 of 24 wells)": {
+        "content": [
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-29T14:31:58.45139"
+    },
+    "imagemagick - montage - 96 well plate thumbnail": {
+        "content": [
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-29T14:31:40.449879"
+    },
+    "imagemagick - montage - 4 well plate full resolution": {
+        "content": [
+            [
+                [
+                    "IMAGEMAGICK_MONTAGE",
+                    "imagemagick",
+                    "7.1.2-21"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-29T14:31:46.612347"
+    }
+}
