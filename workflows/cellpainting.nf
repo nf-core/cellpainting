@@ -169,8 +169,8 @@ workflow CELLPAINTING {
         .map { items ->
             // items is a flat list: [id1, png1, id2, png2, ...]
             def pairs = items.collate(2)
-            def ids = pairs.collect { pair: List -> pair[0] }
-            def pngs = pairs.collect { pair: List -> pair[1] }
+            def ids = pairs.collect { List pair -> pair[0] }
+            def pngs = pairs.collect { List pair -> pair[1] }
             [ids, pngs]
         }
         .set { ch_all_montages }
