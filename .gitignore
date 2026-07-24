@@ -7,6 +7,9 @@ testing/
 testing*
 *.pyc
 null/
+.lineage/
 .nf-test*
 docs/superpowers/
 .superset/
+modules/nf-core/**/tests/
+subworkflows/nf-core/**/tests/

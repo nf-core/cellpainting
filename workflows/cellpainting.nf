@@ -3,18 +3,18 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
-include { CYTOTABLE              } from '../modules/local/cytotable'
+include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
+include { CYTOTABLE                           } from '../modules/local/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
-include { CELLPROFILER_ANALYSIS } from '../modules/local/cellprofiler/analysis'
-include { CELLPROFILER_ASSAYDEVELOPMENT } from '../modules/local/cellprofiler/assaydevelopment'
-include { IMAGEMAGICK_MONTAGE } from '../modules/local/imagemagick/montage'
-include { PLATEVIEWER } from '../modules/local/plateviewer'
+include { CELLPROFILER_ANALYSIS               } from '../modules/local/cellprofiler/analysis'
+include { CELLPROFILER_ASSAYDEVELOPMENT       } from '../modules/local/cellprofiler/assaydevelopment'
+include { IMAGEMAGICK_MONTAGE                 } from '../modules/local/imagemagick/montage'
+include { PLATEVIEWER                         } from '../modules/local/plateviewer'
 
-include { paramsSummaryMap       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cellpainting_pipeline'
+include { paramsSummaryMap                    } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc                } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML              } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText              } from '../subworkflows/local/utils_nfcore_cellpainting_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -23,9 +23,12 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_cell
 */
 
 workflow CELLPAINTING {
-
     take:
     ch_samplesheet // channel: images read in from --input samplesheet
+    multiqc_config
+    multiqc_logo
+    multiqc_methods_description
+    outdir
     cellprofiler_mode // value: assay_development, analysis
     cellprofiler_illumination_cppipe // value: path to illumination cppipe
     cellprofiler_assaydevelopment_cppipe // value: path to assaydevelopment cppipe
@@ -34,14 +37,8 @@ workflow CELLPAINTING {
 
     main:
 
-    ch_versions = channel.empty()
-    ch_multiqc_files = channel.empty()
-
-    // Sort grouped image pairs by filename for deterministic resume caching
-    def sortGroupedImages = { meta, images_meta, images ->
-        def sorted = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
-        [meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
-    }
+    def ch_versions = channel.empty()
+    def ch_multiqc_files = channel.empty()
 
     //
     // Enrich samplesheet with filename metadata
@@ -65,12 +62,12 @@ workflow CELLPAINTING {
             [group_key + [id: group_id], meta, image]
         }
         .groupTuple()
-        .map(sortGroupedImages)
+        .map { meta, images_meta, images -> sortGroupedImages(meta, images_meta, images) }
         .set { ch_illumination_images }
 
     CELLPROFILER_ILLUMINATIONCORRECTION(
         ch_illumination_images,
-        cellprofiler_illumination_cppipe
+        cellprofiler_illumination_cppipe,
     )
 
     ch_versions = ch_versions.mix(CELLPROFILER_ILLUMINATIONCORRECTION.out.versions)
@@ -113,7 +110,7 @@ workflow CELLPAINTING {
 
     CELLPROFILER_ASSAYDEVELOPMENT(
         ch_assay_dev_with_illum,
-        cellprofiler_assaydevelopment_cppipe
+        cellprofiler_assaydevelopment_cppipe,
     )
 
     ch_versions = ch_versions.mix(CELLPROFILER_ASSAYDEVELOPMENT.out.versions)
@@ -152,7 +149,7 @@ workflow CELLPAINTING {
             // Sort wells_meta and pngs together by well name for deterministic -resume caching
             def sorted = [wells_meta, pngs].transpose().sort { a, b -> a[0].well <=> b[0].well }
             def plate_meta = [id: plate_key, batch: batch, plate: plate]
-            [plate_key, plate_meta, sorted.collect { it[0] }, sorted.collect { it[1] }]
+            [plate_key, plate_meta, sorted.collect { item -> item[0] }, sorted.collect { item -> item[1] }]
         }
         .combine(ch_plate_dims, by: 0)
         .map { _key, meta, wells_meta, pngs, plate_rows, plate_cols ->
@@ -208,7 +205,7 @@ workflow CELLPAINTING {
 
         CELLPROFILER_ANALYSIS(
             ch_analysis_with_illum,
-            cellprofiler_analysis_cppipe
+            cellprofiler_analysis_cppipe,
         )
 
         ch_versions = ch_versions.mix(CELLPROFILER_ANALYSIS.out.versions)
@@ -227,19 +224,18 @@ workflow CELLPAINTING {
                 def sorted_dirs = [site_metas, output_dirs]
                     .transpose()
                     .sort { a, b -> a[0].id <=> b[0].id }
-                    .collect { it[1] }
+                    .collect { item -> item[1] }
                 [plate_meta, sorted_dirs]
             }
             .set { ch_cytotable_input }
 
         CYTOTABLE(ch_cytotable_input)
-
     }
 
     //
     // Collate and save software versions
     //
-    def topic_versions = Channel.topic("versions")
+    def topic_versions = channel.topic("versions")
         .distinct()
         .branch { entry ->
             versions_file: entry instanceof Path
@@ -248,71 +244,63 @@ workflow CELLPAINTING {
 
     def topic_versions_string = topic_versions.versions_tuple
         .map { process, tool, version ->
-            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
         }
-        .groupTuple(by:0)
+        .groupTuple(by: 0)
         .map { process, tool_versions ->
             tool_versions.unique().sort()
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    def ch_collated_versions = softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
         .mix(topic_versions_string)
         .collectFile(
-            storeDir: "${params.outdir}/pipeline_info",
-            name: 'nf_core_'  +  'cellpainting_software_'  + 'mqc_'  + 'versions.yml',
+            storeDir: "${outdir}/pipeline_info",
+            name: 'nf_core_' + 'cellpainting_software_' + 'mqc_' + 'versions.yml',
             sort: true,
-            newLine: true
-        ).set { ch_collated_versions }
+            newLine: true,
+        )
 
     //
     // MODULE: MultiQC
     //
-    ch_multiqc_config        = channel.fromPath(
-        "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
-    ch_multiqc_custom_config = params.multiqc_config ?
-        channel.fromPath(params.multiqc_config, checkIfExists: true) :
-        channel.empty()
-    ch_multiqc_logo          = params.multiqc_logo ?
-        channel.fromPath(params.multiqc_logo, checkIfExists: true) :
-        channel.empty()
-
-    summary_params      = paramsSummaryMap(
-        workflow, parameters_schema: "nextflow_schema.json")
-    ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
-    ch_multiqc_files = ch_multiqc_files.mix(
-        ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
-    ch_multiqc_custom_methods_description = params.multiqc_methods_description ?
-        file(params.multiqc_methods_description, checkIfExists: true) :
-        file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
-    ch_methods_description                = channel.value(
-        methodsDescriptionText(ch_multiqc_custom_methods_description))
-
     ch_multiqc_files = ch_multiqc_files.mix(ch_collated_versions)
-    ch_multiqc_files = ch_multiqc_files.mix(
-        ch_methods_description.collectFile(
-            name: 'methods_description_mqc.yaml',
-            sort: true
-        )
-    )
-
-    MULTIQC (
-        ch_multiqc_files.collect(),
-        ch_multiqc_config.toList(),
-        ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList(),
-        [],
-        []
+    def ch_summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
+    def ch_workflow_summary = channel.value(paramsSummaryMultiqc(ch_summary_params))
+    ch_multiqc_files = ch_multiqc_files.mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+    def ch_multiqc_custom_methods_description = multiqc_methods_description
+        ? file(multiqc_methods_description, checkIfExists: true)
+        : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+    def ch_methods_description = channel.value(methodsDescriptionText(ch_multiqc_custom_methods_description))
+    ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml', sort: true))
+    MULTIQC(
+        ch_multiqc_files.flatten().collect().map { files ->
+            [
+                [id: 'cellpainting'],
+                files,
+                multiqc_config
+                    ? file(multiqc_config, checkIfExists: true)
+                    : file("${projectDir}/assets/multiqc_config.yml", checkIfExists: true),
+                multiqc_logo ? file(multiqc_logo, checkIfExists: true) : [],
+                [],
+                [],
+            ]
+        }
     )
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
-
+    versions       = ch_versions // channel: [ path(versions.yml) ]
 }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
+    UTILITY FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+
+// Sort grouped image pairs by filename for deterministic resume caching
+def sortGroupedImages(meta, images_meta, images) {
+    def sorted = [images_meta, images].transpose().sort { a, b -> a[0].filename <=> b[0].filename }
+    return [meta, sorted.collect { item -> item[0] }, sorted.collect { item -> item[1] }]
+}

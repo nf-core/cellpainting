@@ -15,7 +15,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { CELLPAINTING  } from './workflows/cellpainting'
+include { CELLPAINTING            } from './workflows/cellpainting'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_cellpainting_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_cellpainting_pipeline'
 
@@ -29,7 +29,6 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_cell
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow NFCORE_CELLPAINTING {
-
     take:
     samplesheet // channel: samplesheet read in from --input
 
@@ -38,14 +37,19 @@ workflow NFCORE_CELLPAINTING {
     //
     // WORKFLOW: Run pipeline
     //
-    CELLPAINTING (
+    CELLPAINTING(
         samplesheet,
+        params.multiqc_config,
+        params.multiqc_logo,
+        params.multiqc_methods_description,
+        params.outdir,
         params.cellprofiler_mode,
         params.cellprofiler_illumination_cppipe,
         params.cellprofiler_assaydevelopment_cppipe,
         params.cellprofiler_assaydevelopment_site,
-        params.cellprofiler_analysis_cppipe
+        params.cellprofiler_analysis_cppipe,
     )
+
     emit:
     multiqc_report = CELLPAINTING.out.multiqc_report // channel: /path/to/multiqc_report.html
 }
@@ -56,12 +60,10 @@ workflow NFCORE_CELLPAINTING {
 */
 
 workflow {
-
-    main:
     //
     // SUBWORKFLOW: Run initialisation tasks
     //
-    PIPELINE_INITIALISATION (
+    PIPELINE_INITIALISATION(
         params.version,
         params.validate_params,
         params.monochrome_logs,
@@ -70,31 +72,24 @@ workflow {
         params.input,
         params.help,
         params.help_full,
-        params.show_hidden
+        params.show_hidden,
     )
 
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_CELLPAINTING (
+    NFCORE_CELLPAINTING(
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        params.hook_url,
-        NFCORE_CELLPAINTING.out.multiqc_report
+        NFCORE_CELLPAINTING.out.multiqc_report,
     )
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
