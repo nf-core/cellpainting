@@ -16,7 +16,7 @@ lint:
     - docs/usage.md
     - AGENTS.md
     - CLAUDE.md
-nf_core_version: 4.0.2
+nf_core_version: 4.0.3
 repository_type: pipeline
 template:
   author: Kenneth Brewer

@@ -99,7 +99,7 @@
             },
             "mentions": [
                 {
-                    "@id": "#558de72e-c628-4e67-a2c7-61f5df5646f7"
+                    "@id": "#1d64cc7f-1769-4fea-a14a-1b4c0aa0c305"
                 }
             ],
             "name": "nf-core/cellpainting"
@@ -128,11 +128,11 @@
             ],
             "contributor": [
                 {
-                    "@id": "#2a290631-c6c9-4552-8cce-f928d685c2cc"
+                    "@id": "#88d317dd-641e-4b2f-ad83-98aa057f2a7c"
                 }
             ],
             "dateCreated": "",
-            "dateModified": "2026-04-30T13:33:26Z",
+            "dateModified": "2026-07-24T12:35:56Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
             "keywords": [
                 "nf-core",
@@ -171,11 +171,11 @@
             "version": "!>=25.10.4"
         },
         {
-            "@id": "#558de72e-c628-4e67-a2c7-61f5df5646f7",
+            "@id": "#1d64cc7f-1769-4fea-a14a-1b4c0aa0c305",
             "@type": "TestSuite",
             "instance": [
                 {
-                    "@id": "#375409e2-abd8-46ed-a347-1874f434b960"
+                    "@id": "#5db8ef30-2fdd-4084-8d95-1f9e29a607b9"
                 }
             ],
             "mainEntity": {
@@ -184,7 +184,7 @@
             "name": "Test suite for nf-core/cellpainting"
         },
         {
-            "@id": "#375409e2-abd8-46ed-a347-1874f434b960",
+            "@id": "#5db8ef30-2fdd-4084-8d95-1f9e29a607b9",
             "@type": "TestInstance",
             "name": "GitHub Actions workflow for testing nf-core/cellpainting",
             "resource": "repos/nf-core/cellpainting/actions/workflows/nf-test.yml",
@@ -313,7 +313,7 @@
             "url": "https://nf-co.re/"
         },
         {
-            "@id": "#2a290631-c6c9-4552-8cce-f928d685c2cc",
+            "@id": "#88d317dd-641e-4b2f-ad83-98aa057f2a7c",
             "@type": "Person",
             "name": "Kenneth Brewer"
         }
