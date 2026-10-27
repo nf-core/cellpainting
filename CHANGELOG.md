@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Deprecated`
 
-## v1.0.0dev - [date]
+## v1.0.0dev - [unreleased<!-- TODO nf-core: replace with date on release -->]
 
 Initial release of nf-core/cellpainting, created with the [nf-core](https://nf-co.re/) template.
 
