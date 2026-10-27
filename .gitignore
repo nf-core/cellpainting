@@ -10,3 +10,7 @@ null/
 .lineage/
 .nf-test/
 .nf-test.log
+docs/superpowers/
+.superset/
+modules/nf-core/**/tests/
+subworkflows/nf-core/**/tests/

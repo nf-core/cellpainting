@@ -107,7 +107,11 @@
         },
         {
             "@id": "main.nf",
-            "@type": ["File", "SoftwareSourceCode", "ComputationalWorkflow"],
+            "@type": [
+                "File",
+                "SoftwareSourceCode",
+                "ComputationalWorkflow"
+            ],
             "contributor": [
                 {
                     "@id": "#dde54d3b-e1c9-43ab-96b1-a3bc86f2bb16"
@@ -116,17 +120,29 @@
             "dateCreated": "",
             "dateModified": "2026-10-26T16:05:14Z",
             "dct:conformsTo": "https://bioschemas.org/profiles/ComputationalWorkflow/1.0-RELEASE/",
-            "keywords": ["nf-core", "nextflow"],
-            "license": ["MIT"],
-            "name": ["nf-core/cellpainting"],
+            "keywords": [
+                "nf-core",
+                "nextflow"
+            ],
+            "license": [
+                "MIT"
+            ],
+            "name": [
+                "nf-core/cellpainting"
+            ],
             "programmingLanguage": {
                 "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow"
             },
             "sdPublisher": {
                 "@id": "https://nf-co.re/"
             },
-            "url": ["https://github.com/nf-core/cellpainting", "https://nf-co.re/cellpainting/dev/"],
-            "version": ["1.0.0dev"]
+            "url": [
+                "https://github.com/nf-core/cellpainting",
+                "https://nf-co.re/cellpainting/dev/"
+            ],
+            "version": [
+                "1.0.0dev"
+            ]
         },
         {
             "@id": "https://w3id.org/workflowhub/workflow-ro-crate#nextflow",

@@ -5,6 +5,37 @@
     "description": "Image-based profiling pipeline for Cell Painting assays using CellProfiler",
     "type": "object",
     "$defs": {
+        "cellprofiler": {
+            "title": "CellProfiler",
+            "type": "object",
+            "description": "Parameters related to CellProfiler",
+            "default": "",
+            "properties": {
+                "cellprofiler_mode": {
+                    "type": "string",
+                    "default": "analysis",
+                    "enum": ["assay_development", "analysis"],
+                    "description": "Pipeline mode: assay_development (QC only) or analysis (full feature extraction)"
+                },
+                "cellprofiler_illumination_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir}/assets/cellprofiler/illumination.cppipe.jinja"
+                },
+                "cellprofiler_analysis_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir}/assets/cellprofiler/analysis.cppipe"
+                },
+                "cellprofiler_assaydevelopment_cppipe": {
+                    "type": "string",
+                    "default": "${projectDir}/assets/cellprofiler/assaydevelopment.cppipe"
+                },
+                "cellprofiler_assaydevelopment_site": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Site number to use for assay development QC subsample"
+                }
+            }
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -195,6 +226,9 @@
         }
     },
     "allOf": [
+        {
+            "$ref": "#/$defs/cellprofiler"
+        },
         {
             "$ref": "#/$defs/input_output_options"
         },
