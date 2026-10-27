@@ -1,0 +1,61 @@
+nextflow_process {
+
+    name "Test Process CYTOTABLE"
+    script "../main.nf"
+    process "CYTOTABLE"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here.
+            }
+            process {
+                """
+                input[0] = [
+                    [batch: '2021_04_26_Batch1', plate: 'BR00117035'],
+                    [
+                        file("s3://nf-core-test-datasets/cellpainting/minimal_dataset/cpg0016-jump/source_4/workspace/analysis/2021_04_26_Batch1/BR00117035/analysis/BR00117035-A01-1/")
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match("*.parquet")
+        }
+
+    }
+
+    test("cytotable - stub") {
+        tag "stub"
+        options "-stub"
+        when {
+            process {
+                """
+                def analysisDir1 = file("${workDir}/analysis_1")
+                analysisDir1.mkdirs()
+                file("${workDir}/analysis_1/Image.csv").text = "ImageNumber"
+
+                def analysisDir2 = file("${workDir}/analysis_2")
+                analysisDir2.mkdirs()
+                file("${workDir}/analysis_2/Image.csv").text = "ImageNumber"
+
+                input[0] = [
+                    [batch: '2021_04_26_Batch1', plate: 'BR00117035'],
+                    [analysisDir1, analysisDir2]
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+}

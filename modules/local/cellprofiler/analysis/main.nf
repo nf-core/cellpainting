@@ -1,0 +1,61 @@
+process CELLPROFILER_ANALYSIS {
+    tag "${meta.id}"
+    label 'process_medium'
+
+    conda "${moduleDir}/environment.yml"
+    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+        ? 'https://depot.galaxyproject.org/singularity/cellprofiler:4.2.8--pyhdfd78af_0'
+        : 'community.wave.seqera.io/library/cellprofiler:4.2.8--aff0a99749304a7f'}"
+
+    input:
+    tuple val(meta), val(images_meta), path(images, stageAs: "images/*"), path(illum_files, stageAs: "images/*")
+    path analysis_cppipe
+
+    output:
+    tuple val(meta), path("analysis"), emit: output_dir
+    tuple val(meta), path("analysis/*.png"), emit: pngs, optional: true
+    path "versions.yml", emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''
+    def meta_plain = [id: meta.id, batch: meta.batch, plate: meta.plate, well: meta.well, site: meta.site]
+    def images_plain = images_meta.collect { img -> [filename: img.filename, batch: img.batch, plate: img.plate, well: img.well, col: img.col, row: img.row, site: img.site, channel: img.channel] }
+    def metadata_json = groovy.json.JsonOutput.toJson([meta: meta_plain, images: images_plain])
+    """
+    echo '${metadata_json}' > metadata.json
+    generate_illumination_apply_csv.py --metadata metadata.json --images-dir ./images --output load_data.csv
+
+    mkdir -p analysis
+
+    cellprofiler -c -r \
+    ${args} \
+    -p ${analysis_cppipe} \
+    -o analysis \
+    --data-file=load_data.csv \
+    --image-directory ./images/ \
+    -g Metadata_Plate=${meta.plate},Metadata_Well=${meta.well},Metadata_Site=${meta.site}
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cellprofiler: \$(cellprofiler --version)
+    END_VERSIONS
+    """
+
+    stub:
+    """
+    mkdir -p analysis
+    echo 'ImageNumber,Metadata_Plate' > analysis/Image.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Nuclei.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Cells.csv
+    echo 'ImageNumber,ObjectNumber' > analysis/Cytoplasm.csv
+    touch analysis/mock_overlay.png
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        cellprofiler: \$(cellprofiler --version)
+    END_VERSIONS
+    """
+}
