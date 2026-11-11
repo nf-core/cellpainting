@@ -1,0 +1,32 @@
+name: pycytominer_annotation
+description: Annotate CytoTable profiles with plate-map metadata (e.g. compound, gene, perturbation) via pycytominer annotate
+keywords:
+  - pycytominer
+  - annotation
+  - platemap
+  - profiling
+tools:
+  - pycytominer:
+      description: |
+        Processing and feature extraction for image-based profiling data. `pycytominer annotate` joins plate-map metadata onto single-cell profiles.
+      documentation: https://github.com/cytomining/pycytominer/
+input:
+  - - cytotable_parquet:
+        type: file
+        description: Per-plate profiles parquet produced by CYTOTABLE.
+  - - platemap_csv:
+        type: file
+        description: Plate-map CSV with per-well metadata for the plate. Must contain the column given by params.pycytominer_annotation_join_on (default Metadata_Well).
+output:
+  - parquet:
+      - "*_anno.parquet":
+          type: file
+          description: Profiles annotated with plate-map metadata, one parquet per (batch, plate).
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+authors:
+  - "@Riley-Grindle"
+maintainers:
+  - "@Riley-Grindle"

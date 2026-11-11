@@ -1,0 +1,64 @@
+nextflow_process {
+
+    name "Test Process PYCYTOMINER_ANNO"
+    script "../main.nf"
+    process "PYCYTOMINER_ANNO"
+
+    tag "modules"
+    tag "modules_local"
+    tag "pycytominer"
+    tag "pycytominer/annotation"
+
+    test("pycytominer annotate - runs with local fixture") {
+        // Small self-contained fixture (5 rows, 3 features) committed under
+        // tests/data so this test does not depend on S3 or a full CYTOTABLE run.
+        when {
+            params {
+                pycytominer_annotation_join_on = "Metadata_Well,Metadata_Well"
+            }
+            process {
+                """
+                input[0] = [
+                    [batch: '2021_04_26_Batch1', plate: 'BR00117035'],
+                    file("${projectDir}/tests/fixtures/profiles_fixture.parquet", checkIfExists: true),
+                    file("${projectDir}/tests/fixtures/platemap_fixture.csv", checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.parquet.size() > 0 },
+                { assert process.out.parquet.every { path(it[1]).toFile().name == '2021_04_26_Batch1_BR00117035_anno.parquet' } },
+                { assert path(process.out.parquet[0][1]).toFile().length() > 0 },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+
+    test("pycytominer annotate - stub") {
+        tag "stub"
+        options "-stub"
+        when {
+            params {
+                pycytominer_annotation_join_on = "Metadata_Well,Metadata_Well"
+            }
+            process {
+                """
+                input[0] = [
+                    [batch: '2021_04_26_Batch1', plate: 'BR00117035'],
+                    file("${projectDir}/tests/fixtures/profiles_fixture.parquet", checkIfExists: true),
+                    file("${projectDir}/tests/fixtures/platemap_fixture.csv", checkIfExists: true)
+                ]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.parquet).match() }
+            )
+        }
+    }
+}

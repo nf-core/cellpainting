@@ -14,9 +14,14 @@ Initial release of nf-core/cellpainting, created with the [nf-core](https://nf-c
 ### `Added`
 
 - [PR#50](https://github.com/nf-core/cellpainting/pull/50) - added test with larger plate
+- [PR#47](https://github.com/nf-core/cellpainting/pull/47) - added `PYCYTOMINER_ANNO` module and optional `--metadata` plate-map annotation of CytoTable profiles
 
 ### `Fixed`
 
+- [PR#47](https://github.com/nf-core/cellpainting/pull/47) - `CYTOTABLE` now keeps per-image metadata (well/plate/site, channel/position, file/path provenance) in the joined Parquet output by renaming `Image_Metadata_*` columns to the `Metadata_*` convention expected by Pycytominer
+
 ### `Dependencies`
+
+- [PR#47](https://github.com/nf-core/cellpainting/pull/47) - upgraded `CYTOTABLE` container from CytoTable 0.0.15 to 1.2.6 (pinned `duckdb<2.0`, required by CytoTable 1.2.6)
 
 ### `Deprecated`

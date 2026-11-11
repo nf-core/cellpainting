@@ -1,0 +1,36 @@
+{
+    "pycytominer annotate - runs with local fixture": {
+        "content": [
+            [
+                [
+                    "PYCYTOMINER_ANNO",
+                    "pycytominer",
+                    "1.7.1"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-09T14:06:56.730053",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "pycytominer annotate - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    "2021_04_26_Batch1_BR00117035_anno.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-09T11:30:49.68286",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

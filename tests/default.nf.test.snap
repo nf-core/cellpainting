@@ -163,8 +163,14 @@
                 "CELLPROFILER_ILLUMINATIONCORRECTION": {
                     "cellprofiler": "4.2.8"
                 },
+                "CYTOTABLE": {
+                    "cytotable": "1.2.6"
+                },
                 "IMAGEMAGICK_MONTAGE": {
                     "imagemagick": "7.1.2-21"
+                },
+                "PYCYTOMINER_ANNO": {
+                    "pycytominer": "1.7.1"
                 },
                 "Workflow": {
                     "nf-core/cellpainting": "v1.0.0dev"
@@ -247,7 +253,9 @@
                 "pipeline_info",
                 "pipeline_info/nf_core_cellpainting_software_mqc_versions.yml",
                 "plateviewer",
-                "plateviewer/plate_montages_mqc.html"
+                "plateviewer/plate_montages_mqc.html",
+                "pycytominer",
+                "pycytominer/2021_04_26_Batch1_BR00117035_anno.parquet"
             ],
             [
                 "mock_overlay.png:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -271,7 +279,7 @@
                 ".stub:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
-        "timestamp": "2026-07-10T18:07:44.723871236",
+        "timestamp": "2026-11-11T14:35:02.726688",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

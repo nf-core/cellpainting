@@ -36,6 +36,21 @@
                 }
             }
         },
+        "pycytominer": {
+            "title": "PyCytoMiner",
+            "type": "object",
+            "description": "Parameters related to Pycytominer profile annotation",
+            "default": "",
+            "properties": {
+                "pycytominer_annotation_join_on": {
+                    "type": "string",
+                    "default": "Metadata_Well,Metadata_Well",
+                    "description": "Comma-separated pair of join columns: platemap column,profiles column",
+                    "help_text": "Passed to `pycytominer annotate --join_on`. The first value is the plate-map join column and the second is the profiles join column. Defaults to joining on well identifiers (Metadata_Well in both).",
+                    "fa_icon": "fas fa-link"
+                }
+            }
+        },
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -52,6 +67,16 @@
                     "pattern": "^\\S+\\.csv$",
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/cellpainting/usage#samplesheet-input).",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "metadata": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated plate-map file with per-well metadata (treatments, genes, perturbations).",
+                    "help_text": "Optional plate-map CSV describing each plate & well with associated descriptive metadata. Must contain `Metadata_Plate` and `Metadata_Well` columns. When provided, the pipeline runs pycytominer annotate to join this metadata onto the CytoTable profiles.",
                     "fa_icon": "fas fa-file-csv"
                 },
                 "outdir": {
@@ -228,6 +253,9 @@
     "allOf": [
         {
             "$ref": "#/$defs/cellprofiler"
+        },
+        {
+            "$ref": "#/$defs/pycytominer"
         },
         {
             "$ref": "#/$defs/input_output_options"
