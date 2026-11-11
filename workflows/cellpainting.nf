@@ -6,6 +6,7 @@
 include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
 include { CYTOTABLE                           } from '../modules/local/cytotable'
 include { PYCYTOMINER_ANNO                    } from '../modules/local/pycytominer/annotation'
+include { CYTOTABLE_REPORTS                   } from '../modules/local/reports/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS               } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT       } from '../modules/local/cellprofiler/assaydevelopment'
@@ -245,6 +246,11 @@ workflow CELLPAINTING {
 
             PYCYTOMINER_ANNO(ch_annotate_input)
         }
+
+        //
+        // CYTOTABLE REPORTS - marimo QC report per plate
+        //
+        CYTOTABLE_REPORTS(CYTOTABLE.out.parquet)
     }
 
     //

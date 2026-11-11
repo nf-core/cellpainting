@@ -67,6 +67,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - `cytotable/`
   - `<batch>_<plate>.parquet`: Collated CellProfiler measurements for the entire plate (all wells and sites) in Parquet format.
   - `<batch>_<plate>_stats.json`: Structural QC summary (row/column counts and per-compartment column counts) for the Parquet file above.
+  - `reports/`
+    - `<batch>_<plate>_metadata.json`: Metadata summary of the profile (columns, dtypes, row count).
+    - `<batch>_<plate>_descriptive_stats.parquet`: Descriptive statistics (mean/std/min/max/quantiles) for all measurement columns.
+    - `<batch>_<plate>_size_distributions.png`, `<batch>_<plate>_dna_intensity.png`: QC plots.
+    - `<batch>_<plate>_reports.html`: Interactive marimo QC report combining the above.
 
 </details>
 
