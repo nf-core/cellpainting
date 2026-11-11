@@ -15,6 +15,7 @@ Initial release of nf-core/cellpainting, created with the [nf-core](https://nf-c
 
 - [PR#50](https://github.com/nf-core/cellpainting/pull/50) - added test with larger plate
 - [PR#47](https://github.com/nf-core/cellpainting/pull/47) - added `PYCYTOMINER_ANNO` module and optional `--metadata` plate-map annotation of CytoTable profiles
+- [PR#48](https://github.com/nf-core/cellpainting/pull/48) - added `CYTOTABLE` structural QC stats JSON output (row/column counts, per-compartment column counts)
 
 ### `Fixed`
 

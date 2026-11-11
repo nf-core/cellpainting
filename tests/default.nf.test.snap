@@ -239,6 +239,7 @@
                 "cellprofiler/illumination_correction/illumination_corrections/BR00117035_IllumRNA.npy",
                 "cytotable",
                 "cytotable/2021_04_26_Batch1_BR00117035.parquet",
+                "cytotable/2021_04_26_Batch1_BR00117035_stats.json",
                 "imagemagick",
                 "imagemagick/montage",
                 "imagemagick/montage/full",
@@ -275,11 +276,12 @@
                 "BR00117035_IllumER.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumMito.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "BR00117035_IllumRNA.npy:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "2021_04_26_Batch1_BR00117035_stats.json:md5,24179645ec7fbcb687192e1e10b1f32b",
                 ".stub:md5,d41d8cd98f00b204e9800998ecf8427e",
                 ".stub:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
-        "timestamp": "2026-11-11T14:35:02.726688",
+        "timestamp": "2026-11-11T14:45:34.759771",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "25.10.4"

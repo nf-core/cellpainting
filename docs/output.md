@@ -66,6 +66,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `cytotable/`
   - `<batch>_<plate>.parquet`: Collated CellProfiler measurements for the entire plate (all wells and sites) in Parquet format.
+  - `<batch>_<plate>_stats.json`: Structural QC summary (row/column counts and per-compartment column counts) for the Parquet file above.
 
 </details>
 

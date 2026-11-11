@@ -19,8 +19,16 @@ nextflow_pipeline {
             def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             // stable_content: All files in ${params.outdir}/ with stable content
             def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            def statsFiles = getAllFilesFromDir(params.outdir, includeDir: false).findAll { it.name.endsWith('_stats.json') }
             assertAll(
                 { assert workflow.success},
+                { assert statsFiles.size() > 0 },
+                { statsFiles.each { f ->
+                    def stats = new groovy.json.JsonSlurper().parse(f.toFile())
+                    assert stats.num_rows > 0
+                    assert stats.num_columns > 0
+                    assert stats.compartment_columns instanceof Map
+                } },
                 { assert snapshot(
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
                     removeNextflowVersion("$outputDir/pipeline_info/nf_core_cellpainting_software_mqc_versions.yml"),

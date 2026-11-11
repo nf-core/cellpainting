@@ -18,8 +18,9 @@ process CYTOTABLE {
     tuple val(meta), path(cellprofiler_output_dirs, stageAs: "analyses/?")
 
     output:
-    tuple val(meta), path("*.parquet"), emit: parquet
-    path "versions.yml",                emit: versions
+    tuple val(meta), path("*.parquet"),    emit: parquet
+    tuple val(meta), path("*_stats.json"), emit: stats
+    path "versions.yml",                   emit: versions
 
     script:
     """
@@ -101,6 +102,28 @@ if renames:
 
 pq.write_table(table, "${meta.batch}_${meta.plate}.parquet", compression="snappy")
 
+# QC stats: structural summary of the joined profile, grouped by measurement
+# source so downstream users can sanity-check that every compartment/metadata
+# group is present and non-empty without opening the (potentially large)
+# Parquet file itself.
+import json
+import re
+from collections import Counter
+
+prefix_counts = Counter()
+for col in table.column_names:
+    match = re.match(r"^([A-Za-z]+)_", col)
+    prefix_counts[match.group(1) if match else col] += 1
+
+stats = {
+    "num_rows": table.num_rows,
+    "num_columns": table.num_columns,
+    "num_cells": table.num_rows,
+    "compartment_columns": dict(prefix_counts),
+}
+with open("${meta.batch}_${meta.plate}_stats.json", "w") as f:
+    json.dump(stats, f, indent=2, sort_keys=True)
+
 import importlib.metadata as im
 
 with open("versions.yml", "w") as f:
@@ -111,6 +134,14 @@ with open("versions.yml", "w") as f:
     stub:
     """
     touch ${meta.batch}_${meta.plate}.parquet
+    cat <<-END_STATS > ${meta.batch}_${meta.plate}_stats.json
+    {
+        "num_rows": 0,
+        "num_columns": 0,
+        "num_cells": 0,
+        "compartment_columns": {}
+    }
+    END_STATS
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         cytotable: 1.2.6

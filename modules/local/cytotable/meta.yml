@@ -23,9 +23,14 @@ output:
       - versions.yml:
           type: file
           description: File containing software versions
+  - stats:
+      - "*_stats.json":
+          type: file
+          description: JSON file with structural QC stats (row/column counts and per-compartment column counts) for the joined profile.
 authors:
   - "@ybaeus"
   - "@Riley-Grindle"
 maintainers:
   - "@ybaeus"
   - "@Riley-Grindle"
+  - "@kenibrewer"
