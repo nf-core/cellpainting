@@ -4,8 +4,8 @@ process CYTOTABLE {
 
     container {
         workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'oras://community.wave.seqera.io/library/pip_cytotable:9ab5556a2d37fe91' :
-        'community.wave.seqera.io/library/pip_cytotable:b10ffccc482ad53a'
+        'oras://community.wave.seqera.io/library/python_pip_cytotable_duckdb:f302838336b9161f' :
+        'community.wave.seqera.io/library/python_pip_cytotable_duckdb:45640327546360eb'
     }
 
     input:
@@ -36,41 +36,21 @@ import pyarrow.parquet as pq
 
 os.environ["HOME"] = os.getcwd()
 
-# Custom join which keeps genuine Image-table metadata (well/plate/site,
-# channel/position metadata, and file/path provenance) without also pulling
-# in the ~1,900 per-image QC columns (ImageQuality_*, ExecutionTime_*, etc.)
-# that cellprofiler_csv's default preset also drops — those are diagnostic
-# measurements, not metadata, and keeping them duplicated onto every cell row
-# bloats the join's memory footprint substantially for no benefit.
-custom_join = '''
-    SELECT
-        image.Metadata_ImageNumber,
-        image.Metadata_Well,
-        image.Metadata_Plate,
-        image.Metadata_Site,
-        image.Metadata_Col,
-        image.Metadata_Row,
-        COLUMNS('Image_(Metadata|FileName|PathName)_.*'),
-        cytoplasm.* EXCLUDE (Metadata_ImageNumber),
-        cells.* EXCLUDE (Metadata_ImageNumber, Metadata_ObjectNumber),
-        nuclei.* EXCLUDE (Metadata_ImageNumber, Metadata_ObjectNumber)
-    FROM
-        read_parquet('cytoplasm.parquet') AS cytoplasm
-    LEFT JOIN read_parquet('cells.parquet') AS cells USING (Metadata_ImageNumber)
-    LEFT JOIN read_parquet('nuclei.parquet') AS nuclei USING (Metadata_ImageNumber)
-    LEFT JOIN read_parquet('image.parquet') AS image USING (Metadata_ImageNumber)
-    WHERE
-        cells.Metadata_ObjectNumber = cytoplasm.Metadata_Cytoplasm_Parent_Cells
-        AND nuclei.Metadata_ObjectNumber = cytoplasm.Metadata_Cytoplasm_Parent_Nuclei
-'''
-
+# Let CytoTable infer the join SQL from the source table data (joins="infer",
+# CytoTable >= 1.3.0, https://github.com/cytomining/CytoTable/pull/523) instead
+# of hand-writing a join. Inference detects the shared image keys, compartment
+# object numbers, and Parent_* references, validates them against the actual
+# data, and raises a clear error if no defensible join exists. identifying_columns
+# is still passed explicitly so the well/plate/site metadata keys we rely on
+# downstream keep their plain Metadata_* names (CytoTable would otherwise
+# prefix them Image_Metadata_* as it does for any non-identifying Image column).
 convert(
     source_path="analyses",
     source_datatype="csv",
     dest_path="temp_output.parquet",
     dest_datatype="parquet",
     preset="cellprofiler_csv",
-    joins=custom_join,
+    joins="infer",
     identifying_columns=[
         "ImageNumber",
         "ObjectNumber",
@@ -87,18 +67,22 @@ convert(
     ),
 )
 
-# Rewrite the joined table with Image_-prefixed metadata columns renamed to
-# plain Metadata_ columns (Image_Metadata_Well -> Metadata_Well) so the output
-# follows the Pycytominer single-table metadata convention. pyarrow (already a
-# cytotable dependency) is used so no extra container packages are needed.
+# Inferred joins select every column from each source table (unlike a
+# hand-written join, inference has no way to know which Image-table columns
+# matter downstream), which pulls in ~1,900 per-image QC columns
+# (ImageQuality_*, Image_ExecutionTime_*, Image_Count_*, etc.) that are
+# diagnostic measurements, not metadata. Drop them here, keeping only the
+# Image-table columns that are genuine metadata or file/path provenance.
 table = pq.read_table("temp_output.parquet")
-renames = {
-    col: col.replace("Image_Metadata_", "Metadata_")
+keep_image_prefixes = ("Image_Metadata_", "Image_FileName_", "Image_PathName_")
+drop_columns = [
+    col
     for col in table.column_names
-    if col.startswith("Image_Metadata_")
-}
-if renames:
-    table = table.rename_columns([renames.get(col, col) for col in table.column_names])
+    if (col.startswith("Image_") or col.startswith("ImageQuality_"))
+    and not col.startswith(keep_image_prefixes)
+]
+if drop_columns:
+    table = table.drop_columns(drop_columns)
 
 pq.write_table(table, "${meta.batch}_${meta.plate}.parquet", compression="snappy")
 
@@ -144,7 +128,7 @@ with open("versions.yml", "w") as f:
     END_STATS
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        cytotable: 1.2.6
+        cytotable: 1.3.0
     END_VERSIONS
     """
 }

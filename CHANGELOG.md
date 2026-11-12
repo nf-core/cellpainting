@@ -25,5 +25,6 @@ Initial release of nf-core/cellpainting, created with the [nf-core](https://nf-c
 ### `Dependencies`
 
 - [PR#47](https://github.com/nf-core/cellpainting/pull/47) - upgraded `CYTOTABLE` container from CytoTable 0.0.15 to 1.2.6 (pinned `duckdb<2.0`, required by CytoTable 1.2.6)
+- upgraded `CYTOTABLE` container to CytoTable 1.3.0 and switched to `joins="infer"` ([cytomining/CytoTable#523](https://github.com/cytomining/CytoTable/pull/523)) instead of hand-written join SQL; a post-join column filter keeps the same metadata/provenance columns as before and still drops unused per-image QC columns (`ImageQuality_*`, `Image_ExecutionTime_*`, etc.)
 
 ### `Deprecated`

@@ -164,7 +164,7 @@
                     "cellprofiler": "4.2.8"
                 },
                 "CYTOTABLE": {
-                    "cytotable": "1.2.6"
+                    "cytotable": "1.3.0"
                 },
                 "CYTOTABLE_REPORTS": {
                     "marimo": "0.25.2"
@@ -301,10 +301,10 @@
                 ".stub:md5,d41d8cd98f00b204e9800998ecf8427e"
             ]
         ],
-        "timestamp": "2026-11-11T14:47:32.520026",
+        "timestamp": "2026-11-12T10:24:00.573317",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "25.10.4"
+            "nextflow": "26.04.6"
         }
     }
 }
