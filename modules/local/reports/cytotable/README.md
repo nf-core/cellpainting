@@ -11,21 +11,21 @@ profiles parquet is staged once per plate instead of twice.
 
 ## Inputs
 
-| Type    | Description                                    |
-| ------- | --------------------------------------------- |
-| `file`  | CytoTable profiles parquet (one per plate)    |
+| Type   | Description                                |
+| ------ | ------------------------------------------ |
+| `file` | CytoTable profiles parquet (one per plate) |
 
 ## Outputs
 
-| Emit      | File                          | Description                                        |
-| --------- | ----------------------------- | -------------------------------------------------- |
-| `app`     | `<prefix>_reports.py`         | The marimo app copy                                |
-| `metadata`| `<prefix>_metadata.json`      | JSON metadata report                               |
-| `stats`   | `<prefix>_descriptive_stats.parquet` | Per-feature descriptive statistics          |
-| `plots`   | `<prefix>_size_distributions.png`, `<prefix>_dna_intensity.png` | Distribution plots |
-| `html`    | `<prefix>_reports.html`       | Rendered HTML report                               |
-| `notebook`| `<prefix>_reports.ipynb`      | Optional (task.ext.export_ipynb = true)            |
-| `markdown`| `<prefix>_reports.md`         | Optional (task.ext.export_markdown = true)        |
+| Emit       | File                                                            | Description                                |
+| ---------- | --------------------------------------------------------------- | ------------------------------------------ |
+| `app`      | `<prefix>_reports.py`                                           | The marimo app copy                        |
+| `metadata` | `<prefix>_metadata.json`                                        | JSON metadata report                       |
+| `stats`    | `<prefix>_descriptive_stats.parquet`                            | Per-feature descriptive statistics         |
+| `plots`    | `<prefix>_size_distributions.png`, `<prefix>_dna_intensity.png` | Distribution plots                         |
+| `html`     | `<prefix>_reports.html`                                         | Rendered HTML report                       |
+| `notebook` | `<prefix>_reports.ipynb`                                        | Optional (task.ext.export_ipynb = true)    |
+| `markdown` | `<prefix>_reports.md`                                           | Optional (task.ext.export_markdown = true) |
 
 ## Example usage
 
