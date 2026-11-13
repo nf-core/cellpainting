@@ -1,0 +1,66 @@
+{
+    "cytotable reports - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    "2021_04_26_Batch1_BR00117035_metadata.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    "2021_04_26_Batch1_BR00117035_descriptive_stats.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    "2021_04_26_Batch1_BR00117035_reports.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    [
+                        "2021_04_26_Batch1_BR00117035_dna_intensity.png:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "2021_04_26_Batch1_BR00117035_size_distributions.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-11T14:40:33.183604",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "cytotable reports - runs with local fixture": {
+        "content": [
+            [
+                [
+                    "CYTOTABLE_REPORTS",
+                    "marimo",
+                    "0.25.2"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-09T14:07:18.409654",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

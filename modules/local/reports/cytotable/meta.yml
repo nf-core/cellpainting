@@ -1,0 +1,58 @@
+name: cytotable_reports
+description: Consolidated metadata and descriptive-statistics reports for CytoTable parquet outputs
+keywords:
+  - report
+  - qc
+  - marimo
+  - parquet
+  - metadata
+  - statistics
+tools:
+  - marimo:
+      description: |
+        A reactive Python notebook framework. The report runs as a marimo app exported to HTML (and optionally ipynb / md), producing metadata and descriptive-statistics artifacts from a CytoTable profiles parquet.
+      documentation: https://github.com/marimo-team/marimo
+input:
+  - - parquet_file:
+        type: file
+        description: CytoTable profiles parquet to report on (per plate).
+output:
+  - app:
+      - "*_reports.py":
+          type: file
+          description: The marimo report app, copied with a per-plate prefix.
+  - metadata:
+      - "*_metadata.json":
+          type: file
+          description: JSON metadata report (file info, dataframe overview, column structure, metadata columns, data types).
+  - stats:
+      - "*_descriptive_stats.parquet":
+          type: file
+          description: Descriptive statistics (count, mean, std, min, quartiles, max) per numeric feature.
+  - plots:
+      - "*_size_distributions.png":
+          type: file
+          description: Cell / nuclei / cytoplasm area distribution histograms.
+      - "*_dna_intensity.png":
+          type: file
+          description: DNA intensity distribution histogram and box plot.
+  - html:
+      - "*_reports.html":
+          type: file
+          description: Rendered HTML report.
+  - notebook:
+      - "*_reports.ipynb":
+          type: file
+          description: Optional Jupyter-notebook export (when task.ext.export_ipynb is true).
+  - markdown:
+      - "*_reports.md":
+          type: file
+          description: Optional markdown export (when task.ext.export_markdown is true).
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+authors:
+  - "@jerowe"
+maintainers:
+  - "@jerowe"

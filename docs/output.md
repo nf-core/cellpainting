@@ -12,6 +12,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [Assay Development](#assay-development) - Single-site segmentation QC per well
 - [Analysis](#analysis) - Full morphological feature extraction per site
 - [CytoTable](#cytotable) - CSV-to-Parquet conversion
+- [Pycytominer Annotation](#pycytominer-annotation) - Plate-map metadata annotation of CytoTable profiles
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
 ### Illumination Correction
@@ -65,10 +66,28 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - `cytotable/`
   - `<batch>_<plate>.parquet`: Collated CellProfiler measurements for the entire plate (all wells and sites) in Parquet format.
+  - `<batch>_<plate>_stats.json`: Structural QC summary (row/column counts and per-compartment column counts) for the Parquet file above.
+  - `reports/`
+    - `<batch>_<plate>_metadata.json`: Metadata summary of the profile (columns, dtypes, row count).
+    - `<batch>_<plate>_descriptive_stats.parquet`: Descriptive statistics (mean/std/min/max/quantiles) for all measurement columns.
+    - `<batch>_<plate>_size_distributions.png`, `<batch>_<plate>_dna_intensity.png`: QC plots.
+    - `<batch>_<plate>_reports.html`: Interactive marimo QC report combining the above.
 
 </details>
 
 [CytoTable](https://github.com/cytomining/CytoTable) consolidates the per-site CellProfiler CSV outputs of a plate into a single Parquet file using the `cellprofiler_csv` preset. Per-site `CELLPROFILER_ANALYSIS` runs are joined in one `cytotable.convert` call, producing one row per CellProfiler image set per plate. Parquet files are columnar, compressed, and ready for downstream analysis with tools like [Pycytominer](https://github.com/cytomining/pycytominer). This step only runs in `analysis` mode.
+
+### Pycytominer Annotation
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `pycytominer/`
+  - `<batch>_<plate>_anno.parquet`: CytoTable profiles with plate-map metadata (treatments, genes, perturbations, etc.) joined on, in Parquet format.
+
+</details>
+
+[Pycytominer](https://github.com/cytomining/pycytominer) `annotate` joins the optional `--metadata` plate-map CSV onto each plate's CytoTable profile, matching rows on `--pycytominer_annotation_join_on` (default: `Metadata_Well`). This step only runs when `--metadata` is supplied.
 
 ### Pipeline information
 

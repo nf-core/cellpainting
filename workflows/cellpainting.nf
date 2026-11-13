@@ -5,6 +5,8 @@
 */
 include { MULTIQC                             } from '../modules/nf-core/multiqc/main'
 include { CYTOTABLE                           } from '../modules/local/cytotable'
+include { PYCYTOMINER_ANNO                    } from '../modules/local/pycytominer/annotation'
+include { CYTOTABLE_REPORTS                   } from '../modules/local/reports/cytotable'
 include { CELLPROFILER_ILLUMINATIONCORRECTION } from '../modules/local/cellprofiler/illuminationcorrection'
 include { CELLPROFILER_ANALYSIS               } from '../modules/local/cellprofiler/analysis'
 include { CELLPROFILER_ASSAYDEVELOPMENT       } from '../modules/local/cellprofiler/assaydevelopment'
@@ -230,6 +232,25 @@ workflow CELLPAINTING {
             .set { ch_cytotable_input }
 
         CYTOTABLE(ch_cytotable_input)
+        ch_versions = ch_versions.mix(CYTOTABLE.out.versions)
+
+        //
+        // PYCYTOMINER ANNOTATE - join plate-map metadata onto CytoTable profiles
+        //
+        if (params.metadata) {
+            def ch_platemap = channel.value(file(params.metadata, checkIfExists: true))
+
+            CYTOTABLE.out.parquet
+                .combine(ch_platemap)
+                .set { ch_annotate_input }
+
+            PYCYTOMINER_ANNO(ch_annotate_input)
+        }
+
+        //
+        // CYTOTABLE REPORTS - marimo QC report per plate
+        //
+        CYTOTABLE_REPORTS(CYTOTABLE.out.parquet)
     }
 
     //

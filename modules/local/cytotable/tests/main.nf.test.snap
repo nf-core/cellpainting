@@ -1,42 +1,20 @@
 {
     "cytotable - stub": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035"
-                        },
-                        "2021_04_26_Batch1_BR00117035.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+            [
+                [
+                    {
+                        "batch": "2021_04_26_Batch1",
+                        "plate": "BR00117035"
+                    },
+                    "2021_04_26_Batch1_BR00117035.parquet:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
-            }
+            ]
         ],
+        "timestamp": "2026-11-09T16:37:55.541508",
         "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-04-28T11:36:53.790958"
-    },
-    "*.parquet": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "batch": "2021_04_26_Batch1",
-                            "plate": "BR00117035"
-                        },
-                        "2021_04_26_Batch1_BR00117035.parquet:md5,2ca5fe9f60ab445ee3ed458729725c03"
-                    ]
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.1",
-            "nextflow": "25.10.0"
-        },
-        "timestamp": "2026-04-28T11:42:29.420817"
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
     }
 }

@@ -1,0 +1,4 @@
+Metadata_Source,Metadata_Plate,Metadata_Well,Metadata_JCP2022,Metadata_broad_sample,Metadata_Name,Metadata_Vector,Metadata_Transcript,Metadata_Symbol,Metadata_NCBI_Gene_ID,Metadata_Taxon_ID,Metadata_Gene_Description,Metadata_Prot_Match,Metadata_Insert_Length,Metadata_pert_type
+source_4,BR00117035,A01,JCP2022_905588,ccsbBroad304_05979,ORF000779.1_TRC304.1,pLX_304,NM_001261.4,CDK9,1025,9606,cyclin dependent kinase 9,100.0,1116.0,trt
+source_4,BR00117035,A02,JCP2022_912241,ccsbBroad304_13129,ORF007469.1_TRC304.1,pLX_304,NM_001352984.2,HMGB4,127540,9606,high mobility group box 4,99.1,336.0,trt
+source_4,BR00117035,B01,JCP2022_910053,ccsbBroad304_10788,ORF006617.1_TRC304.1,pLX_304,NM_203418.3,RCAN1,1827,9606,regulator of calcineurin 1,88.8,591.0,trt
