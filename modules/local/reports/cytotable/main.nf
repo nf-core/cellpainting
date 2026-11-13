@@ -31,6 +31,14 @@ process CYTOTABLE_REPORTS {
     def export_markdown = task.ext.export_markdown ?: false
     def args            = task.ext.args ?: ''
     """
+    # matplotlib/marimo default to writing config under \$HOME (e.g.
+    # /.config/matplotlib). nf-core CI containers run as a non-root UID with
+    # an unwritable \$HOME, which fails with "Permission denied: '/.config'"
+    # even though the export otherwise succeeds. Point both at the task's
+    # own (always-writable) work directory instead.
+    export HOME="\$PWD"
+    export MPLCONFIGDIR="\$PWD/.matplotlib"
+
     cp ${moduleDir}/parquet_reports.py ${prefix}_reports.py
 
     # Export to HTML (marimo export executes the report code)
